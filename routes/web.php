@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Frontend\EventsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StripeController;
+use App\Http\Controllers\Frontend\RentalsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +34,7 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        if (auth()->user()->is_admin) {
+        if (auth()->user()->hasRole('manager')) {
             return view('dashboard')->with('canManage', true);
         } else {
             return view('dashboard')->with('canManage', false);
@@ -70,11 +73,32 @@ Route::middleware([
     Route::get('/rentals/{rental}', [\App\Http\Controllers\Frontend\RentalsController::class, 'show'])->name('rentals.show');
 
     Route::get('/events', [\App\Http\Controllers\Frontend\EventsController::class, 'index'])->name('events.index');
-    Route::get('/events/{event}', [\App\Http\Controllers\Frontend\EventsController::class, 'show'])->name('events.show');
 
     Route::get('/cooptation', function () {
         return view('cooptation');
     })->name('cooptation');
+
+    Route::post('/session', [StripeController::class, 'session'])->name('session');
+    Route::get('/success', [StripeController::class, 'success'])->name('success');
+    Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
+
+
+    Route::prefix('cart')->group(function () {
+        Route::get('/', [RentalsController::class, 'cart'])->name('cart');
+        Route::patch('update', [RentalsController::class, 'update'])->name('update_cart');
+        Route::delete('remove', [RentalsController::class, 'remove'])->name('remove_from_cart');
+
+        // Rentals routes
+        Route::prefix('rentals')->group(function () {
+            Route::get('add-rental-to-cart/{id}', [RentalsController::class, 'addToCart'])->name('add_rental_to_cart');
+        });
+
+        // Events routes
+        Route::prefix('events')->group(function () {
+            Route::get('add-event-to-cart/{id}', [EventsController::class, 'addToCart'])->name('add_event_to_cart');
+        });
+    });
+
 });
 
 Route::middleware(['auth', 'management'])->name('management.')->prefix('management')->group(function () {
@@ -82,4 +106,3 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::resource('/rentals', \App\Http\Controllers\Management\RentalsController::class);
     Route::resource('/events', \App\Http\Controllers\Management\EventsController::class);
 });
-

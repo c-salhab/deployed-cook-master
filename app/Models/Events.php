@@ -20,4 +20,12 @@ class Events extends Model
         'start_time',
         'end_time',
     ];
+
+    public function decreaseCapacity()
+    {
+        $newCapacity = $this->max_capacity - 1;
+        $this->max_capacity = max(0, $newCapacity); // Ensure the capacity is not negative
+        $this->save();
+    }
+
 }

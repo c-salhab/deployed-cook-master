@@ -88,10 +88,14 @@
                     <img src="{{ asset($rentals->image) }}" class="w-16 h-16 rounded">
                 </td>
                 <td class="px-6 py-4">
-                    {{ date('Y-m-d', strtotime($rentals->start_time)) }}
+                    @if($rentals->start_time)
+                        {{ date('Y-m-d', strtotime($rentals->start_time)) }}
+                    @endif
                 </td>
                 <td class="px-6 py-4">
-                    {{ date('Y-m-d', strtotime($rentals->end_time)) }}
+                    @if($rentals->end_time)
+                        {{ date('Y-m-d', strtotime($rentals->end_time)) }}
+                    @endif
                 </td>
                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <div class="flex space-x-2">

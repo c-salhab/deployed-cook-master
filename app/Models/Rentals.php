@@ -16,5 +16,13 @@ class Rentals extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function decreaseQuantity($quantity)
+    {
+        $newQuantity = $this->quantity - $quantity;
+        $this->quantity = max(0, $newQuantity); // Ensure the quantity is not negative
+        $this->save();
+    }
+
+
 
 }

@@ -61,47 +61,56 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($events as $events)
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $events->name }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ $events->address }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $events->max_capacity }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $events->description }}
-                </td>
-                <td class="px-6 py-4">
-                    € {{ number_format($events->price, 2, ',', '.') }}
-                </td>
-                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <img src="{{ asset($events->image) }}" class="w-16 h-16 rounded">
-                </td>
-                <td class="px-6 py-4">
-                    {{ date('Y-m-d', strtotime($events->start_time)) }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ date('Y-m-d', strtotime($events->end_time)) }}
-                </td>
-                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div class="flex space-x-2">
-                        <a href="{{ route('management.events.edit', $events->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg  text-white">Edit</a>
-                        <form class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white"
-                                method="POST"
-                                action="{{ route('management.events.destroy', $events->id) }}"
-                                onsubmit="return confirm('Are you sure?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
+            @foreach($events as $event)
+                @php
+                    $endTime = strtotime($event->end_time);
+                    $currentTime = strtotime('today');
+                    $showButtons = $endTime >= $currentTime;
+                @endphp
+                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $event->name }}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ $event->address }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $event->max_capacity }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $event->description }}
+                    </td>
+                    <td class="px-6 py-4">
+                        € {{ number_format($event->price, 2, ',', '.') }}
+                    </td>
+                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <img src="{{ asset($event->image) }}" class="w-16 h-16 rounded">
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ date('Y-m-d', strtotime($event->start_time)) }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ date('Y-m-d', strtotime($event->end_time)) }}
+                    </td>
+
+                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <div class="flex space-x-2">
+                            <a href="{{ route('management.events.edit', $event->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Edit</a>
+                            @if ($showButtons)
+                                <form class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white"
+                                      method="POST"
+                                      action="{{ route('management.events.destroy', $event->id) }}"
+                                      onsubmit="return confirm('Are you sure?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Delete</button>
+                                </form>
+                        </div>
+                    </td>
+                    </tr>
+                    @endif
             @endforeach
+
             </tbody>
         </table>
     </div>

@@ -28,8 +28,6 @@ class RentalStoreRequest extends FormRequest
             'state' => ['required'],
             'image' => ['required','image'],
             'description' => ['required'],
-            'start_time' => ['required'],
-            'end_time' => ['required'],
         ];
     }
 }

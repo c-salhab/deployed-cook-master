@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="{{ route('dashboard') }}">
+                    <a class="navbar-brand" href="{{ route('welcome') }}">
                         <img src="{{ asset('images/logo.png') }}" alt="Logo" width="68" height="65" class="d-inline-block align-text-top">
                     </a>
                 </div>
@@ -31,24 +31,63 @@
                         {{ __('Subscription') }}
                     </x-nav-link>
                 </div>
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('message') }}" :active="request()->routeIs('message')">
                         {{ __('Message') }}
                     </x-nav-link>
                 </div>
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('lessons') }}" :active="request()->routeIs('lessons')">
                         {{ __('Lessons') }}
                     </x-nav-link>
                 </div>
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('certified_courses') }}" :active="request()->routeIs('certified_courses')">
                         {{ __('Certified courses') }}
                     </x-nav-link>
                 </div>
-            </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" x-data="{ dropdownOpen: false }">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3 mb-3" id="dropdownDefaultButton" @click="dropdownOpen = !dropdownOpen">cart
+                        <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-1 rounded dark:bg-red-900 dark:text-red-300">{{ count((array) session('cart')) }}</span>
+                    </button>
+
+                    <!-- Dropdown menu -->
+                    <div class="absolute right-0 mt-2 w-72 bg-white border border-gray-300 shadow-lg rounded-md z-10" x-show="dropdownOpen" @click.away="dropdownOpen = false">
+                        <div class="py-2">
+                            <div class="px-4 flex items-center justify-between">
+                                <h2 class="text-lg font-semibold">Shopping Cart</h2>
+                                @php $total = 0 @endphp
+                                @foreach((array) session('cart') as $id => $details)
+                                    @php $total += $details['price'] * $details['quantity'] @endphp
+                                @endforeach
+                                <p class="text-success">Total: €{{ $total }}</p>
+                            </div>
+                            @if(session('cart'))
+                                @foreach(session('cart') as $id => $details)
+                                    <div class="flex items-center mt-4 px-4">
+                                        <div class="w-16 h-16 mr-4">
+                                            <img src="{{ asset($details['image']) }}" class="w-full h-full object-cover rounded">
+                                        </div>
+                                        <div>
+                                            <p>{{ $details['name'] }}</p>
+                                            <span class="price text-success">€{{ $details['price'] }}</span>
+                                            <span class="count">Quantity: {{ $details['quantity'] }}</span>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                            <div class="flex justify-center mt-4">
+                                <a href="{{ route('cart') }}" class="btn btn-primary btn-block">View all</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ml-3 relative">
@@ -265,4 +304,32 @@
             </div>
         </div>
     </div>
+    </div>
+
+
+
 </nav>
+
+@if(request()->is('rentals') || request()->is('events') || request()->is('cart'))
+<div class="container w-full px-5 py-6 mx-auto">
+    @if(session('success'))
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
+    @if(session('warning'))
+        <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
+            {{ session('warning') }}
+        </div>
+    @endif
+
+</div>
+@endif
+@yield('content')
+
+@yield('scripts')

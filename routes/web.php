@@ -34,11 +34,10 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        if (auth()->user()->hasRole('manager')) {
-            return view('dashboard')->with('canManage', true);
-        } else {
-            return view('dashboard')->with('canManage', false);
-        }
+        $user = auth()->user();
+        $canManage = $user->hasRole('manager');
+
+        return view('dashboard', compact('canManage'));
     })->name('dashboard');
 
     Route::get('/subscription', function () {
@@ -70,7 +69,6 @@ Route::middleware([
     })->name('shop');
 
     Route::get('/rentals', [\App\Http\Controllers\Frontend\RentalsController::class, 'index'])->name('rentals.index');
-    Route::get('/rentals/{rental}', [\App\Http\Controllers\Frontend\RentalsController::class, 'show'])->name('rentals.show');
 
     Route::get('/events', [\App\Http\Controllers\Frontend\EventsController::class, 'index'])->name('events.index');
 
@@ -105,4 +103,5 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::get('/', [\App\Http\Controllers\Management\ManagementController::class, 'index'])->name('index');
     Route::resource('/rentals', \App\Http\Controllers\Management\RentalsController::class);
     Route::resource('/events', \App\Http\Controllers\Management\EventsController::class);
+//    Route::resource('/rentings', \App\Http\Controllers\Management\RentalsUsersController::class);
 });

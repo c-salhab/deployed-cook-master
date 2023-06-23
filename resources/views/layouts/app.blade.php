@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-        <title>YourCookMaster</title>
+        <title>Cook Master</title>
         <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/icon type">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

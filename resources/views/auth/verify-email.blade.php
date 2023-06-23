@@ -1,7 +1,9 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/icon type">
+            <div class="center">
+                <img src="{{ asset('images/logo.png') }}" alt="Mountains" style="display: block;margin-left: auto;margin-right: auto;width: 30%;">
+            </div>
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">

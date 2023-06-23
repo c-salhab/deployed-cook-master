@@ -2,7 +2,7 @@
     <x-authentication-card>
         <x-slot name="logo">
             <div class="center">
-                <img src="{{ asset('images/logo.png') }}" alt="Mountains" style="width:45%;position: center">
+                <img src="{{ asset('images/logo.png') }}" alt="Mountains" style="width: 30%;position: center">
             </div>
         </x-slot>
 

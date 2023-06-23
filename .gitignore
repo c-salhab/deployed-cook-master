@@ -1,0 +1,31 @@
+# Laravel specific
+.env
+public/storage
+public/hot
+storage/*.key
+vendor
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+Homestead.json
+Homestead.yaml
+/.idea
+/.vscode
+.phpunit.result.cache
+
+# Composer specific
+composer.lock
+
+# Build tools
+.DS_Store
+Thumbs.db
+
+# Application specific
+public/uploads
+
+# Log files
+/storage/*.log
+
+# Testing databases
+sqlite/*.sqlite

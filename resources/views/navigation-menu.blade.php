@@ -17,7 +17,7 @@
                 </div>
 
 
-                @if (auth()->check() && auth()->user()->is_admin)
+                @if (auth()->check() && auth()->user()->hasRole('manager'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('management.index') }}" :active="request()->routeIs('management.index')">
                         {{ __('Management') }}

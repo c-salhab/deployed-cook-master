@@ -95,7 +95,7 @@ class EventsController extends Controller
 
     if ($request->hasFile('image')) {
         Storage::disk('public')->delete($event->image);
-        $image = $request->file('image')->storeAs('events', $request->file('image')->getClientOriginalName(), 'public');
+        $image = $request->file('image')->storeAs('event', $request->file('image')->getClientOriginalName(), 'public');
     }
 
     $data = [

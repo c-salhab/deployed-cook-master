@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Cook Master</title>
+    <title>YourCookMaster</title>
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/icon type">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -41,6 +41,10 @@
 
                 <x-admin-nav-link :href="route('management.events.index')" :active="request()->routeIs('management.events.index')">
                     {{ __('Events') }}
+                </x-admin-nav-link>
+
+                <x-admin-nav-link :href="route('management.rentings.index')" :active="request()->routeIs('management.rentings.index')">
+                    {{ __('Rentings') }}
                 </x-admin-nav-link>
 
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">

@@ -13,11 +13,12 @@ class Management
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if(!auth()->check() || !auth()->user()->is_admin){
-            abort(403);
+        if (auth()->check() && auth()->user()->hasRole('manager')) {
+            return $next($request);
         }
-        return $next($request);
+
+        abort(403, 'Unauthorized');
     }
 }

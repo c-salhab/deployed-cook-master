@@ -14,6 +14,21 @@
             <form method="POST" action="{{ route('management.events.update', $event->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+
+                <div class="sm:col-span-6">
+                    <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
+                    <div>
+                        <img class="w-32 h-32" src="{{ asset($event->image) }}">
+                    </div>
+                    <div class="mt-1">
+                        <input type="file" id="image" name="image"
+                               class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    </div>
+                    @error('image')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <div class="sm:col-span-6">
                     <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
                     <div class="mt-1">
@@ -67,6 +82,29 @@
                 </div>
 
                 <div class="sm:col-span-6">
+                    <label for="difficulty" class="block text-sm font-medium text-gray-700"> Difficulty </label>
+                    <div class="mt-1">
+                        <input type="text" id="difficulty" value="{{ $event->address }}" name="difficulty" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    </div>
+                    @error('difficulty')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="sm:col-span-6">
+                    <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
+                    <div class="mt-1">
+                        <select id="type" name="type" class="block w-full bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                            <option value="WorkShop">WorkShop</option>
+                            <option value="Event">Event</option>
+                        </select>
+                    </div>
+                    @error('type')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="sm:col-span-6">
                     <label for="start_time" class="block text-sm font-medium text-gray-700"> Start Time </label>
                     <div class="mt-1">
                         <input type="date" min="<?php echo date('Y-m-d'); ?>" value="{{ $event->start_time }}" id="start_time" name="start_time" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
@@ -82,20 +120,6 @@
                         <input type="date" min="<?php echo date('Y-m-d'); ?>" value="{{ $event->end_time }}" id="end_time" name="end_time" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
                     @error('end_time')
-                    <div class="text-sm text-red-400">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="sm:col-span-6">
-                    <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
-                    <div>
-                        <img class="w-32 h-32" src="{{ asset($event->image) }}">
-                    </div>
-                    <div class="mt-1">
-                        <input type="file" id="image" name="image"
-                               class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                    </div>
-                    @error('image')
                     <div class="text-sm text-red-400">{{ $message }}</div>
                     @enderror
                 </div>

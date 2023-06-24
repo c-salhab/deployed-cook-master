@@ -14,6 +14,17 @@
         <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
             <form method="POST" action="{{ route('management.events.store') }}" enctype="multipart/form-data">
                 @csrf
+
+                <div class="sm:col-span-6">
+                    <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
+                    <div class="mt-1">
+                        <input type="file" id="image" name="image" class="block appearance-none bg-white border py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    </div>
+                </div>
+                @error('image')
+                <div class="text-sm text-red-400">{{ $message }}</div>
+                @enderror
+
                 <div class="sm:col-span-6">
                     <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
                     <div class="mt-1">
@@ -66,14 +77,28 @@
                 @enderror
 
                 <div class="sm:col-span-6">
-                    <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
+                    <label for="difficulty" class="block text-sm font-medium text-gray-700"> Difficulty </label>
                     <div class="mt-1">
-                        <input type="file" id="image" name="image" class="block appearance-none bg-white border py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                        <input type="text" id="difficulty" name="difficulty" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
                 </div>
-                @error('image')
+                @error('difficulty')
                 <div class="text-sm text-red-400">{{ $message }}</div>
                 @enderror
+
+                <div class="sm:col-span-6">
+                    <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
+                    <div class="mt-1">
+                        <select id="type" name="type" class="block w-full bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                            <option value="WorkShop">WorkShop</option>
+                            <option value="Event">Event</option>
+                        </select>
+                    </div>
+                    @error('type')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
 
                 <div class="sm:col-span-6">
                     <label for="start_time" class="block text-sm font-medium text-gray-700"> Start Time </label>

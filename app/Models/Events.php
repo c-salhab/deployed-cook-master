@@ -11,14 +11,16 @@ class Events extends Model
 
     protected $fillable = [
         'name',
-        'price',
-        'image',
-        'description',
-        'user_id',
         'address',
         'max_capacity',
+        'description',
+        'price',
+        'difficulty',
+        'type',
         'start_time',
         'end_time',
+        'image',
+        'user_creator',
     ];
 
     public function decreaseCapacity()

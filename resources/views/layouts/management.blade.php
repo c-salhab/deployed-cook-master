@@ -42,9 +42,9 @@
                     {{ __('Rooms') }}
                 </x-admin-nav-link>
 
-                <x-admin-nav-link :href="route('management.rentals.index')" :active="request()->routeIs('management.rentals.index')">
-                    {{ __('Rentals') }}
-                </x-admin-nav-link>
+{{--                <x-admin-nav-link :href="route('management.rentals.index')" :active="request()->routeIs('management.rentals.index')">--}}
+{{--                    {{ __('Rentals') }}--}}
+{{--                </x-admin-nav-link>--}}
 
                 <x-admin-nav-link :href="route('management.events.index')" :active="request()->routeIs('management.events.index')">
                     {{ __('Events') }}

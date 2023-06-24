@@ -32,10 +32,13 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
+                    Image
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Name
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Adress
+                    Address
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Max Capacity
@@ -47,7 +50,10 @@
                     Price
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Image
+                    Difficulty
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Type
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Start Date
@@ -68,6 +74,9 @@
                     $showButtons = $endTime >= $currentTime;
                 @endphp
                 <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <img src="{{ asset($event->image) }}" class="w-16 h-16 rounded">
+                    </td>
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $event->name }}
                     </th>
@@ -83,8 +92,11 @@
                     <td class="px-6 py-4">
                         € {{ number_format($event->price, 2, ',', '.') }}
                     </td>
-                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <img src="{{ asset($event->image) }}" class="w-16 h-16 rounded">
+                    <td class="px-6 py-4">
+                        {{ $event->difficulty }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $event->type }}
                     </td>
                     <td class="px-6 py-4">
                         {{ date('Y-m-d', strtotime($event->start_time)) }}

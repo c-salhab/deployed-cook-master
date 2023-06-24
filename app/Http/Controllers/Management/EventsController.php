@@ -19,7 +19,7 @@ class EventsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $events = Events::where('user_id', $user->id)->get();
+        $events = Events::where('user_creator', $user->id)->get();
         return view('management.events.index', compact('events'));
     }
 
@@ -54,11 +54,13 @@ class EventsController extends Controller
             'price' => $request->price,
             'image' => $image,
             'description' => $request->description,
-            'user_id' => $user_id,
+            'user_creator' => $user_id,
             'address' => $request->address,
             'max_capacity' => $request->max_capacity,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
+            'difficulty' => $request->difficulty,
+            'type' => $request->type,
         ]);
 
         return redirect()->route('management.events.index')->with('success', 'Event created successfully.');
@@ -79,7 +81,7 @@ class EventsController extends Controller
     {
         $user = Auth::user();
 
-        if ($event->user_id !== $user->id) {
+        if ($event->user_creator !== $user->id) {
             abort(403); // Renvoie une réponse "Forbidden"
         }
         return view('management.events.edit', compact('event'));
@@ -106,6 +108,8 @@ class EventsController extends Controller
         'price' => $request->input('price'),
         'start_time' => $request->input('start_time'),
         'image' => $image,
+        'difficulty' => $request->input('difficulty'),
+        'type' => $request->input('type'),
     ];
 
     if ($request->filled('end_time')) {

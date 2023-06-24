@@ -4,7 +4,7 @@
          style="background-image: url('https://cdn.pixabay.com/photo/2016/11/18/14/39/beans-1834984_960_720.jpg');">
         <h1
                 class="font-mono text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 md:text-center sm:leading-none lg:text-5xl">
-            <span class="inline md:block">Welcome to YourCookMaster </span>
+            <span class="inline md:block">Welcome to Cook Master </span>
         </h1>
         <div class="mx-auto mt-2 text-green-50 md:text-center lg:text-lg" style="font-size: 1.25rem">
             where culinary dreams come to life with a touch of Parisian flair.
@@ -32,7 +32,7 @@
                         <h2 class="text-4xl text-green-600">Welcome</h2>
                         <!-- </h1> -->
                         <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl" style="font-size: 1rem">
-                            The journey of YourCookMaster began in 2016 with the vision to create a culinary haven in the heart of Paris.
+                            The journey of Cook Master began in 2016 with the vision to create a culinary haven in the heart of Paris.
                             Inspired by the rich gastronomic culture of the city, our founder, passionate about the art of cooking, envisioned a place where people could gather to learn, create, and indulge in the
                             pleasures of gastronomy.
                             With our continuous growth, YourCookMaster has become synonymous with culinary education, innovation, and unforgettable gastronomic moments.
@@ -68,8 +68,8 @@
                                 class="mb-4 text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
                             WHY CHOOSE US?</h2>
 
-                        <p class="mb-4 font-medium tracking-tight text-gray-400 xl:mb-6">Welcome to YourCookMaster, a chain of event spaces located in Paris, dedicated to
-                            cooking and gastronomy. At YourCookMaster, we believe in the power of warm hospitality and providing our clients with a diverse range of services.
+                        <p class="mb-4 font-medium tracking-tight text-gray-400 xl:mb-6">Cook Master, a chain of event spaces located in Paris, dedicated to
+                            cooking and gastronomy. At Cook Master, we believe in the power of warm hospitality and providing our clients with a diverse range of services.
                             Whether you are looking to learn how to cook delicious meals, discover new savory recipes or indulge in the art of pastry-making,
                             we have something for everyone !</p>
                         <ul>

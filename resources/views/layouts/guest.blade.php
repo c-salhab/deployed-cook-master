@@ -42,10 +42,16 @@
                href="/">Home</a>
             <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
                href="{{ route('aboutus') }}">About Us</a>
-            <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
-               href="{{ route('login') }}">Login</a>
-            <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
-               href="{{ route('register') }}">Register</a>
+            @auth
+                <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                   href="{{ route('dashboard') }}">Dashboard</a>
+            @else
+                <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                   href="{{ route('login') }}">Login</a>
+                <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                   href="{{ route('register') }}">Register</a>
+            @endauth
+
         </div>
     </nav>
 </div>

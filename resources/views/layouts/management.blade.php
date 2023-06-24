@@ -34,6 +34,9 @@
                     {{ __('Dashboard') }}
                 </x-admin-nav-link>
 
+                <x-admin-nav-link :href="route('management.materials.index')" :active="request()->routeIs('management.materials.index')">
+                    {{ __('Materials') }}
+                </x-admin-nav-link>
 
                 <x-admin-nav-link :href="route('management.rentals.index')" :active="request()->routeIs('management.rentals.index')">
                     {{ __('Rentals') }}
@@ -41,10 +44,6 @@
 
                 <x-admin-nav-link :href="route('management.events.index')" :active="request()->routeIs('management.events.index')">
                     {{ __('Events') }}
-                </x-admin-nav-link>
-
-                <x-admin-nav-link :href="route('management.rentings.index')" :active="request()->routeIs('management.rentings.index')">
-                    {{ __('Rentings') }}
                 </x-admin-nav-link>
 
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">

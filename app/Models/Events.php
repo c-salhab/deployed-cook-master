@@ -23,6 +23,14 @@ class Events extends Model
         'user_creator',
     ];
 
+    protected $dates = [
+        'start_time'
+    ];
+
+    public function rooms(){
+        return $this->belongsTo(Rooms::class);
+    }
+
     public function decreaseCapacity()
     {
         $newCapacity = $this->max_capacity - 1;

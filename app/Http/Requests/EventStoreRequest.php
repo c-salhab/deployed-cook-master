@@ -31,7 +31,8 @@ class EventStoreRequest extends FormRequest
             'start_time' => ['required'],
             'end_time' => ['required'],
             'image' => ['required','image'],
-            'difficulty' => ['required']
+            'difficulty' => ['required'],
+            'id_room' => ['required']
         ];
     }
 }

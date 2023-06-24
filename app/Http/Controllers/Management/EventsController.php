@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Management;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EventStoreRequest;
 use App\Models\Events;
+use App\Models\Rooms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +29,9 @@ class EventsController extends Controller
      */
     public function create()
     {
-        return view('management.events.create');
+        $rooms = Rooms::all();
+        return view('management.events.create', ['rooms' => $rooms]);
+
     }
 
     /**

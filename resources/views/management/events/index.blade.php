@@ -47,6 +47,9 @@
                     Description
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Room Name
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Price
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -88,6 +91,9 @@
                     </td>
                     <td class="px-6 py-4">
                         {{ $event->description }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $event->room->name ?? 'No Room Assigned' }}
                     </td>
                     <td class="px-6 py-4">
                         € {{ number_format($event->price, 2, ',', '.') }}

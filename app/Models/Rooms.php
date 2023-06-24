@@ -16,4 +16,16 @@ class Rooms extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function events(){
+        return $this->hasMany(Events::class);
+    }
+
+    public function showForm()
+    {
+        // Fetch all rooms from the database
+        $rooms = Rooms::all();
+
+        return view('management.events.create', compact('rooms'));
+    }
+
 }

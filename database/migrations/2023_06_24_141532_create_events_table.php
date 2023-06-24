@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('type');
             $table->timestamp('start_time')->default(now());
             $table->timestamp('end_time')->default(now());
+            $table->foreignId('id_room')->nullable()->constrained('rooms');
             $table->foreignId('user_creator')->nullable()->constrained('users');
             $table->string('image');
         });

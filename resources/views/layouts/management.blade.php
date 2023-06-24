@@ -38,6 +38,10 @@
                     {{ __('Materials') }}
                 </x-admin-nav-link>
 
+                <x-admin-nav-link :href="route('management.rooms.index')" :active="request()->routeIs('management.rooms.index')">
+                    {{ __('Rooms') }}
+                </x-admin-nav-link>
+
                 <x-admin-nav-link :href="route('management.rentals.index')" :active="request()->routeIs('management.rentals.index')">
                     {{ __('Rentals') }}
                 </x-admin-nav-link>

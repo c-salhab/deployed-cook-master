@@ -103,6 +103,7 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::get('/', [\App\Http\Controllers\Management\ManagementController::class, 'index'])->name('index');
     Route::resource('/rentals', \App\Http\Controllers\Management\RentalsController::class);
     Route::resource('/materials', \App\Http\Controllers\Management\MaterialsController::class);
+    Route::resource('/rooms', \App\Http\Controllers\Management\RoomsController::class);
     Route::resource('/events', \App\Http\Controllers\Management\EventsController::class);
 //    Route::resource('/rentings', \App\Http\Controllers\Management\RentalsUsersController::class);
 });

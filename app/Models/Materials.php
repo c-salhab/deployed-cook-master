@@ -16,6 +16,10 @@ class Materials extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function events(){
+        return $this->hasMany(Events::class);
+    }
+
     public function decreaseCapacity()
     {
         $newCapacity = $this->max_capacity - 1;

@@ -8,6 +8,19 @@
     <div class="flex justify-end m-2 p-2">
         <a href="{{route('management.rooms.create')}}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">New Room</a>
     </div>
+
+    <div class="container flex">
+        <div class="relative">
+            <form action="{{ route('management.rooms.search') }}" method="POST">
+                @csrf
+                <input type="text" name="query" class="h-14 w-96 pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none" placeholder="Search Room...">
+            </form>
+            <div class="absolute top-4 right-3">
+                <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
+            </div>
+        </div>
+    </div><br>
+
     <div>
         @if(session()->has('danger'))
             <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">

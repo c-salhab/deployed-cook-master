@@ -129,4 +129,12 @@ class RoomsController extends Controller
         return redirect()->route('management.rooms.index')->with('danger', 'Room deleted successfully.');
     }
 
+    public function search(Request $request)
+    {
+        $search_text = $request->input('query');
+        $rooms = Rooms::where('name', 'LIKE', '%' . $search_text . '%')->get();
+
+        return view('management.rooms.index', compact('rooms'));
+    }
+
 }

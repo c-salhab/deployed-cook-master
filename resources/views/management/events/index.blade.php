@@ -6,8 +6,21 @@
     </x-slot>
 
     <div class="flex justify-end m-2 p-2">
-        <a href="{{route('management.events.create')}}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">New Event</a>
+        <a href="{{route('management.events.step-one')}}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">New Event</a>
     </div>
+
+    <div class="container flex">
+        <div class="relative">
+            <form action="{{ route('management.events.search_2') }}" method="POST">
+                @csrf
+                <input type="text" name="query" class="h-14 w-96 pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none" placeholder="Search Event...">
+            </form>
+            <div class="absolute top-4 right-3">
+                <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
+            </div>
+        </div>
+    </div><br>
+
     <div>
         @if(session()->has('danger'))
             <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
@@ -27,6 +40,9 @@
             </div>
         @endif
     </div>
+
+
+
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -93,7 +109,7 @@
                         {{ $event->description }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $event->room->name ?? 'No Room Assigned' }}
+                        {{ $event->room->name }}
                     </td>
                     <td class="px-6 py-4">
                         € {{ number_format($event->price, 2, ',', '.') }}

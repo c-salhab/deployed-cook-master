@@ -129,4 +129,11 @@ class MaterialsController extends Controller
         return redirect()->route('management.materials.index')->with('danger', 'Material deleted successfully.');
     }
 
+    public function search(Request $request)
+    {
+        $search_text = $request->input('query');
+        $materials = Materials::where('name', 'LIKE', '%' . $search_text . '%')->get();
+
+        return view('management.materials.index', compact('materials'));
+    }
 }

@@ -49,13 +49,29 @@
                     @enderror
                 </div>
 
-
                 <div class="sm:col-span-6">
                     <label for="max_capacity" class="block text-sm font-medium text-gray-700"> Max Capacity </label>
                     <div class="mt-1">
                         <input type="text" id="max_capacity" value="{{ $event->max_capacity }}" name="max_capacity" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
                     @error('max_capacity')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="sm:col-span-6">
+                    <label for="room_name" class="block text-sm font-medium text-gray-700">Room</label>
+                    <div class="mt-1">
+                        <select id="room_name" name="room_name" class="form-multiselect block w-full mt-1 block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                            @foreach ($rooms as $room)
+                                <option value="{{ $room->id }}" @if ($room->id == $event->id_room) selected @endif>
+                                    {{ $room->name }}
+                                    ({{ $room->max_capacity }} Persons)
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @error('room_name')
                     <div class="text-sm text-red-400">{{ $message }}</div>
                     @enderror
                 </div>
@@ -74,7 +90,7 @@
                 <div class="sm:col-span-6">
                     <label for="price" class="block text-sm font-medium text-gray-700"> Price </label>
                     <div class="mt-1">
-                        <input type="text" value="{{ $event->price }}"id="price" name="price" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                        <input type="text" value="{{ $event->price }}" id="price" name="price" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
                     @error('price')
                     <div class="text-sm text-red-400">{{ $message }}</div>

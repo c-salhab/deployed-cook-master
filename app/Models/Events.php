@@ -21,14 +21,26 @@ class Events extends Model
         'end_time',
         'image',
         'user_creator',
+        'id_room'
     ];
 
     protected $dates = [
         'start_time'
     ];
 
-    public function rooms(){
-        return $this->belongsTo(Rooms::class);
+    public function room()
+    {
+        return $this->belongsTo(Rooms::class, 'id_room');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_creator');
+    }
+
+    public function material()
+    {
+        return $this->belongsTo(Materials::class, 'id_material');
     }
 
     public function decreaseCapacity()

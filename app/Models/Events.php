@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Management\EventMaterial;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,16 +39,33 @@ class Events extends Model
         return $this->belongsTo(User::class, 'user_creator');
     }
 
-    public function material()
+    public function materials()
     {
-        return $this->belongsTo(Materials::class, 'id_material');
+        return $this->belongsToMany(Materials::class, 'event_material', 'event_id', 'material_id');
     }
-
     public function decreaseCapacity()
     {
         $newCapacity = $this->max_capacity - 1;
         $this->max_capacity = max(0, $newCapacity); // Ensure the capacity is not negative
         $this->save();
     }
+
+    public function newPivot(Model $parent, array $attributes, $table, $exists, $using = null)
+    {
+        if ($using === null && $table === 'event_material') {
+            return EventMaterial::fromRawAttributes($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists, $using);
+    }
+
+    public function material()
+    {
+        return $this->belongsToMany(Materials::class, 'event_material', 'event_id', 'material_id')
+            ->using(EventMaterial::class)
+            ->withPivot('quantity');
+    }
+
+
 
 }

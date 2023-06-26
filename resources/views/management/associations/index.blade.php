@@ -4,13 +4,19 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
+    <div class="mt-10 pt-5"></div>
     <br>
     <div class="container flex">
+
+        <button onclick="window.location.href = '{{ route('management.associations.index') }}'" class="bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+            <svg class="w-6 h-6 text-gray-800 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13"/>
+            </svg>
+        </button>
         <div class="relative">
             <form action="{{ route('management.events.search_1') }}" method="POST">
                 @csrf
-                <input type="text" name="query" class="h-14 w-96 pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none" placeholder="Search Event-Material...">
+                <input type="text" name="query" class="w-50 pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none" placeholder="Search Event...">
             </form>
             <div class="absolute top-4 right-3">
                 <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
@@ -18,6 +24,27 @@
         </div>
     </div>
     <br>
+
+    <div>
+        @if(session()->has('danger'))
+            <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                <span class="font-medium"></span> {{ session()->get('danger') }}
+            </div>
+        @endif
+
+        @if(session()->has('success'))
+            <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+                <span class="font-medium"></span> {{ session()->get('success') }}
+            </div>
+        @endif
+
+        @if(session()->has('warning'))
+            <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
+                <span class="font-medium"></span> {{ session()->get('warning') }}
+            </div>
+        @endif
+    </div>
+
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 p-8">
@@ -28,6 +55,9 @@
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Materials
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Quantity
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Created by
@@ -49,7 +79,15 @@
                             {{ $event->name }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $event->material->name }}
+                            @foreach ($event->materials as $material)
+                                {{ $material->name }}<br>
+                            @endforeach
+                        </td>
+
+                        <td class="px-6 py-4">
+                            @foreach ($event->material as $material)
+                            {{ $material->pivot->quantity }}<br>
+                            @endforeach
                         </td>
                         <td class="px-6 py-4">
                             {{ $event->user->name }}
@@ -59,7 +97,6 @@
                         </td>
 
                     </tr>
-
                 @endforeach
 
                 </tbody>

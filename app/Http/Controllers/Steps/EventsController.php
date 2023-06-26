@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Events;
 use App\Models\Materials;
 use App\Models\Rooms;
+use App\Notifications\Reminder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class EventsController extends Controller
 {
@@ -54,30 +56,30 @@ class EventsController extends Controller
     public function storeStepTwo(Request $request)
     {
         $validated = $request->validate([
-            'room_name' => ['required'],
+            'room_name' => ['nullable', 'exists:rooms,name'], // Validate that the room name exists in the rooms table
             'price' => ['required', 'numeric'],
             'difficulty' => ['required'],
             'start_time' => ['required'],
             'end_time' => ['required'],
-            'image' => ['required', 'file', 'image'], // Add image validation rule
         ]);
 
-        // Check if the uploaded file is an image
-        if (!$request->file('image')->isValid()) {
-            return redirect()->back()->with('error', 'Invalid image file.');
-        }
+        $validated = array_merge($validated, ['room_name' => $request->input('room_name', '')]);
 
         $event = $request->session()->get('event');
         $roomName = $validated['room_name'];
 
-        $room = Rooms::where('name', $roomName)->first();
+        if (!empty($roomName)) {
+            $room = Rooms::where('name', $roomName)->first();
+            $event->id_room = $room->id;
+        } else {
+            $event->id_room = null; // Set room ID as null if no room name is provided
+        }
 
         $user_id = Auth::id();
 
         $image = $request->file('image')->storeAs('event', $request->file('image')->getClientOriginalName(), 'public');
         $event->image = $image;
 
-        $event->id_room = $room->id;
         $event->user_creator = $user_id;
         $event->fill($validated);
         $request->session()->put('event', $event);
@@ -95,23 +97,42 @@ class EventsController extends Controller
         return view('management.events.step-three', compact('event', 'materials'));
     }
 
-
     public function storeStepThree(Request $request)
     {
         $validated = $request->validate([
-            'material_name' => ['required'],
+            'material_name' => ['nullable', 'array'],
+            'material_name.*' => ['nullable', 'exists:materials,id'],
+            'quantity' => ['nullable', 'array'],
+            'quantity.*' => ['nullable', 'integer', 'min:0'],
         ]);
 
         $event = $request->session()->get('event');
-        $materialName = $validated['material_name'];
 
-        $material = Materials::where('name', $materialName)->first();
+        $selectedMaterials = $validated['material_name'] ?? [];
+        $quantities = $validated['quantity'] ?? [];
 
-        $event->id_material = $material->id;
         $event->fill($validated);
         $event->save();
-        $request->session()->forget('event');
 
+        $materials = [];
+        foreach ($selectedMaterials as $materialId) {
+            if ($materialId !== null) {
+                $quantity = $quantities[$materialId] ?? 0;
+                $materials[$materialId] = ['quantity' => $quantity];
+            }
+        }
+
+        $event->materials()->sync($materials);
+
+        foreach ($materials as $materialId => $materialData) {
+            $quantity = $materialData['quantity'];
+            $material = Materials::find($materialId);
+            $material->quantity -= $quantity;
+            $material->availability = ($material->quantity <= 0) ? 0 : 1;
+            $material->save();
+        }
+
+        $request->session()->forget('event');
         return redirect()->route('management.events.index')->with('success', 'Event created successfully.');
     }
 

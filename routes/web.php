@@ -102,6 +102,7 @@ Route::middleware([
 });
 
 Route::middleware(['auth', 'management'])->name('management.')->prefix('management')->group(function () {
+
     Route::get('/events/step-one', [\App\Http\Controllers\Steps\EventsController::class, 'stepOne'])->name('events.step-one');
     Route::post('/events/step-one', [\App\Http\Controllers\Steps\EventsController::class, 'storeStepOne'])->name('events.store.step-one');
     Route::get('/events/step-two', [\App\Http\Controllers\Steps\EventsController::class, 'stepTwo'])->name('events.step-two');
@@ -118,4 +119,5 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/search-events', '\App\Http\Controllers\Management\EventsController@search_2')->name('events.search_2');
     Route::post('/search-rooms', '\App\Http\Controllers\Management\RoomsController@search')->name('rooms.search');
     Route::post('/search-materials', '\App\Http\Controllers\Management\MaterialsController@search')->name('materials.search');
+
 });

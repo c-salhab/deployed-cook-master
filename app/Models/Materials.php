@@ -16,8 +16,13 @@ class Materials extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function events(){
+    public function event(){
         return $this->hasMany(Events::class);
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Events::class, 'event_material', 'material_id', 'event_id');
     }
 
     public function decreaseCapacity()

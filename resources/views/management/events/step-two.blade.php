@@ -51,6 +51,7 @@
                                     <label for="room_name" class="block text-sm font-medium text-gray-700">Room</label>
                                     <div class="mt-1">
                                         <select id="room_name" name="room_name" class="form-multiselect block w-full mt-1 block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                            <option value="" selected>None</option>
                                             @foreach ($rooms as $room)
                                                 <option value="{{ $room->name }}" @selected($room->name == $event->room_name)>
                                                     {{ $room->name }}

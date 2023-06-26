@@ -10,10 +10,15 @@
     </div>
 
     <div class="container flex">
+        <button onclick="window.location.href = '{{ route('management.materials.index') }}'" class="bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+            <svg class="w-6 h-6 text-gray-800 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13"/>
+            </svg>
+        </button>
         <div class="relative">
             <form action="{{ route('management.materials.search') }}" method="POST">
                 @csrf
-                <input type="text" name="query" class="h-14 w-96 pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none" placeholder="Search Material...">
+                <input type="text" name="query" class="w-50 pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none" placeholder="Search Material...">
             </form>
             <div class="absolute top-4 right-3">
                 <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>

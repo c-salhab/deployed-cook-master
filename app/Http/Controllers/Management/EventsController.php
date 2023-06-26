@@ -7,9 +7,11 @@ use App\Http\Requests\EventStoreRequest;
 use App\Models\Events;
 use App\Models\Materials;
 use App\Models\Rooms;
+use App\Notifications\Reminder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -67,8 +69,9 @@ class EventsController extends Controller
 
         $event->load('room');
         $rooms = Rooms::where('availability', 1)->get();
+        $materials = Materials::where('availability', 1)->get(); // Fetch the materials
 
-        return view('management.events.edit', compact('event','rooms'));
+        return view('management.events.edit', compact('event', 'rooms', 'materials')); // Pass the materials to the view
     }
 
     /**
@@ -86,7 +89,7 @@ class EventsController extends Controller
 
         $roomOption = $request->input('room_name');
 
-        $room = Rooms::where('name', $roomOption)->first();
+        $room = Rooms::where('id', $roomOption)->first();
 
         $data = [
             'name' => $request->input('name'),
@@ -109,7 +112,32 @@ class EventsController extends Controller
             $data['end_time'] = $request->input('end_time');
         }
 
+        // Update the event
         $event->update($data);
+
+        $validated = $request->validate([
+            'material_name' => ['nullable', 'array'],
+            'material_name.*' => ['nullable', 'exists:materials,id'],
+            'quantity' => ['nullable', 'array'],
+            'quantity.*' => ['nullable', 'integer', 'min:0'],
+        ]);
+
+        $selectedMaterials = $validated['material_name'] ?? [];
+        $quantities = $validated['quantity'] ?? [];
+
+        $event->materials()->detach();
+
+        foreach ($selectedMaterials as $materialId) {
+            if ($materialId !== null) {
+                $quantity = $quantities[$materialId] ?? 0;
+                $event->materials()->attach($materialId, ['quantity' => $quantity]);
+
+                $material = Materials::find($materialId);
+                $material->quantity -= $quantity;
+                $material->availability = ($material->quantity <= 0) ? 0 : 1;
+                $material->save();
+            }
+        }
 
         return redirect()->route('management.events.index')->with('warning', 'Event updated successfully.');
     }
@@ -128,7 +156,19 @@ class EventsController extends Controller
             Storage::disk('public')->delete($imagePath);
         }
 
+        // Retrieve the materials associated with the event
+        $materials = $event->materials;
+
         $event->delete();
+
+        // Restore the quantity of materials
+        foreach ($materials as $material) {
+            $pivotData = $material->pivot;
+            $originalQuantity = $pivotData->original['quantity'] ?? 0; // Get the original quantity from the pivot data, default to 0 if not available
+            $material->quantity += $originalQuantity; // Add back the original quantity of the material
+            $material->availability = 1; // Mark the material as available again
+            $material->save();
+        }
 
         return redirect()->route('management.events.index')->with('danger', 'Event deleted successfully.');
     }
@@ -147,5 +187,15 @@ class EventsController extends Controller
         $events = Events::where('name', 'LIKE', '%' . $search_text . '%')->get();
 
         return view('management.events.index', compact('events'));
+    }
+
+    public function sendReminder(Request $request, Events $events)
+    {
+        $eventId = $events->id; // Assuming you have the event ID from the request or any other source
+        $event = Events::find($eventId);
+        $user = $request->user(); // Assuming you have the authenticated user
+
+        Notification::send($user, new Reminder($event));
+
     }
 }

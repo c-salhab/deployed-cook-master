@@ -16,7 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('description');
-            $table->string('image')->default('public/images/logo.png');
+            $table->string('image')->default('images/logo.png');
+            $table->foreignId('creator')->nullable()->constrained('users');
         });
     }
 

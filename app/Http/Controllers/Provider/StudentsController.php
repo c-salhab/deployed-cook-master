@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Provider;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentsController extends Controller
 {
@@ -12,7 +13,11 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        return 'hi';
+        return $user = Auth::user();
+
+        $students = User::where('creator', $user->id)->get();
+
+        return view('provider.courses.index', compact('students'));;
     }
 
     /**

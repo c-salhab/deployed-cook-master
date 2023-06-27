@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\Frontend\RentalsController;
+use App\Http\Controllers\Provider\ProviderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,3 +122,10 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/search-materials', '\App\Http\Controllers\Management\MaterialsController@search')->name('materials.search');
 
 });
+
+
+Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->group(function () {
+    Route::get('/', [ProviderController::class, 'index'])->name('index');
+    // Other routes...
+});
+

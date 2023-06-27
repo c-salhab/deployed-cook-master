@@ -25,6 +25,14 @@
                 </div>
                 @endif
 
+                @if (auth()->check() && auth()->user()->hasRole('provider'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link href="{{ route('provider.index') }}" :active="request()->routeIs('provider.index')">
+                            {{ __('Provider') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('subscription') }}" :active="request()->routeIs('subscription')">

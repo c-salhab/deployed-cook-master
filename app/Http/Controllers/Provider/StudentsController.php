@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Provider;
 
 use App\Http\Controllers\Controller;
+use App\Models\Formation;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,12 +15,13 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        return $user = Auth::user();
+        $user = Auth::user();
 
         $students = User::where('creator', $user->id)->get();
 
-        return view('provider.courses.index', compact('students'));;
+        return view('provider.students.index', compact('students'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -67,4 +70,14 @@ class StudentsController extends Controller
     {
         //
     }
+
+
+    public function search(Request $request)
+    {
+        $search_text = $request->input('query');
+        $students = User::where('first_name', 'LIKE', '%' . $search_text . '%')->get();
+
+        return view('provider.students.index', compact('students'));
+    }
+
 }

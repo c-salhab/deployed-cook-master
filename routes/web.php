@@ -130,5 +130,8 @@ Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->
     Route::resource('/courses', \App\Http\Controllers\Provider\CoursesController::class);
     Route::resource('/students', \App\Http\Controllers\Provider\StudentsController::class);
     Route::resource('/certifications', \App\Http\Controllers\Provider\CertificationsController::class);
+    Route::post('/search-certifications', '\App\Http\Controllers\Provider\CertificationsController@search')->name('certifications.search');
+    Route::post('/search-courses', '\App\Http\Controllers\Provider\CoursesController@search')->name('courses.search');
+    Route::post('/search-students', '\App\Http\Controllers\Provider\StudentsController@search')->name('students.search');
 });
 

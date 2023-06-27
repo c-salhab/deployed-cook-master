@@ -84,4 +84,12 @@ class CertificationsController extends Controller
 
         return redirect()->route('provider.certifications.index')->with('danger', 'Certification deleted successfully!');
     }
+
+    public function search(Request $request)
+    {
+        $search_text = $request->input('query');
+        $certifications = Certification::where('name', 'LIKE', '%' . $search_text . '%')->get();
+
+        return view('provider.certifications.index', compact('certifications'));
+    }
 }

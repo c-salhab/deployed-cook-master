@@ -124,4 +124,12 @@ class CoursesController extends Controller
         return redirect()->route('provider.courses.index')->with('danger', 'Course deleted successfully!');
     }
 
+    public function search(Request $request)
+    {
+        $search_text = $request->input('query');
+        $formations = Formation::where('name', 'LIKE', '%' . $search_text . '%')->get();
+
+        return view('provider.courses.index', compact('formations'));
+    }
+
 }

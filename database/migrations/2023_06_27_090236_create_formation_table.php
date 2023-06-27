@@ -11,7 +11,7 @@ class CreateFormationTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('formation', function (Blueprint $table) {
+        Schema::create('formations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('image');
@@ -22,7 +22,7 @@ class CreateFormationTable extends Migration
             $table->timestamp('creation_date')->default(now());
             $table->integer('score');
             $table->foreignId('creator')->nullable()->constrained('users');
-            $table->foreignId('certification_id')->nullable()->constrained('certification')->onDelete('set null');
+            $table->foreignId('certification_id')->nullable()->constrained('certifications')->onDelete('set null');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateFormationTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('formation');
+        Schema::dropIfExists('formations');
     }
 }

@@ -1,4 +1,4 @@
-<x-management-layout>
+<x-provider-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -6,97 +6,72 @@
     </x-slot>
 
     <div class="flex m-2 p-2">
-        <a href="{{route('management.rentals.index')}}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Go Back</a>
+        <a href="{{route('provider.students.index')}}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Go Back</a>
     </div>
 
     <div class="m-2 p-2 bg-slate-100 rounded">
     <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
-        <form method="POST" action="{{ route('management.rentals.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('provider.students.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="sm:col-span-6">
-                <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
+                <label for="first_name" class="block text-sm font-medium text-gray-700"> First Name </label>
                 <div class="mt-1">
-                    <input type="text" id="name" name="name" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    <input type="text" id="first_name" name="first_name" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                 </div>
             </div>
-            @error('name')
-            <div class="text-sm text-red-400">{{ $message }}</div>
-            @enderror
-            <div class="sm:col-span-6">
-                <label for="price" class="block text-sm font-medium text-gray-700"> Price </label>
-                <div class="mt-1">
-                    <input type="text" id="price" name="price" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                </div>
-            </div>
-            @error('price')
-            <div class="text-sm text-red-400">{{ $message }}</div>
-            @enderror
-            <div class="sm:col-span-6">
-                <label for="quantity" class="block text-sm font-medium text-gray-700"> Quantity </label>
-                <div class="mt-1">
-                    <input type="text" id="quantity" name="quantity" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                </div>
-            </div>
-            @error('quantity')
-            <div class="text-sm text-red-400">{{ $message }}</div>
-            @enderror
-            <div class="sm:col-span-6">
-                <label for="state" class="block text-sm font-medium text-gray-700"> State </label>
-                <div class="mt-1">
-                    <input type="text" id="state" name="state" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                </div>
-            </div>
-            @error('state')
-            <div class="text-sm text-red-400">{{ $message }}</div>
-            @enderror
-            <div class="sm:col-span-6">
-                <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
-                <div class="mt-1">
-                    <input type="file" id="image" name="image" class="block appearance-none bg-white border py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                </div>
-            </div>
-            @error('image')
-            <div class="text-sm text-red-400">{{ $message }}</div>
-            @enderror
-            <div class="sm:col-span-6 pt-5">
-                <label for="description" class="block text-sm font-medium text-gray-700"> Description </label>
-                <div class="mt-1">
-                    <textarea id="description" rows="3"  class="shadow-sm focus:ring-indigo-500 appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" name="description"></textarea>
-                </div>
-            </div>
-            @error('description')
+            @error('first_name')
             <div class="text-sm text-red-400">{{ $message }}</div>
             @enderror
 
             <div class="sm:col-span-6">
-                <label for="start_time" class="block text-sm font-medium text-gray-700"> Start Time </label>
+                <label for="last_name" class="block text-sm font-medium text-gray-700"> Last Name </label>
                 <div class="mt-1">
-                    <input type="date" min="<?php echo date('Y-m-d'); ?>" id="start_time" name="start_time" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    <input type="text" id="last_name" name="last_name" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                 </div>
             </div>
-            @error('start_time')
+            @error('last_name')
             <div class="text-sm text-red-400">{{ $message }}</div>
             @enderror
 
             <div class="sm:col-span-6">
-                <label for="end_time" class="block text-sm font-medium text-gray-700"> End Time </label>
+                <label for="email" class="block text-sm font-medium text-gray-700"> Email </label>
                 <div class="mt-1">
-                    <input type="date" min="<?php echo date('Y-m-d'); ?>" id="end_time" name="end_time" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    <input type="text" id="email" name="email" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                 </div>
             </div>
-            @error('end_time')
+            @error('email')
+            <div class="text-sm text-red-400">{{ $message }}</div>
+            @enderror
+
+            <div class="sm:col-span-6">
+                <label for="phone" class="block text-sm font-medium text-gray-700"> Phone </label>
+                <div class="mt-1">
+                    <input type="text" id="phone" name="phone" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                </div>
+            </div>
+            @error('phone')
+            <div class="text-sm text-red-400">{{ $message }}</div>
+            @enderror
+
+            <div class="sm:col-span-6">
+                <label for="address" class="block text-sm font-medium text-gray-700"> Address </label>
+                <div class="mt-1">
+                    <input type="text" id="address" name="address" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                </div>
+            </div>
+            @error('address')
             <div class="text-sm text-red-400">{{ $message }}</div>
             @enderror
 
             <div class="mt-6 p-4">
-            <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Create New Rental</button>
+            <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Create New Student</button>
             </div>
         </form>
     </div>
 
     </div>
 
-</x-management-layout>
+</x-provider-layout>
 
 
 

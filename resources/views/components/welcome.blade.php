@@ -3,7 +3,7 @@
         Welcome to Cook Master !
     </h1>
     <p class="mt-6 text-gray-500 leading-relaxed">
-        Welcome to Cook Master! Our application is designed to revolutionize your culinary journey and elevate your cooking skills to new heights. With a wide range of features and functionalities, Cook Master provides a comprehensive platform for learning, exploring, and connecting with the culinary world. Whether you're a passionate home cook, a food enthusiast, or a professional chef, our application offers a seamless experience tailored to your needs.
+        Our application is designed to revolutionize your culinary journey and elevate your cooking skills to new heights. With a wide range of features and functionalities, Cook Master provides a comprehensive platform for learning, exploring, and connecting with the culinary world. Whether you're a passionate home cook, a food enthusiast, or a professional chef, our application offers a seamless experience tailored to your needs.
     </p>
     <p class="mt-1 text-gray-500 leading-relaxed">
         From accessing a diverse array of lessons and certified courses, reserving kitchen spaces, and attending exclusive events to shopping for high-quality products, engaging in a chat service with chefs, and enjoying personalized recommendations, Cook Master is your ultimate companion in the world of gastronomy.

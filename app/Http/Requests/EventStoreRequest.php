@@ -23,13 +23,16 @@ class EventStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:255'],
-            'price' => ['required'],
             'address' => ['required'],
             'max_capacity' => ['required'],
-            'image' => ['required','image'],
             'description' => ['required'],
+            'price' => ['required'],
+            'type' => ['required'],
             'start_time' => ['required'],
             'end_time' => ['required'],
+            'image' => ['required','image'],
+            'difficulty' => ['required'],
+            'id_room' => ['required']
         ];
     }
 }

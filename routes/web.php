@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Frontend\EventsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\Frontend\RentalsController;
+use App\Http\Controllers\Provider\ProviderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +15,9 @@ use App\Http\Controllers\Frontend\RentalsController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -93,15 +96,39 @@ Route::middleware([
 
         // Events routes
         Route::prefix('events')->group(function () {
-            Route::get('add-event-to-cart/{id}', [EventsController::class, 'addToCart'])->name('add_event_to_cart');
+            Route::get('add-event-to-cart/{id}', [App\Http\Controllers\Frontend\EventsController::class, 'addToCart'])->name('add_event_to_cart');
         });
     });
 
 });
 
 Route::middleware(['auth', 'management'])->name('management.')->prefix('management')->group(function () {
+
+    Route::get('/events/step-one', [\App\Http\Controllers\Steps\EventsController::class, 'stepOne'])->name('events.step-one');
+    Route::post('/events/step-one', [\App\Http\Controllers\Steps\EventsController::class, 'storeStepOne'])->name('events.store.step-one');
+    Route::get('/events/step-two', [\App\Http\Controllers\Steps\EventsController::class, 'stepTwo'])->name('events.step-two');
+    Route::post('/events/step-two', [\App\Http\Controllers\Steps\EventsController::class, 'storeStepTwo'])->name('events.store.step-two');
+    Route::get('/events/step-three', [\App\Http\Controllers\Steps\EventsController::class, 'stepThree'])->name('events.step-three');
+    Route::post('/events/step-three', [\App\Http\Controllers\Steps\EventsController::class, 'storeStepThree'])->name('events.store.step-three');
     Route::get('/', [\App\Http\Controllers\Management\ManagementController::class, 'index'])->name('index');
-//    Route::resource('/courses', \App\Http\Controllers\Management\RentalsController::class);
-//    Route::resource('/students', \App\Http\Controllers\Management\EventsController::class);
-//    Route::resource('/certifications', \App\Http\Controllers\Management\RentalsUsersController::class);
+
+    Route::resource('/rentals', \App\Http\Controllers\Management\RentalsController::class);
+    Route::resource('/materials', \App\Http\Controllers\Management\MaterialsController::class);
+    Route::resource('/rooms', \App\Http\Controllers\Management\RoomsController::class);
+    Route::resource('/events', \App\Http\Controllers\Management\EventsController::class);
+    Route::resource('/associations', \App\Http\Controllers\Management\AssociationsController::class);
+    Route::post('/search-events-materials', '\App\Http\Controllers\Management\EventsController@search_1')->name('events.search_1');
+    Route::post('/search-events', '\App\Http\Controllers\Management\EventsController@search_2')->name('events.search_2');
+    Route::post('/search-rooms', '\App\Http\Controllers\Management\RoomsController@search')->name('rooms.search');
+    Route::post('/search-materials', '\App\Http\Controllers\Management\MaterialsController@search')->name('materials.search');
+
 });
+
+
+Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->group(function () {
+    Route::get('/', [ProviderController::class, 'index'])->name('index');
+    Route::resource('/courses', \App\Http\Controllers\Provider\CoursesController::class);
+    Route::resource('/students', \App\Http\Controllers\Provider\StudentsController::class);
+    Route::resource('/certifications', \App\Http\Controllers\Provider\CertificationsController::class);
+});
+

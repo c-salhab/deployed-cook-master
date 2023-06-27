@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>YourCookMaster</title>
+    <title>Cook Master</title>
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/icon type">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -34,17 +34,19 @@
                     {{ __('Dashboard') }}
                 </x-admin-nav-link>
 
+                <x-admin-nav-link :href="route('management.materials.index')" :active="request()->routeIs('management.materials.index')">
+                    {{ __('Materials') }}
+                </x-admin-nav-link>
 
-                <x-admin-nav-link :href="route('management.rentals.index')" :active="request()->routeIs('management.rentals.index')">
-                    {{ __('Rentals') }}
+                <x-admin-nav-link :href="route('management.rooms.index')" :active="request()->routeIs('management.rooms.index')">
+                    {{ __('Rooms') }}
                 </x-admin-nav-link>
 
                 <x-admin-nav-link :href="route('management.events.index')" :active="request()->routeIs('management.events.index')">
                     {{ __('Events') }}
                 </x-admin-nav-link>
-
-                <x-admin-nav-link :href="route('management.rentings.index')" :active="request()->routeIs('management.rentings.index')">
-                    {{ __('Rentings') }}
+                <x-admin-nav-link :href="route('management.associations.index')" :active="request()->routeIs('management.associations.index')">
+                    {{ __('Materials -> Events') }}
                 </x-admin-nav-link>
 
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
@@ -67,7 +69,7 @@
                 </div>
             </nav>
         </div>
-        <main class ="m-2 p-8 w-full">
+        <main class ="m-2 p-4 w-full">
             {{ $slot }}
         </main>
     </div>

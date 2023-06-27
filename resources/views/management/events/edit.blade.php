@@ -14,6 +14,21 @@
             <form method="POST" action="{{ route('management.events.update', $event->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+
+                <div class="sm:col-span-6">
+                    <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
+                    <div>
+                        <img class="w-32 h-32" src="{{ asset($event->image) }}">
+                    </div>
+                    <div class="mt-1">
+                        <input type="file" id="image" name="image"
+                               class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    </div>
+                    @error('image')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <div class="sm:col-span-6">
                     <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
                     <div class="mt-1">
@@ -34,13 +49,59 @@
                     @enderror
                 </div>
 
-
                 <div class="sm:col-span-6">
                     <label for="max_capacity" class="block text-sm font-medium text-gray-700"> Max Capacity </label>
                     <div class="mt-1">
                         <input type="text" id="max_capacity" value="{{ $event->max_capacity }}" name="max_capacity" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
                     @error('max_capacity')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="sm:col-span-6">
+                    <label for="room_name" class="block text-sm font-medium text-gray-700">Room</label>
+                    <div class="mt-1">
+                        <select id="room_name" name="room_name" class="form-multiselect block w-full mt-1 block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                            <option value="">None</option>
+                            @foreach ($rooms as $room)
+                                <option value="{{ $room->id }}" @if ($room->id == $event->id_room) selected @endif>
+                                    {{ $room->name }}
+                                    ({{ $room->max_capacity }} Persons)
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @error('room_name')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="sm:col-span-6 pt-5">
+                    <label for="material_name" class="block text-sm font-medium text-gray-700">Material</label>
+                    <div class="mt-1">
+                        <select id="material_name" name="material_name[]" multiple class="form-multiselect block w-full mt-1 block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                            <option value="">None</option>
+                            @foreach ($materials as $material)
+                                @if($material->quantity > 0)
+                                    <option value="{{ $material->id }}">{{ $material->name }} ({{ $material->quantity }} Left)</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    @error('material_name')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="sm:col-span-6 pt-5">
+                    <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
+                    <div class="mt-1">
+                        @foreach ($materials as $material)
+                            <input type="number" name="quantity[{{ $material->id }}]" value="{{ old('quantity.' . $material->id) }}" min="0" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"><br>
+                        @endforeach
+                    </div>
+                    @error('quantity')
                     <div class="text-sm text-red-400">{{ $message }}</div>
                     @enderror
                 </div>
@@ -59,9 +120,32 @@
                 <div class="sm:col-span-6">
                     <label for="price" class="block text-sm font-medium text-gray-700"> Price </label>
                     <div class="mt-1">
-                        <input type="text" value="{{ $event->price }}"id="price" name="price" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                        <input type="text" value="{{ $event->price }}" id="price" name="price" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
                     @error('price')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="sm:col-span-6">
+                    <label for="difficulty" class="block text-sm font-medium text-gray-700"> Difficulty </label>
+                    <div class="mt-1">
+                        <input type="text" id="difficulty" value="{{ $event->address }}" name="difficulty" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    </div>
+                    @error('difficulty')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="sm:col-span-6">
+                    <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
+                    <div class="mt-1">
+                        <select id="type" name="type" class="block w-full bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                            <option value="WorkShop">WorkShop</option>
+                            <option value="Event">Event</option>
+                        </select>
+                    </div>
+                    @error('type')
                     <div class="text-sm text-red-400">{{ $message }}</div>
                     @enderror
                 </div>
@@ -82,20 +166,6 @@
                         <input type="date" min="<?php echo date('Y-m-d'); ?>" value="{{ $event->end_time }}" id="end_time" name="end_time" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
                     @error('end_time')
-                    <div class="text-sm text-red-400">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="sm:col-span-6">
-                    <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
-                    <div>
-                        <img class="w-32 h-32" src="{{ asset($event->image) }}">
-                    </div>
-                    <div class="mt-1">
-                        <input type="file" id="image" name="image"
-                               class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                    </div>
-                    @error('image')
                     <div class="text-sm text-red-400">{{ $message }}</div>
                     @enderror
                 </div>

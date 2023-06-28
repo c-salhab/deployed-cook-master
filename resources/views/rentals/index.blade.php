@@ -2,7 +2,7 @@
 
     @yield('scripts')
 
-    <div class="container w-full px-5 py-6 mx-auto">
+    <div class="container w-full px-5 py-6 mx-auto bg-white dark:bg-black">
         <div class="grid lg:grid-cols-4 gap-y-6">
             @foreach($rentals as $rental)
                 @if ($rental->status === 'available' && $rental->quantity != 0)

@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 bg-white dark:bg-black">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <p class="text-2xl">
                 Hello, <div class="text-indigo-600 text-3xl"><?php echo ucfirst(Auth::user()->first_name); ?></div>

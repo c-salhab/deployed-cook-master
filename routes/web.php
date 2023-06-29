@@ -120,7 +120,6 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/search-events', '\App\Http\Controllers\Management\EventsController@search_2')->name('events.search_2');
     Route::post('/search-rooms', '\App\Http\Controllers\Management\RoomsController@search')->name('rooms.search');
     Route::post('/search-materials', '\App\Http\Controllers\Management\MaterialsController@search')->name('materials.search');
-
 });
 
 

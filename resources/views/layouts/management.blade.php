@@ -45,8 +45,13 @@
                 <x-admin-nav-link :href="route('management.events.index')" :active="request()->routeIs('management.events.index')">
                     {{ __('Events') }}
                 </x-admin-nav-link>
+
                 <x-admin-nav-link :href="route('management.associations.index')" :active="request()->routeIs('management.associations.index')">
                     {{ __('Materials -> Events') }}
+                </x-admin-nav-link>
+
+                <x-admin-nav-link :href="route('management.formations.index')" :active="request()->routeIs('management.formations.index')">
+                    {{ __('Formations') }}
                 </x-admin-nav-link>
 
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">

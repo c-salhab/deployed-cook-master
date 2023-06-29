@@ -16,4 +16,9 @@ class Certification extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function formation()
+    {
+        return $this->hasOne(Formation::class, 'certification_id');
+    }
+
 }

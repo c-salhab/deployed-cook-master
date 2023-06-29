@@ -16,9 +16,6 @@ use App\Http\Controllers\Provider\ProviderController;
 |
 */
 
-
-
-
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
@@ -89,12 +86,10 @@ Route::middleware([
         Route::patch('update', [RentalsController::class, 'update'])->name('update_cart');
         Route::delete('remove', [RentalsController::class, 'remove'])->name('remove_from_cart');
 
-        // Rentals routes
         Route::prefix('rentals')->group(function () {
             Route::get('add-rental-to-cart/{id}', [RentalsController::class, 'addToCart'])->name('add_rental_to_cart');
         });
 
-        // Events routes
         Route::prefix('events')->group(function () {
             Route::get('add-event-to-cart/{id}', [App\Http\Controllers\Frontend\EventsController::class, 'addToCart'])->name('add_event_to_cart');
         });
@@ -113,6 +108,7 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::get('/', [\App\Http\Controllers\Management\ManagementController::class, 'index'])->name('index');
 
     Route::resource('/rentals', \App\Http\Controllers\Management\RentalsController::class);
+    Route::resource('/formations', \App\Http\Controllers\Management\FormationsController::class);
     Route::resource('/materials', \App\Http\Controllers\Management\MaterialsController::class);
     Route::resource('/rooms', \App\Http\Controllers\Management\RoomsController::class);
     Route::resource('/events', \App\Http\Controllers\Management\EventsController::class);
@@ -121,6 +117,7 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/search-events', '\App\Http\Controllers\Management\EventsController@search_2')->name('events.search_2');
     Route::post('/search-rooms', '\App\Http\Controllers\Management\RoomsController@search')->name('rooms.search');
     Route::post('/search-materials', '\App\Http\Controllers\Management\MaterialsController@search')->name('materials.search');
+    Route::post('/search-formations', '\App\Http\Controllers\Management\FormationsController@search')->name('formations.search');
 
 });
 

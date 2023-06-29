@@ -21,6 +21,7 @@ class CreateFormationTable extends Migration
             $table->decimal('price', 10, 2);
             $table->timestamp('creation_date')->default(now());
             $table->integer('score');
+            $table->boolean('validated')->default(0);
             $table->foreignId('creator')->nullable()->constrained('users');
             $table->foreignId('certification_id')->nullable()->constrained('certifications')->onDelete('set null');
         });

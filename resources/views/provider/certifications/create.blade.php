@@ -1,4 +1,4 @@
-<x-management-layout>
+<x-provider-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -34,6 +34,23 @@
             <div class="text-sm text-red-400">{{ $message }}</div>
             @enderror
 
+            <div class="sm:col-span-6 pt-5">
+                <label for="formation" class="block text-sm font-medium text-gray-700">Formation</label>
+                <div class="mt-1">
+                    <select id="formation" name="formation" class="form-multiselect block w-full mt-1 block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        @foreach ($formations as $formation)
+                            <option value="{{ $formation->name }}">
+                                {{ $formation->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                @error('formation')
+                <div class="text-sm text-red-400">{{ $message }}</div>
+                @enderror
+            </div>
+
+
             <div class="mt-6 p-4">
             <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Create New Certification</button>
             </div>
@@ -42,7 +59,7 @@
 
     </div>
 
-</x-management-layout>
+</x-provider-layout>
 
 
 

@@ -84,7 +84,7 @@
                     {{ $certification->description }}
                 </td>
                 <td class="px-6 py-4">
-                    Formation Name
+                    {{ $certification->formation->name }}
                 </td>
                 <td class="px-6 py-4">
                     <a href="#" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg  text-white">Generate PDF</a>

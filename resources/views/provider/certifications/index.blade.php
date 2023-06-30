@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="flex justify-end m-2 p-2">
-        <a href="{{route('provider.certifications.create')}}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">New Certification</a>
+        <a href="{{ route('provider.certifications.create') }}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">New Certification</a>
     </div>
 
     <div class="container flex">
@@ -51,61 +51,144 @@
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-
                 <th scope="col" class="px-6 py-3">
                     Name
                 </th>
-
                 <th scope="col" class="px-6 py-3">
-                    Descripiton
+                    Description
                 </th>
-
                 <th scope="col" class="px-6 py-3">
                     Formation
                 </th>
-
                 <th scope="col" class="px-6 py-3">
                     Generate Certification
                 </th>
-
                 <th scope="col" class="px-6 py-3">
                     Edit Certification
                 </th>
-
             </tr>
             </thead>
             <tbody>
             @foreach($certifications as $certification)
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $certification->name }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ $certification->description }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $certification->formation->name }}
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg  text-white">Generate PDF</a>
-                </td>
-                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div class="flex space-x-2">
-                        <a href="{{ route('provider.certifications.edit', $certification->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg  text-white">Edit</a>
-                        <form class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white"
-                                method="POST"
-                                action="{{ route('provider.certifications.destroy', $certification->id) }}"
-                                onsubmit="return confirm('Are you sure?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
+                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $certification->name }}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ $certification->description }}
+                    </td>
+                    <td class="px-6 py-4">
+{{--                        {{ $certification->formation->name }}--}}
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="container">
+                            <div class="interior">
+                                <a class="btn px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white" href="#open-modal">Generate Certification</a>
+                            </div>
+                        </div>
+                        <div id="open-modal" class="modal-window">
+                            <div>
+                                <a href="" title="Close" class="modal-close">Close</a>
+                                <h1>Enter the Full Name of the Student</h1><br>
+                                <form method="POST" action="{{ route('provider.certifications.generate-pdf', $certification->id) }}" enctype="multipart/form-data">
+                                @csrf
+                                    <div class="sm:col-span-6">
+                                        <label for="first_name" class="block text-sm font-medium text-gray-700"> First Name </label>
+                                        <div class="mt-1">
+                                            <input type="text" id="first_name" name="first_name" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                        </div>
+                                    </div>
+                                    @error('first_name')
+                                    <div class="text-sm text-red-400">{{ $message }}</div>
+                                    @enderror
+
+                                    <div class="sm:col-span-6">
+                                        <label for="last_name" class="block text-sm font-medium text-gray-700"> Last Name </label>
+                                        <div class="mt-1">
+                                            <input type="text" id="last_name" name="last_name" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                        </div>
+                                    </div>
+                                    @error('last_name')
+                                    <div class="text-sm text-red-400">{{ $message }}</div>
+                                    @enderror
+                                    <div class="mt-6 p-4">
+                                        <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Create New Student</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <div class="flex space-x-2">
+                            <a href="{{ route('provider.certifications.edit', $certification->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Edit</a>
+                            <form class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white"
+                                  method="POST"
+                                  action="{{ route('provider.certifications.destroy', $certification->id) }}"
+                                  onsubmit="return confirm('Are you sure?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
             @endforeach
             </tbody>
         </table>
     </div>
 
+    <style>
+        .modal-window {
+            position: fixed;
+            background-color: rgba(255, 255, 255, 0.25);
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+        &:target {
+             visibility: visible;
+             opacity: 1;
+             pointer-events: auto;
+         }
+        & > div {
+              width: 400px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              padding: 2em;
+              background: white;
+          }
+        header {
+            font-weight: bold;
+        }
+        h1 {
+            font-size: 150%;
+            margin: 0 0 15px;
+        }
+        }
+
+        .modal-close {
+            color: #aaa;
+            line-height: 50px;
+            font-size: 80%;
+            position: absolute;
+            right: 0;
+            text-align: center;
+            top: 0;
+            width: 70px;
+            text-decoration: none;
+        &:hover {
+             color: black;
+         }
+        }
+
+    </style>
+
 </x-provider-layout>
+

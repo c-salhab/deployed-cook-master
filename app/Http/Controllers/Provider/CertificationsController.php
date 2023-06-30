@@ -139,4 +139,5 @@ class CertificationsController extends Controller
 
         return view('provider.certifications.index', compact('certifications'));
     }
+
 }

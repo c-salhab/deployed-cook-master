@@ -105,7 +105,10 @@
                     </td>
 
                     <td class="px-6 py-4">
-                        A revoir Formation ici
+                        @foreach ($student->formations as $formation)
+                            - {{ $formation->name }}
+                            <br>
+                        @endforeach
                     </td>
 
                     <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">

@@ -26,4 +26,10 @@ class Formation extends Model
         return $this->belongsTo(User::class, 'creator');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_formation', 'formation_id', 'user_id');
+    }
+
+
 }

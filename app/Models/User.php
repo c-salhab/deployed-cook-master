@@ -78,7 +78,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function formations()
     {
-        return $this->hasMany(Formation::class);
+        return $this->belongsToMany(Formation::class, 'user_formation', 'user_id', 'formation_id');
+    }
+
+    public function formation()
+    {
+        return $this->belongsToMany(Formation::class, 'user_formation');
     }
 
 }

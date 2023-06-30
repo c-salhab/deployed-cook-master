@@ -22,6 +22,7 @@ class StudentsController extends Controller
 
         $students = User::where('creator', $user->id)->get();
 
+
         return view('provider.students.index', compact('students'));
     }
 
@@ -31,7 +32,8 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        return view('provider.students.create');
+        $formations = Formation::where('validated',1)->get();
+        return view('provider.students.create',compact('formations'));
     }
 
     /**
@@ -39,20 +41,32 @@ class StudentsController extends Controller
      */
     public function store(StudentStoreRequest $request)
     {
+        $validated = $request->validate([
+            'formation_name' => ['nullable', 'array'],
+            'formation_name.*' => ['nullable', 'exists:formations,id'],
+        ]);
 
-        $password = Auth::user()->getAuthPassword();
-        User::create([
+        $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
             'creator' => Auth::id(),
-            'password' => $password
+            'password' => bcrypt(Auth::user()->getAuthPassword())
         ]);
+
+        $formationIds = $validated['formation_name'] ?: null;
+
+        if (empty($formationIds) || in_array('', $formationIds)) {
+            $user->formations()->detach();
+        } else {
+            $user->formations()->sync($formationIds);
+        }
 
         return redirect()->route('provider.students.index')->with('success', 'Student created successfully.');
     }
+
 
     /**
      * Display the specified resource.
@@ -73,7 +87,10 @@ class StudentsController extends Controller
             abort(403);
         }
 
-        return view('provider.students.edit', compact('student'));
+        $formations = Formation::all();
+        $selectedFormations = $student->formations->pluck('id')->toArray();
+
+        return view('provider.students.edit', compact('student', 'formations', 'selectedFormations'));
     }
 
     /**
@@ -81,17 +98,31 @@ class StudentsController extends Controller
      */
     public function update(Request $request, User $student)
     {
+        $user = Auth::user();
 
-        $student->first_name = $request->input('first_name');
-        $student->last_name = $request->input('last_name');
-        $student->email = $request->input('email');
-        $student->phone = $request->input('address');
-        $student->phone = $request->input('phone');
+        if ($student->creator !== $user->id) {
+            abort(403);
+        }
 
-        $student->save();
+        $validated = $request->validate([
+            'formation_name' => ['nullable', 'array'],
+            'formation_name.*' => ['nullable', 'exists:formations,id'],
+        ]);
+
+        $student->update($request->only(['first_name', 'last_name', 'email', 'phone', 'address']));
+
+        $formationIds = $validated['formation_name'];
+
+        if (empty($formationIds) || in_array('', $formationIds)) {
+            $student->formations()->detach();
+        } else {
+            $student->formations()->sync($formationIds);
+        }
 
         return redirect()->route('provider.students.index')->with('warning', 'Student updated successfully.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

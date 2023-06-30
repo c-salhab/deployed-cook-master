@@ -56,7 +56,7 @@ class EventsController extends Controller
     public function storeStepTwo(Request $request)
     {
         $validated = $request->validate([
-            'room_name' => ['nullable', 'exists:rooms,name'], // Validate that the room name exists in the rooms table
+            'room_name' => ['nullable', 'exists:rooms,name'],
             'price' => ['required', 'numeric'],
             'difficulty' => ['required'],
             'start_time' => ['required'],
@@ -72,7 +72,7 @@ class EventsController extends Controller
             $room = Rooms::where('name', $roomName)->first();
             $event->id_room = $room->id;
         } else {
-            $event->id_room = null; // Set room ID as null if no room name is provided
+            $event->id_room = null;
         }
 
         $user_id = Auth::id();

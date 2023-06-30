@@ -112,12 +112,21 @@
                                     <div class="text-sm text-red-400">{{ $message }}</div>
                                     @enderror
                                     <div class="mt-6 p-4">
-                                        <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Create New Student</button>
+                                        <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white" onclick="event.stopPropagation()">Generate</button>
+
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </td>
+
+                    <script>
+                        // Prevent modal closing when clicking inside the modal window
+                        document.getElementById('open-modal').addEventListener('click', function(event) {
+                            event.stopPropagation();
+                        });
+                    </script>
+
                     <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div class="flex space-x-2">
                             <a href="{{ route('provider.certifications.edit', $certification->id) }}" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Edit</a>

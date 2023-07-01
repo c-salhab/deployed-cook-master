@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('max_capacity');
             $table->string('image');
             $table->boolean('availability')->default(1);
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->foreignId('user_id')->nullable()->constrained('users');
         });
     }

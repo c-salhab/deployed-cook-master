@@ -40,7 +40,7 @@
                                     <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
                                     <div class="mt-1">
                                         @foreach ($materials as $material)
-                                            <input type="number" name="quantity[{{ $material->id }}]" value="{{ old('quantity.' . $material->id) }}" min="0" max="{{ $material->quantity }}" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"><br>
+                                            <input type="number" value="{{ old('quantity') }}" name="quantity[{{ $material->id }}]" value="{{ old('quantity.' . $material->id) }}" min="0" max="{{ $material->quantity }}" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"><br>
                                         @endforeach
                                     </div>
                                     @error('quantity')

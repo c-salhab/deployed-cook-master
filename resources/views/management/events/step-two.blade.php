@@ -20,7 +20,7 @@
                                 <div class="sm:col-span-6">
                                     <label for="price" class="block text-sm font-medium text-gray-700"> Price </label>
                                     <div class="mt-1">
-                                        <input type="text" id="price" name="price" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                        <input type="text" id="price" value="{{ old('price') }}"name="price" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     </div>
                                 </div>
                                 @error('price')
@@ -30,7 +30,7 @@
                                 <div class="sm:col-span-6">
                                     <label for="difficulty" class="block text-sm font-medium text-gray-700"> Difficulty </label>
                                     <div class="mt-1">
-                                        <input type="text" id="difficulty" name="difficulty" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                        <input type="text" value="{{ old('difficulty') }}" id="difficulty" name="difficulty" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     </div>
                                 </div>
                                 @error('difficulty')
@@ -50,7 +50,7 @@
                                 <div class="sm:col-span-6 pt-5">
                                     <label for="room_name" class="block text-sm font-medium text-gray-700">Room</label>
                                     <div class="mt-1">
-                                        <select id="room_name" name="room_name" class="form-multiselect block w-full mt-1 block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                        <select id="room_name" value="{{ old('room_name') }}" name="room_name" class="form-multiselect block w-full mt-1 block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5">
                                             <option value="" selected>None</option>
                                             @foreach ($rooms as $room)
                                                 <option value="{{ $room->name }}" @selected($room->name == $event->room_name)>
@@ -69,7 +69,7 @@
                                 <br><div class="sm:col-span-6">
                                     <label for="start_time" class="block text-sm font-medium text-gray-700"> Start Time </label>
                                     <div class="mt-1">
-                                        <input type="date" min="<?php echo date('Y-m-d'); ?>" id="start_time" name="start_time" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                        <input type="date" value="{{ old('start_time') }}" min="<?php echo date('Y-m-d'); ?>" id="start_time" name="start_time" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     </div>
                                 </div>
                                 @error('start_time')
@@ -79,7 +79,7 @@
                                 <div class="sm:col-span-6">
                                     <label for="end_time" class="block text-sm font-medium text-gray-700"> End Time </label>
                                     <div class="mt-1">
-                                        <input type="date" min="<?php echo date('Y-m-d'); ?>" id="end_time" name="end_time" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                        <input type="date" value="{{ old('end_time') }}" min="<?php echo date('Y-m-d'); ?>" id="end_time" name="end_time" class="block w-full  appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     </div>
                                 </div>
                                 @error('end_time')

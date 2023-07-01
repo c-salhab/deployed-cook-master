@@ -1,6 +1,7 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
+import flowbitePlugin from 'flowbite/plugin';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -19,5 +20,11 @@ export default {
         },
     },
 
-    plugins: [forms, typography],
+    plugins: [forms, typography, flowbitePlugin],
+    darkMode: 'class',
+
 };
+
+
+
+

@@ -10,14 +10,14 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Styles -->
     @livewireStyles
 </head>
-<body class="font-sans antialiased bg-white dark:bg-black">
+<body class="font-sans antialiased bg-white">
 <div class="flex-col w-full md:flex md:flex-row md:min-h-screen">
     <div @click.away="open = false" class="flex flex-col flex-shrink-0 w-full text-gray-700 bg-slate-100 md:w-64 dark:text-gray-200 dark:bg-gray-800" x-data="{ open: false }">
         <div class="flex flex-row items-center justify-between flex-shrink-0 px-8 py-4">
@@ -69,6 +69,7 @@
     <main class ="m-2 p-4 w-full">
         {{ $slot }}
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
 </div>
 </body>
 </html>

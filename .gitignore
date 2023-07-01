@@ -1,7 +1,5 @@
 # Laravel specific
 .env
-public/storage
-public/hot
 storage/*.key
 vendor
 node_modules

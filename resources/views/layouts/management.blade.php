@@ -62,6 +62,14 @@
                     {{ __('Lessons') }}
                 </x-admin-nav-link>
 
+                <x-admin-nav-link :href="route('management.products.index')" :active="request()->routeIs('management.products.index')">
+                    {{ __('Products') }}
+                </x-admin-nav-link>
+
+                <x-admin-nav-link :href="route('management.recipes.index')" :active="request()->routeIs('management.recipes.index')">
+                    {{ __('Recipes') }}
+                </x-admin-nav-link>
+
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark:bg-transparent dark:focus:text-white dark:hover:text-white dark:focus:bg-gray-600 dark:hover:bg-gray-600 md:block hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                         <span>{{ Auth::user()->first_name }}</span>

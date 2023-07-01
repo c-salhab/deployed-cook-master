@@ -9,7 +9,7 @@
         <a href="{{route('provider.students.index')}}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Go Back</a>
     </div>
 
-    <div class="m-2 p-2 bg-slate-100 rounded bg-white dark:bg-black">
+    <div class="m-2 p-2 bg-slate-100 rounded bg-white">
     <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
         <form method="POST" action="{{ route('provider.students.store') }}" enctype="multipart/form-data">
             @csrf

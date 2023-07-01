@@ -53,10 +53,6 @@ Route::middleware([
         return view('lessons');
     })->name('lessons');
 
-    Route::get('/certified_courses', function () {
-        return view('certified_courses');
-    })->name('certified_courses');
-
     Route::get('/recipes', function () {
         return view('recipes');
     })->name('recipes');
@@ -70,8 +66,8 @@ Route::middleware([
     })->name('shop');
 
     Route::get('/rentals', [\App\Http\Controllers\Frontend\RentalsController::class, 'index'])->name('rentals.index');
-
     Route::get('/events', [\App\Http\Controllers\Frontend\EventsController::class, 'index'])->name('events.index');
+    Route::get('/certified_courses', [\App\Http\Controllers\Frontend\FormationsController::class, 'index'])->name('formations.index');
 
     Route::get('/cooptation', function () {
         return view('cooptation');
@@ -83,8 +79,11 @@ Route::middleware([
 
 
     Route::prefix('cart')->group(function () {
+
         Route::get('/', [RentalsController::class, 'cart'])->name('cart');
+
         Route::patch('update', [RentalsController::class, 'update'])->name('update_cart');
+
         Route::delete('remove', [RentalsController::class, 'remove'])->name('remove_from_cart');
 
         Route::prefix('rentals')->group(function () {
@@ -93,6 +92,10 @@ Route::middleware([
 
         Route::prefix('events')->group(function () {
             Route::get('add-event-to-cart/{id}', [App\Http\Controllers\Frontend\EventsController::class, 'addToCart'])->name('add_event_to_cart');
+        });
+
+        Route::prefix('certified_courses')->group(function () {
+            Route::get('add-formations-to-cart/{id}', [App\Http\Controllers\Frontend\FormationsController::class, 'addToCart'])->name('add_formation_to_cart');
         });
     });
 
@@ -118,6 +121,7 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/search-events', '\App\Http\Controllers\Management\EventsController@search_2')->name('events.search_2');
     Route::post('/search-rooms', '\App\Http\Controllers\Management\RoomsController@search')->name('rooms.search');
     Route::post('/search-materials', '\App\Http\Controllers\Management\MaterialsController@search')->name('materials.search');
+    Route::post('/search-formations', '\App\Http\Controllers\Management\FormationsController@search')->name('formations.search');
 });
 
 

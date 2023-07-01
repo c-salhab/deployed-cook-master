@@ -119,6 +119,7 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::resource('/lessons', \App\Http\Controllers\Management\LessonsController::class);
     Route::resource('/products', \App\Http\Controllers\Management\ProductsController::class);
     Route::resource('/associations', \App\Http\Controllers\Management\AssociationsController::class);
+    Route::resource('/recipes', \App\Http\Controllers\Management\RecipesController::class);
     Route::post('/search-events-materials', '\App\Http\Controllers\Management\EventsController@search_1')->name('events.search_1');
     Route::post('/search-events', '\App\Http\Controllers\Management\EventsController@search_2')->name('events.search_2');
     Route::post('/search-rooms', '\App\Http\Controllers\Management\RoomsController@search')->name('rooms.search');
@@ -126,6 +127,7 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/search-formations', '\App\Http\Controllers\Management\FormationsController@search')->name('formations.search');
     Route::post('/search-lessons', '\App\Http\Controllers\Management\LessonsController@search')->name('lessons.search');
     Route::post('/search-products', '\App\Http\Controllers\Management\ProductsController@search')->name('products.search');
+    Route::post('/search-recipes', '\App\Http\Controllers\Management\RecipesController@search')->name('recipes.search');
 });
 
 

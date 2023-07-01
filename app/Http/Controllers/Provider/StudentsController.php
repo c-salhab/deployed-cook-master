@@ -9,6 +9,7 @@ use App\Models\Student;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 
 class StudentsController extends Controller

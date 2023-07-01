@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Provider;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certification;
+use Barryvdh\DomPDF\Facade;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -32,6 +33,6 @@ class PDFController extends Controller
 
         $pdf = PDF::loadView('provider.myPDF', $data);
 
-        return $pdf->download('certification.pdf');
+        return $pdf->download($firstname . '-' . $lastname . '-certification.pdf');
     }
 }

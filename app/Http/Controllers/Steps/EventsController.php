@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Steps;
 
 use App\Http\Controllers\Controller;
-use App\Models\Events;
-use App\Models\Materials;
-use App\Models\Rooms;
-use App\Notifications\Reminder;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\Events;
+use App\Models\Rooms;
+use App\Models\Materials;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
 
 class EventsController extends Controller
 {
@@ -36,7 +36,6 @@ class EventsController extends Controller
 
         return redirect()->route('management.events.step-two');
     }
-
 
     public function stepTwo(Request $request)
     {
@@ -70,6 +69,12 @@ class EventsController extends Controller
 
         if (!empty($roomName)) {
             $room = Rooms::where('name', $roomName)->first();
+
+            $isRoomAvailable = $this->checkRoomAvailability($room, $event->start_time, $event->end_time);
+            if (!$isRoomAvailable) {
+                return redirect()->back()->withErrors(['room_name' => 'The selected room is not available for these dates.'])->withInput();
+            }
+
             $event->id_room = $room->id;
         } else {
             $event->id_room = null;
@@ -86,7 +91,6 @@ class EventsController extends Controller
 
         return redirect()->route('management.events.step-three');
     }
-
 
     public function stepThree(Request $request)
     {
@@ -136,4 +140,28 @@ class EventsController extends Controller
         return redirect()->route('management.events.index')->with('success', 'Event created successfully.');
     }
 
+    private function checkRoomAvailability($room, $startTime, $endTime)
+    {
+        $startTime = Carbon::parse($startTime);
+        $endTime = Carbon::parse($endTime);
+
+        $existingEvents = Events::where('id_room', $room->id)
+            ->where(function ($query) use ($startTime, $endTime) {
+                $query->where(function ($query) use ($startTime, $endTime) {
+                    $query->where('start_time', '>=', $startTime)
+                        ->where('start_time', '<=', $endTime);
+                })
+                    ->orWhere(function ($query) use ($startTime, $endTime) {
+                        $query->where('end_time', '>=', $startTime)
+                            ->where('end_time', '<=', $endTime);
+                    })
+                    ->orWhere(function ($query) use ($startTime, $endTime) {
+                        $query->where('start_time', '<=', $startTime)
+                            ->where('end_time', '>=', $endTime);
+                    });
+            })
+            ->count();
+
+        return $existingEvents === 0;
+    }
 }

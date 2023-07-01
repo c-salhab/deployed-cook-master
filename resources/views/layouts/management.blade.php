@@ -11,6 +11,10 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    <!-- CSS de FullCalendar -->
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.css" rel="stylesheet" />
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -18,6 +22,9 @@
     @livewireStyles
 </head>
 <body class="font-sans antialiased bg-white">
+    <!-- Scripts JavaScript de FullCalendar -->
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>
     <div class="flex-col w-full md:flex md:flex-row md:min-h-screen">
         <div @click.away="open = false" class="flex flex-col flex-shrink-0 w-full text-gray-700 bg-slate-100 md:w-64 dark:text-gray-200 dark:bg-gray-800" x-data="{ open: false }">
             <div class="flex flex-row items-center justify-between flex-shrink-0 px-8 py-4">
@@ -44,7 +51,7 @@
                 </x-admin-nav-link>
 
                 <x-admin-nav-link :href="route('management.associations.index')" :active="request()->routeIs('management.associations.index')">
-                    {{ __('Materials -> Events') }}
+                    {{ __('Used Materials') }}
                 </x-admin-nav-link>
 
                 <x-admin-nav-link :href="route('management.formations.index')" :active="request()->routeIs('management.formations.index')">

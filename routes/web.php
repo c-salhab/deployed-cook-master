@@ -33,8 +33,6 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
 
     Route::get('/message', function () { return view('message'); })->name('message');
 
-    Route::get('/recipes', function () { return view('recipes'); })->name('recipes');
-
     Route::get('/interventions', function () { return view('interventions'); })->name('interventions');
 
     Route::get('/shop', function () { return view('shop'); })->name('shop');
@@ -43,6 +41,8 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
     Route::get('/lessons', [\App\Http\Controllers\Frontend\LessonsController::class, 'index'])->name('lessons.index');
     Route::get('/shop', [\App\Http\Controllers\Frontend\ProductsController::class, 'index'])->name('shop.index');
     Route::get('/certified_courses', [\App\Http\Controllers\Frontend\FormationsController::class, 'index'])->name('formations.index');
+    Route::get('/recipes', [\App\Http\Controllers\Frontend\RecipesController::class, 'index'])->name('recipes.index');
+    Route::post('/search-recipes', '\App\Http\Controllers\Frontend\RecipesController@search')->name('recipes.search');
 
     Route::get('/cooptation', function () { return view('cooptation'); })->name('cooptation');
 

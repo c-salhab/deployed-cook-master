@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->text('steps');
+            $table->text('ingredients');
             $table->integer('quantity');
             $table->text('duration');
             $table->text('difficulty');

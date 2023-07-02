@@ -28,6 +28,7 @@ class RecipeStoreRequest extends FormRequest
             'duration' => ['required'],
             'difficulty' => ['required'],
             'quantity' => ['required'],
+            'ingredients' => ['required']
 
         ];
     }

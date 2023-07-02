@@ -40,6 +40,17 @@
                 </div>
 
                 <div class="sm:col-span-6 pt-5">
+                    <label for="ingredients" class="block text-sm font-medium text-gray-700"> Ingredients </label>
+                    <div class="mt-1">
+                        <textarea id="ingredients" rows="3"  class="shadow-sm focus:ring-indigo-500 appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" name="ingredients">{{ $recipe->ingredients }}
+                        </textarea>
+                    </div>
+                    @error('ingredients')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="sm:col-span-6 pt-5">
                     <label for="steps" class="block text-sm font-medium text-gray-700"> Steps </label>
                     <div class="mt-1">
                         <textarea id="steps" rows="3"  class="shadow-sm focus:ring-indigo-500 appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" name="steps">{{ $recipe->steps }}

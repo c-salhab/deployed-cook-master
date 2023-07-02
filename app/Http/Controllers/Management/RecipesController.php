@@ -52,6 +52,7 @@ class RecipesController extends Controller
             'duration' => $request->duration,
             'difficulty' => $request->difficulty,
             'quantity' => $request->quantity,
+            'ingredients' => $request->ingredients,
             'creator' => Auth::id(),
         ]);
 
@@ -98,6 +99,7 @@ class RecipesController extends Controller
         $recipe->quantity = $request->input('quantity');
         $recipe->duration = $request->input('duration');
         $recipe->difficulty =  $request->input('difficulty');
+        $recipe->ingredients =  $request->input('ingredients');
         $recipe->save();
 
         return redirect()->route('management.recipes.index')->with('warning', 'Recipe updated successfully.');
@@ -124,6 +126,6 @@ class RecipesController extends Controller
         $search_text = $request->input('query');
         $recipes = Recipes::where('name', 'LIKE', '%' . $search_text . '%')->get();
 
-        return view('management.products.index', compact('recipes'));
+        return view('management.recipes.index', compact('recipes'));
     }
 }

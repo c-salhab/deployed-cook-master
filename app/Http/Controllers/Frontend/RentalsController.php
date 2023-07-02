@@ -34,7 +34,7 @@ class RentalsController extends Controller
         if (isset($cart[$rental->name])) {
             $cart[$rental->name]['quantity']++;
             if($cart[$rental->name]['quantity'] > $quantity){
-                return redirect()->back()->with('error', 'Quanity exceeded !');
+                return redirect()->back()->with('error', 'Quantity exceeded !');
             }
         } else {
             $cart[$rental->name] = [

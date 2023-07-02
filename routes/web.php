@@ -17,61 +17,33 @@ use App\Http\Controllers\Provider\PDFController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', function () { return view('welcome'); })->name('welcome');
 
-Route::get('/aboutus', function () {
-    return view('aboutus');
-})->name('aboutus');
+Route::get('/aboutus', function () { return view('aboutus'); })->name('aboutus');
 
-Route::get('/terms', function () {
-    return view('terms');
-})->name('terms');
+Route::get('/terms', function () { return view('terms'); })->name('terms');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        $user = auth()->user();
-        $canManage = $user->hasRole('manager');
+Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified' ])->group(function () {
 
+    Route::get('/dashboard', function () { $user = auth()->user(); $canManage = $user->hasRole('manager');
         return view('dashboard', compact('canManage'));
     })->name('dashboard');
 
-    Route::get('/subscription', function () {
-        return view('subscription');
-    })->name('subscription');
+    Route::get('/subscription', function () { return view('subscription'); })->name('subscription');
 
-    Route::get('/message', function () {
-        return view('message');
-    })->name('message');
+    Route::get('/message', function () { return view('message'); })->name('message');
 
-    Route::get('/lessons', function () {
-        return view('lessons');
-    })->name('lessons');
+    Route::get('/recipes', function () { return view('recipes'); })->name('recipes');
 
-    Route::get('/recipes', function () {
-        return view('recipes');
-    })->name('recipes');
+    Route::get('/interventions', function () { return view('interventions'); })->name('interventions');
 
-    Route::get('/interventions', function () {
-        return view('interventions');
-    })->name('interventions');
+    Route::get('/shop', function () { return view('shop'); })->name('shop');
 
-    Route::get('/shop', function () {
-        return view('shop');
-    })->name('shop');
-
-    Route::get('/rentals', [\App\Http\Controllers\Frontend\RentalsController::class, 'index'])->name('rentals.index');
     Route::get('/events', [\App\Http\Controllers\Frontend\EventsController::class, 'index'])->name('events.index');
+    Route::get('/lessons', [\App\Http\Controllers\Frontend\LessonsController::class, 'index'])->name('lessons.index');
     Route::get('/certified_courses', [\App\Http\Controllers\Frontend\FormationsController::class, 'index'])->name('formations.index');
 
-    Route::get('/cooptation', function () {
-        return view('cooptation');
-    })->name('cooptation');
+    Route::get('/cooptation', function () { return view('cooptation'); })->name('cooptation');
 
     Route::post('/session', [StripeController::class, 'session'])->name('session');
     Route::get('/success', [StripeController::class, 'success'])->name('success');
@@ -97,6 +69,10 @@ Route::middleware([
         Route::prefix('certified_courses')->group(function () {
             Route::get('add-formations-to-cart/{id}', [App\Http\Controllers\Frontend\FormationsController::class, 'addToCart'])->name('add_formation_to_cart');
         });
+
+        Route::prefix('lessons')->group(function () {
+            Route::get('add-lessons-to-cart/{id}', [App\Http\Controllers\Frontend\LessonsController::class, 'addToCart'])->name('add_lesson_to_cart');
+        });
     });
 
 });
@@ -120,6 +96,7 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::resource('/products', \App\Http\Controllers\Management\ProductsController::class);
     Route::resource('/associations', \App\Http\Controllers\Management\AssociationsController::class);
     Route::resource('/recipes', \App\Http\Controllers\Management\RecipesController::class);
+
     Route::post('/search-events-materials', '\App\Http\Controllers\Management\EventsController@search_1')->name('events.search_1');
     Route::post('/search-events', '\App\Http\Controllers\Management\EventsController@search_2')->name('events.search_2');
     Route::post('/search-rooms', '\App\Http\Controllers\Management\RoomsController@search')->name('rooms.search');

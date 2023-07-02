@@ -2,7 +2,7 @@
 @yield('scripts')
 
 @section('content')
-<td class="ml-12 p-6">
+<div class="ml-12 p-6">
 
     @yield('scripts')
     <table class="text-sm text-left text-gray-500 dark:text-gray-400 ml-12 pl-3" style="margin-left:30rem;">

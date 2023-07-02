@@ -17,9 +17,9 @@
                             <h2 class="mb-3 text-xl font-semibold tracking-tight text-indigo-500 uppercase">{{ $event->name }}</h2>
                             <h4 class="mb-3 text-l font-semibold tracking-tight text-indigo-500">Max Capacity : {{ $event->max_capacity }}</h4>
                             <p class="leading-normal text-gray-700">Type : {{ $event->type }}</p>
-                            <p class="leading-normal text-gray-700">Difficulty : {{ $event->difficulty }}</p><br>
-                            <p class="leading-normal text-gray-700">Address : {{ $event->address }}@if ($event->room) ({{ $event->room->name }}) @endif</p><br>
-                            <p class="leading-normal text-gray-700">Description : {{ $event->description }}</p><br>
+                            <p class="leading-normal text-gray-700">Difficulty : {{ $event->difficulty }}</p>
+                            <p class="leading-normal text-gray-700">Address : {{ $event->address }}@if ($event->room) ({{ $event->room->name }}) @endif</p>
+                            <p class="leading-normal text-gray-700">Description : {{ $event->description }}</p>
                             <p class="leading-normal text-gray-500 text-sm">Start Time : {{ date('Y-m-d', strtotime($event->start_time)) }}</p>
                             <p class="leading-normal text-gray-500 text-sm">End Time : {{ date('Y-m-d', strtotime($event->end_time)) }}</p>
                         </div>

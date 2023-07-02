@@ -41,6 +41,7 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
 
     Route::get('/events', [\App\Http\Controllers\Frontend\EventsController::class, 'index'])->name('events.index');
     Route::get('/lessons', [\App\Http\Controllers\Frontend\LessonsController::class, 'index'])->name('lessons.index');
+    Route::get('/shop', [\App\Http\Controllers\Frontend\ProductsController::class, 'index'])->name('shop.index');
     Route::get('/certified_courses', [\App\Http\Controllers\Frontend\FormationsController::class, 'index'])->name('formations.index');
 
     Route::get('/cooptation', function () { return view('cooptation'); })->name('cooptation');
@@ -72,6 +73,10 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
 
         Route::prefix('lessons')->group(function () {
             Route::get('add-lessons-to-cart/{id}', [App\Http\Controllers\Frontend\LessonsController::class, 'addToCart'])->name('add_lesson_to_cart');
+        });
+
+        Route::prefix('shop')->group(function () {
+            Route::get('add-product-to-cart/{id}', [App\Http\Controllers\Frontend\ProductsController::class, 'addToCart'])->name('add_product_to_cart');
         });
     });
 

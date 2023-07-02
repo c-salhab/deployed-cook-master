@@ -59,14 +59,14 @@
         <div class="flex items-center">
             <x-shop-logo></x-shop-logo>
             <h2 class="ml-3 text-xl font-semibold text-gray-900">
-                <a href="{{ route('shop') }}">Shop</a>
+                <a href="{{ route('shop.index') }}">Shop</a>
             </h2>
         </div>
 
         <p class="mt-4 text-gray-500 text-sm leading-relaxed">
             Discover our online store, where you can find a wide selection of quality products. From books and resources to tools and equipment, our boutique offers everything you need to support your learning journey.        </p>
         <p class="mt-4 text-sm">
-            <a href="{{ route('shop') }}" class="inline-flex items-center font-semibold text-indigo-700">
+            <a href="{{ route('shop.index') }}" class="inline-flex items-center font-semibold text-indigo-700">
                 Come and buy incredible stuff !
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-indigo-500">
                     <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />

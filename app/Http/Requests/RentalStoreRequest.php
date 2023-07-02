@@ -22,12 +22,9 @@ class RentalStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'min:3', 'max:255'],
-            'price' => ['required'],
-            'quantity' => ['required'],
-            'state' => ['required'],
-            'image' => ['required','image'],
-            'description' => ['required'],
+            'products' => ['required'],
+            'start_time' => ['required'],
+            'end_time' => ['required'],
         ];
     }
 }

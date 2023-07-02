@@ -318,7 +318,7 @@
 
 </nav>
 
-@if(request()->is('rentals') || request()->is('events') || request()->is('cart'))
+@if(request()->is('rentals') || request()->is('events') || request()->is('cart') || request()->is('lessons') || request()->is('certified_courses') || request()->is('formations') || request()->is('shop'))
 <div class="container w-full px-5 py-6 mx-auto">
     @if(session('success'))
         <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">

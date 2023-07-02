@@ -118,7 +118,7 @@ class RecipesController extends Controller
 
         $recipe->delete();
 
-        return redirect()->route('management.products.index')->with('danger', 'Recipe deleted successfully.');
+        return redirect()->route('management.recipes.index')->with('danger', 'Recipe deleted successfully.');
     }
 
     public function search(Request $request)

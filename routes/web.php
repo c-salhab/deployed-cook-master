@@ -42,6 +42,8 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
     Route::get('/shop', [\App\Http\Controllers\Frontend\ProductsController::class, 'index'])->name('shop.index');
     Route::get('/certified_courses', [\App\Http\Controllers\Frontend\FormationsController::class, 'index'])->name('formations.index');
     Route::get('/recipes', [\App\Http\Controllers\Frontend\RecipesController::class, 'index'])->name('recipes.index');
+    Route::get('/rentals', [\App\Http\Controllers\Frontend\RentalsController::class, 'index'])->name('rentals.index');
+
     Route::post('/search-recipes', '\App\Http\Controllers\Frontend\RecipesController@search')->name('recipes.search');
 
     Route::get('/cooptation', function () { return view('cooptation'); })->name('cooptation');
@@ -110,6 +112,7 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/search-lessons', '\App\Http\Controllers\Management\LessonsController@search')->name('lessons.search');
     Route::post('/search-products', '\App\Http\Controllers\Management\ProductsController@search')->name('products.search');
     Route::post('/search-recipes', '\App\Http\Controllers\Management\RecipesController@search')->name('recipes.search');
+    Route::post('/search-rentals', '\App\Http\Controllers\Management\RentalsController@search')->name('rentals.search');
 });
 
 

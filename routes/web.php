@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\Frontend\RentalsController;
 use App\Http\Controllers\Provider\ProviderController;
-use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +15,6 @@ use App\Http\Controllers\LoginController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
-Route::post('/android/login.php', [LoginController::class, 'login']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -126,6 +122,6 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
 
 Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->group(function () {
     Route::get('/', [ProviderController::class, 'index'])->name('index');
-    // Other routes...
+
 });
 

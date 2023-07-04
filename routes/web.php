@@ -16,9 +16,6 @@ use App\Http\Controllers\Provider\ProviderController;
 |
 */
 
-
-
-
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
@@ -125,6 +122,6 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
 
 Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->group(function () {
     Route::get('/', [ProviderController::class, 'index'])->name('index');
-    // Other routes...
+
 });
 

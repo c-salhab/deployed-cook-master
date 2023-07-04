@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Team;
 
 class AdminSeeder extends Seeder
 {
@@ -24,6 +25,14 @@ class AdminSeeder extends Seeder
             'updated_at' => now()
         ]);
 
+        Team::create(
+            [
+                'user_id' => 1,
+                'name' => 'Administrator',
+                'personal_team' => true
+            ]
+        );
+
         DB::table('users')->insert([
             'name' => 'Teddy',
             'email' => 'truongteddy306@protonmail.com',
@@ -33,6 +42,14 @@ class AdminSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        Team::create(
+            [
+                'user_id' => 2,
+                'name' => 'Teddy',
+                'personal_team' => true
+            ]
+        );
 
         DB::table('users')->insert([
             'name' => 'Charbel',
@@ -44,6 +61,14 @@ class AdminSeeder extends Seeder
             'updated_at' => now()
         ]);
 
+        Team::create(
+            [
+                'user_id' => 3,
+                'name' => 'Quang',
+                'personal_team' => true
+            ]
+        );
+
         DB::table('users')->insert([
             'name' => 'Quang',
             'email' => 'quang123@protonmail.com',
@@ -53,5 +78,13 @@ class AdminSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        Team::create(
+            [
+                'user_id' => 4,
+                'name' => 'Quang',
+                'personal_team' => true
+            ]
+        );
     }
 }

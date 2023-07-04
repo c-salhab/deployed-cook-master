@@ -11,21 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('team_user', function (Blueprint $table) {
+        Schema::create('subscription_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id');
-            $table->foreignId('user_id');
-            $table->string('role')->nullable();
-            $table->timestamps();
-            $table->unique(['team_id', 'user_id']);
+            $table->string('description');
+            $table->foreignId('subscription_id')->constrained('subscriptions');
         });
     }
 
-    /**
+    /**S
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('team_user');
+        Schema::dropIfExists('subscription_items');
     }
 };

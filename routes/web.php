@@ -24,29 +24,7 @@ Route::get('/aboutus', function () { return view('aboutus'); })->name('aboutus')
 
 Route::get('/terms', function () { return view('terms'); })->name('terms');
 
-Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified' ])->group(function () {
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
-Route::get('/aboutus', function () {
-    return view('aboutus');
-})->name('aboutus');
-
-Route::get('/terms', function () {
-    return view('terms');
-})->name('terms');
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        $user = auth()->user();
-        $canManage = $user->hasRole('manager');
-
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
 
     Route::get('/dashboard', function () { $user = auth()->user(); $canManage = $user->hasRole('manager');
         return view('dashboard', compact('canManage'));
@@ -57,8 +35,6 @@ Route::middleware([
     Route::get('/message', function () { return view('message'); })->name('message');
 
     Route::get('/interventions', function () { return view('interventions'); })->name('interventions');
-
-    Route::get('/shop', function () { return view('shop'); })->name('shop');
 
     Route::get('/events', [\App\Http\Controllers\Frontend\EventsController::class, 'index'])->name('events.index');
     Route::get('/lessons', [\App\Http\Controllers\Frontend\LessonsController::class, 'index'])->name('lessons.index');
@@ -137,7 +113,6 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/search-rentals', '\App\Http\Controllers\Management\RentalsController@search')->name('rentals.search');
 });
 
-
 Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->group(function () {
     Route::get('/', [ProviderController::class, 'index'])->name('index');
 
@@ -148,7 +123,6 @@ Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->
     Route::post('/search-courses', '\App\Http\Controllers\Provider\CoursesController@search')->name('courses.search');
     Route::post('/search-students', '\App\Http\Controllers\Provider\StudentsController@search')->name('students.search');
     Route::post('/generate-pdf/{certificationId}', [PDFController::class, 'generatePDF'])->name('certifications.generate-pdf');
-
 
 });
 

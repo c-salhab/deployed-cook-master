@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('team_user', function (Blueprint $table) {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id');
-            $table->foreignId('user_id');
-            $table->string('role')->nullable();
+            $table->string('name')->unique();
+            $table->integer('price');
+            $table->string('currency');
+            $table->string('stripe_product_key');
+            $table->string('stripe_api_key');
             $table->timestamps();
-            $table->unique(['team_id', 'user_id']);
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('team_user');
+        Schema::dropIfExists('subscriptions');
     }
 };

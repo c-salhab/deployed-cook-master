@@ -17,6 +17,7 @@ use App\Http\Controllers\Provider\PDFController;
 |
 */
 
+
 Route::get('/', function () { return view('welcome'); })->name('welcome');
 
 Route::get('/aboutus', function () { return view('aboutus'); })->name('aboutus');
@@ -24,6 +25,28 @@ Route::get('/aboutus', function () { return view('aboutus'); })->name('aboutus')
 Route::get('/terms', function () { return view('terms'); })->name('terms');
 
 Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified' ])->group(function () {
+
+Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
+
+Route::get('/aboutus', function () {
+    return view('aboutus');
+})->name('aboutus');
+
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        $user = auth()->user();
+        $canManage = $user->hasRole('manager');
+
 
     Route::get('/dashboard', function () { $user = auth()->user(); $canManage = $user->hasRole('manager');
         return view('dashboard', compact('canManage'));
@@ -51,7 +74,6 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
     Route::post('/session', [StripeController::class, 'session'])->name('session');
     Route::get('/success', [StripeController::class, 'success'])->name('success');
     Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
-
 
     Route::prefix('cart')->group(function () {
 
@@ -118,6 +140,7 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
 
 Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->group(function () {
     Route::get('/', [ProviderController::class, 'index'])->name('index');
+
     Route::resource('/courses', \App\Http\Controllers\Provider\CoursesController::class);
     Route::resource('/students', \App\Http\Controllers\Provider\StudentsController::class);
     Route::resource('/certifications', \App\Http\Controllers\Provider\CertificationsController::class);
@@ -125,6 +148,34 @@ Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->
     Route::post('/search-courses', '\App\Http\Controllers\Provider\CoursesController@search')->name('courses.search');
     Route::post('/search-students', '\App\Http\Controllers\Provider\StudentsController@search')->name('students.search');
     Route::post('/generate-pdf/{certificationId}', [PDFController::class, 'generatePDF'])->name('certifications.generate-pdf');
+
+
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'administrator'
+])->prefix('administration')
+    ->group(function(){
+    Route::get('/', function(){
+        return view('administration.index');
+    })->name('administration');
+
+    Route::get('/users', function(){
+        return view('administration.users.index');
+    })->name('administration.users');
+
+    Route::get('/subscriptions', function(){
+        return view('administration.subscriptions.index');
+    })->name('administration.subscriptions');
+
+    Route::get('/subscriptions/modify/{id}', \App\Http\Livewire\Administration\Subscriptions\ModifySubscription::class);
+
+    Route::get('/subscriptions/create', function(){
+        return view('administration.subscriptions.create-subscription');
+    })->name('administration.subscriptions.create');
 
 });
 

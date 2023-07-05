@@ -46,18 +46,6 @@
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('lessons.index') }}" :active="request()->routeIs('lessons.index')">
-                        {{ __('Lessons') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('formations.index') }}" :active="request()->routeIs('certified_courses')">
-                        {{ __('Certified courses') }}
-                    </x-nav-link>
-                </div>
-
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" x-data="{ dropdownOpen: false }">
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3 mb-3" id="dropdownDefaultButton" @click="dropdownOpen = !dropdownOpen">cart
                         <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-1 rounded dark:bg-red-900 dark:text-red-300">{{ count((array) session('cart')) }}</span>
@@ -179,11 +167,11 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
-                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
-                                </x-dropdown-link>
-                            @endif
+                            <x-dropdown-link href="{{ route('api-tokens.index') }}">
+                                {{ __('API Tokens') }}
+                            </x-dropdown-link>
+
+                            <x-admin-manage-drop></x-admin-manage-drop>
 
                             <div class="border-t border-gray-200"></div>
 
@@ -230,24 +218,13 @@
                 {{ __('Message') }}
             </x-responsive-nav-link>
         </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('lessons.index') }}" :active="request()->routeIs('lessons')">
-                {{ __('Lessons') }}
-            </x-responsive-nav-link>
-        </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('formations.index') }}" :active="request()->routeIs('certified_courses')">
-                {{ __('Certified Formation') }}
-            </x-responsive-nav-link>
-        </div>
+
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
-                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                    <div class="shrink-0 mr-3">
-                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                    </div>
-                @endif
+                <div class="shrink-0 mr-3">
+                    <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                </div>
 
                 <div>
                     <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
@@ -266,6 +243,8 @@
                         {{ __('API Tokens') }}
                     </x-responsive-nav-link>
                 @endif
+
+                <x-admin-manage-drop></x-admin-manage-drop>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}" x-data>
@@ -290,11 +269,9 @@
                         {{ __('Team Settings') }}
                     </x-responsive-nav-link>
 
-                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                        <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
-                            {{ __('Create New Team') }}
-                        </x-responsive-nav-link>
-                    @endcan
+                    <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
+                        {{ __('Create New Team') }}
+                    </x-responsive-nav-link>
 
                     <!-- Team Switcher -->
                     @if (Auth::user()->allTeams()->count() > 1)
@@ -313,10 +290,25 @@
         </div>
     </div>
     </div>
-
-
-
 </nav>
+    @if(request()->is('rentals') || request()->is('events') || request()->is('cart'))
+    <div class="container w-full px-5 py-6 mx-auto">
+        @if(session('success'))
+            <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
+        @if(session('warning'))
+            <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
+                {{ session('warning') }}
+            </div>
+        @endif
+
 
 @if(request()->is('rentals') || request()->is('events') || request()->is('cart') || request()->is('lessons') || request()->is('certified_courses') || request()->is('formations') || request()->is('shop'))
 <div class="container w-full px-5 py-6 mx-auto">
@@ -338,6 +330,10 @@
 
 </div>
 @endif
+
+    </div>
+   @endif
+
 @yield('content')
 
 @yield('scripts')

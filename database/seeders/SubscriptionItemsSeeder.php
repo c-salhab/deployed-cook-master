@@ -51,5 +51,11 @@ class SubscriptionItemsSeeder extends Seeder
             'description' => '20% reduction on extra recipes',
             'subscription_id' => '2',
         ]);
+
+        DB::table('subscription_items')->insert([
+            'id' => '8',
+            'description' => 'no ads',
+            'subscription_id' => '2',
+        ]);
     }
 }

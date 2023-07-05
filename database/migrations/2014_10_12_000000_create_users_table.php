@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('role')->default('user');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable()->default('profile-photos/default.jpg');
+            $table->string('profile_photo_path', 2048)->nullable();
             $table->foreignId('subscription_id')->nullable()->constrained('subscriptions');
             $table->timestamps();
         });

@@ -28,7 +28,7 @@ class AdminSeeder extends Seeder
         Team::create(
             [
                 'user_id' => 1,
-                'name' => 'Administrator',
+                'name' => 'Administrator\'s team',
                 'personal_team' => true
             ]
         );
@@ -46,7 +46,7 @@ class AdminSeeder extends Seeder
         Team::create(
             [
                 'user_id' => 2,
-                'name' => 'Teddy',
+                'name' => 'Teddy\'s team',
                 'personal_team' => true
             ]
         );
@@ -64,7 +64,7 @@ class AdminSeeder extends Seeder
         Team::create(
             [
                 'user_id' => 3,
-                'name' => 'Quang',
+                'name' => 'Charbel\'s team',
                 'personal_team' => true
             ]
         );
@@ -82,7 +82,7 @@ class AdminSeeder extends Seeder
         Team::create(
             [
                 'user_id' => 4,
-                'name' => 'Quang',
+                'name' => 'Quang\'s team',
                 'personal_team' => true
             ]
         );

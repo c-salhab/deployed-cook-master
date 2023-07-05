@@ -43,7 +43,7 @@
         </div>
 
         <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-            Experience personalized guidance and support through our intervention services. Our team of experts is here to help you navigate challenges, provide solutions, and empower you to reach your fullest potential.
+            Unlock the secrets of success with our captivating online lessons that will empower you to reach new heights and embrace your full potential.
         </p>
         <p class="mt-4 text-sm">
             <a href="{{ route('lessons.index') }}" class="inline-flex items-center font-semibold text-indigo-700">

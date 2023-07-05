@@ -54,4 +54,26 @@ class Subscription extends Model
         dd('Database error occured : ' . $e);
         }
     }
+
+    public static function subscribe($price_id)
+    {
+        dd($price_id);
+
+        \Stripe\Stripe::setApiKey(config('stripe.sk'));
+
+        $checkout_session = \Stripe\Checkout\Session::create([
+            'line_items' => [[
+                'price' => $price_id,
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('subscription'),
+            'cancel_url' => route('subscription'),
+            'automatic_tax' => [
+                'enabled' => true,
+            ],
+        ]);
+
+        return $checkout_session->url;
+    }
 }

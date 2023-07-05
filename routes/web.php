@@ -72,15 +72,6 @@ Route::middleware([
 
     Route::get('/events', [\App\Http\Controllers\Frontend\EventsController::class, 'index'])->name('events.index');
 
-    Route::get('/cooptation', function () {
-        return view('cooptation');
-    })->name('cooptation');
-
-    Route::post('/session', [StripeController::class, 'session'])->name('session');
-    Route::get('/success', [StripeController::class, 'success'])->name('success');
-    Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
-
-
     Route::prefix('cart')->group(function () {
         Route::get('/', [RentalsController::class, 'cart'])->name('cart');
         Route::patch('update', [RentalsController::class, 'update'])->name('update_cart');
@@ -122,6 +113,31 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
 
 Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->group(function () {
     Route::get('/', [ProviderController::class, 'index'])->name('index');
+});
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'administrator'
+])->prefix('administration')
+    ->group(function(){
+    Route::get('/', function(){
+        return view('administration.index');
+    })->name('administration');
+
+    Route::get('/users', function(){
+        return view('administration.users.index');
+    })->name('administration.users');
+
+    Route::get('/subscriptions', function(){
+        return view('administration.subscriptions.index');
+    })->name('administration.subscriptions');
+
+    Route::get('/subscriptions/modify/{id}', \App\Http\Livewire\Administration\Subscriptions\ModifySubscription::class);
+
+    Route::get('/subscriptions/create', function(){
+        return view('administration.subscriptions.create-subscription');
+    })->name('administration.subscriptions.create');
 });
 

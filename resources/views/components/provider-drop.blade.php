@@ -1,3 +1,3 @@
-<x-dropdown-link href="{{ route('administration') }}">
-    {{ __('Administration') }}
+<x-dropdown-link href="{{ route('provider.index') }}">
+    {{ __('Provider') }}
 </x-dropdown-link>

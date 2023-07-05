@@ -2,15 +2,12 @@
     <section class="px-2 py-32 bg-white md:px-0" style="padding-top: 2rem;
     padding-bottom: 0rem;">
         <div class="body container items-center max-w-6xl px-8 mx-auto xl:px-5" style="padding-bottom: 0rem;">
-            <!-- <h1
-            class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl"
-          > -->
+
             <h3 class="text-xl"><i>OUR STORY<br></i>
             </h3>
             <h2 class="text-4xl text-green-600">Welcome<br><br></h2>
-            <!-- </h1> -->
             <p style="font-size: 1rem; line-height: 30px;">
-                Welcome to YourCookMaster, a chain of event spaces located in Paris, dedicated to cooking and gastronomy.
+                We are a chain of event spaces located in Paris, dedicated to cooking and gastronomy.
                 At YourCookMaster, we believe in the power of warm hospitality and providing our clients with a diverse range of services.
                 Whether you are looking to learn how to cook delicious meals, discover new savory recipes or indulge in the art of pastry-making,
                 we have something for everyone. <br>

@@ -15,7 +15,7 @@ class Management
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->hasRole('manager')) {
+        if (auth()->check() && auth()->user()->hasRole('manager') || auth()->user()->hasRole('administrator')) {
             return $next($request);
         }
 

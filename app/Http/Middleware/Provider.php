@@ -15,7 +15,7 @@ class Provider
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->hasRole('provider')) {
+        if (auth()->check() && (auth()->user()->hasRole('provider') || auth()->user()->hasRole('administrator'))) {
             return $next($request);
         }
 

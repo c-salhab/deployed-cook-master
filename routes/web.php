@@ -45,8 +45,6 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
     Route::post('/search-recipes', '\App\Http\Controllers\Frontend\RecipesController@search')->name('recipes.search');
 
-    Route::get('/cooptation', function () { return view('cooptation'); })->name('cooptation');
-
     Route::post('/session', [StripeController::class, 'session'])->name('session');
     Route::get('/success', [StripeController::class, 'success'])->name('success');
     Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');

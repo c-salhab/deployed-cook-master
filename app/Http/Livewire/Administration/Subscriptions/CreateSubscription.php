@@ -10,14 +10,14 @@ class CreateSubscription extends Component
     public $name;
     public $price;
     public $currency;
-    public $advantages =[];
+    public $advantages = [];
 
     public $successMessage;
 
     protected $rules = [
-        'name' => ['required'],
-        'price' => ['required'],
-        'currency' => ['required'],
+        'name' => ['required', 'string'],
+        'price' => ['required', 'string'],
+        'currency' => ['required', 'string'],
         'advantages' => ['required'],
     ];
 

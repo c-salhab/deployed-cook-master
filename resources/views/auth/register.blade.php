@@ -2,15 +2,13 @@
     <x-authentication-card>
         <x-slot name="logo">
             <div class="center">
-                <img src="{{ asset('images/logo.png') }}" alt="Mountains" style="width:45%;position: center">
+                <img src="{{ asset('images/logo.png') }}" alt="Mountains" style="width:25%;position: center">
             </div>
         </x-slot>
-
         <x-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
-
             <div>
                 <x-label for="name" value="{{ __('Name') }}" />
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />

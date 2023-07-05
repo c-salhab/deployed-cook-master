@@ -16,24 +16,6 @@
                     </x-nav-link>
                 </div>
 
-
-                @if (auth()->check() && auth()->user()->hasRole('manager'))
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('management.index') }}" :active="request()->routeIs('management.index')">
-                        {{ __('Management') }}
-                    </x-nav-link>
-                </div>
-                @endif
-
-                @if (auth()->check() && auth()->user()->hasRole('provider'))
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link href="{{ route('provider.index') }}" :active="request()->routeIs('provider.index')">
-                            {{ __('Provider') }}
-                        </x-nav-link>
-                    </div>
-                @endif
-
-
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('subscription') }}" :active="request()->routeIs('subscription')">
                         {{ __('Subscription') }}
@@ -171,7 +153,7 @@
                                 {{ __('API Tokens') }}
                             </x-dropdown-link>
 
-                            <x-admin-manage-drop></x-admin-manage-drop>
+                            <x-manage-permissions-drop></x-manage-permissions-drop>
 
                             <div class="border-t border-gray-200"></div>
 
@@ -244,7 +226,7 @@
                     </x-responsive-nav-link>
                 @endif
 
-                <x-admin-manage-drop></x-admin-manage-drop>
+                <x-manage-permissions-drop></x-manage-permissions-drop>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}" x-data>

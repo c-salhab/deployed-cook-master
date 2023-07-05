@@ -32,4 +32,11 @@ class Materials extends Model
         $this->save();
     }
 
+    public function decreaseQuantity($quantity)
+    {
+        $newQuantity = $this->quantity - $quantity;
+        $this->quantity = max(0, $newQuantity);
+        $this->save();
+    }
+
 }

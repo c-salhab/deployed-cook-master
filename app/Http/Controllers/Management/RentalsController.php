@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RentalStoreRequest;
 use App\Models\Events;
 use App\Models\Rentals;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -38,31 +39,9 @@ class RentalsController extends Controller
      */
     public function store(RentalStoreRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'price' => 'required|numeric',
-            'quantity' => 'required|integer',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors())->withInput();
-        }
-
-        $image = $request->file('image')->storeAs('rental', $request->file('image')->getClientOriginalName(), 'public');
-
-        Rentals::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'quantity' => $request->quantity,
-            'state' => $request->state,
-            'image' => $image,
-            'description' => $request->description,
-            'start_time' => $request->start_time,
-            'end_time' => $request->end_time,
-            'user_id' => Auth::id(),
-        ]);
-
-        return redirect()->route('management.rentals.index')->with('success', 'Rental created successfully.');
+        //
     }
+
 
     /**
      * Display the specified resource.
@@ -132,7 +111,23 @@ class RentalsController extends Controller
 
         $rental->delete();
 
-        return redirect()->route('management.rentals.index')->with('danger', 'Rental deleted successfully.');;
+        return redirect()->route('management.rentals.index')->with('danger', 'Rental deleted successfully.');
+    }
+
+
+    public function search(Request $request)
+    {
+        $searchText = $request->input('query');
+
+        $user = User::where('first_name', 'LIKE', '%' . $searchText . '%')->first();
+
+        if (!$user) {
+            $rentals = collect();
+        } else {
+            $rentals = Rentals::where('user_id', $user->id)->get();
+        }
+
+        return view('management.rentals.index', compact('rentals'));
     }
 
 }

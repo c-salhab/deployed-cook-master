@@ -69,9 +69,9 @@ class EventsController extends Controller
 
         $event->load('room');
         $rooms = Rooms::where('availability', 1)->get();
-        $materials = Materials::where('availability', 1)->get(); // Fetch the materials
+        $materials = Materials::where('availability', 1)->get();
 
-        return view('management.events.edit', compact('event', 'rooms', 'materials')); // Pass the materials to the view
+        return view('management.events.edit', compact('event', 'rooms', 'materials'));
     }
 
     /**
@@ -103,16 +103,16 @@ class EventsController extends Controller
             'type' => $request->input('type'),
         ];
 
-        // Check if a room with the provided name exists
+
         if ($room) {
-            $data['id_room'] = $room->id; // Assign the room ID to 'id_room'
+            $data['id_room'] = $room->id;
         }
 
         if ($request->filled('end_time')) {
             $data['end_time'] = $request->input('end_time');
         }
 
-        // Update the event
+
         $event->update($data);
 
         $validated = $request->validate([
@@ -156,17 +156,15 @@ class EventsController extends Controller
             Storage::disk('public')->delete($imagePath);
         }
 
-        // Retrieve the materials associated with the event
         $materials = $event->materials;
 
         $event->delete();
 
-        // Restore the quantity of materials
         foreach ($materials as $material) {
             $pivotData = $material->pivot;
-            $originalQuantity = $pivotData->original['quantity'] ?? 0; // Get the original quantity from the pivot data, default to 0 if not available
-            $material->quantity += $originalQuantity; // Add back the original quantity of the material
-            $material->availability = 1; // Mark the material as available again
+            $originalQuantity = $pivotData->original['quantity'] ?? 0;
+            $material->quantity += $originalQuantity;
+            $material->availability = 1;
             $material->save();
         }
 
@@ -191,9 +189,9 @@ class EventsController extends Controller
 
     public function sendReminder(Request $request, Events $events)
     {
-        $eventId = $events->id; // Assuming you have the event ID from the request or any other source
+        $eventId = $events->id;
         $event = Events::find($eventId);
-        $user = $request->user(); // Assuming you have the authenticated user
+        $user = $request->user();
 
         Notification::send($user, new Reminder($event));
 

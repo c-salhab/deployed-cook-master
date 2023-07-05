@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Events;
+use App\Models\Materials;
 use App\Models\Rentals;
+use App\Models\RentalProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Stripe\Stripe;
@@ -21,6 +23,8 @@ class StripeController extends Controller
             $product_name = $details['name'];
             $total = $details['price'];
             $quantity = $details['quantity'];
+            $start_time = $details['start_time'];
+            $end_time = $details['end_time'];
 
             $two0 = "00";
             $unit_amount = "$total$two0";
@@ -57,21 +61,32 @@ class StripeController extends Controller
         // Diminuer la quantité des produits
         foreach (session('cart') as $id => $details) {
             $name = $details['name'];
-            $product = DB::table('rentals')->where('name', $name)->first();
+            $product = DB::table('materials')->where('name', $name)->first();
 
             $event = Events::where('name', $name)->first();
 
             if ($product) {
                 $quantity = $details['quantity'];
-                $productModel = Rentals::find($product->id);
+                $productModel = Materials::find($product->id);
                 $productModel->decreaseQuantity($quantity);
                 $productModel->save();
+
+                $rental = Rentals::create([
+                    'user_id' => auth()->id(),
+                    'start_time' => $details['start_time'],
+                    'end_time' => $details['end_time'],
+                ]);
+
+                RentalProduct::create([
+                    'rental_id' => $rental->id,
+                    'material_id' => $product->id,
+                    'quantity' => $quantity,
+                ]);
             }
 
             if($event){
                 $event->decreaseCapacity();
             }
-
         }
 
         return "Thanks for your order! You have just completed your payment. The seller will reach out to you as soon as possible.";

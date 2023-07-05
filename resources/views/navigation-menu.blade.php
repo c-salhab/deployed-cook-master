@@ -45,6 +45,7 @@
                         {{ __('Message') }}
                     </x-nav-link>
                 </div>
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" x-data="{ dropdownOpen: false }">
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3 mb-3" id="dropdownDefaultButton" @click="dropdownOpen = !dropdownOpen">cart
                         <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-1 rounded dark:bg-red-900 dark:text-red-300">{{ count((array) session('cart')) }}</span>
@@ -217,6 +218,7 @@
                 {{ __('Message') }}
             </x-responsive-nav-link>
         </div>
+
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
@@ -307,8 +309,31 @@
             </div>
         @endif
 
+
+@if(request()->is('rentals') || request()->is('events') || request()->is('cart') || request()->is('lessons') || request()->is('certified_courses') || request()->is('formations') || request()->is('shop'))
+<div class="container w-full px-5 py-6 mx-auto">
+    @if(session('success'))
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
+    @if(session('warning'))
+        <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
+            {{ session('warning') }}
+        </div>
+    @endif
+
+</div>
+@endif
+
     </div>
    @endif
+
 @yield('content')
 
 @yield('scripts')

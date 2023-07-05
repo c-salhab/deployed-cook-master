@@ -30,7 +30,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
         return view('dashboard', compact('canManage'));
     })->name('dashboard');
 
-    Route::get('/subscription', function () { return view('subscription'); })->name('subscription');
+    Route::get('/subscription', \App\Http\Livewire\Subscription::class)->name('subscription');
 
     Route::get('/message', function () { return view('message'); })->name('message');
 
@@ -44,10 +44,6 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::get('/rentals', [\App\Http\Controllers\Frontend\RentalsController::class, 'index'])->name('rentals.index');
 
     Route::post('/search-recipes', '\App\Http\Controllers\Frontend\RecipesController@search')->name('recipes.search');
-
-    Route::post('/session', [StripeController::class, 'session'])->name('session');
-    Route::get('/success', [StripeController::class, 'success'])->name('success');
-    Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
 
     Route::prefix('cart')->group(function () {
 

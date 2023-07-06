@@ -1,7 +1,7 @@
 <x-app-layout>
 
     @yield('scripts')
-
+    <h1>Formation courses</h1>
     <div class="container w-full px-5 py-6 mx-auto">
         <div class="grid lg:grid-cols-4 gap-y-6">
             @foreach($formations as $formation)

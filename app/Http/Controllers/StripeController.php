@@ -12,88 +12,44 @@ use Stripe\Stripe;
 
 class StripeController extends Controller
 {
-    public function session(Request $request)
-    {
-        //$user         = auth()->user();
-        $productItems = [];
+    public function index(){
+    }
+    public function checkout(Request $request){
 
-        Stripe::setApiKey(config('stripe.sk'));
+        $stripeSecretKey = config('stripe.sk');
+        $price_id = $request->input('price_id');
 
-        foreach (session('cart') as $id => $details) {
-            $product_name = $details['name'];
-            $total = $details['price'];
-            $quantity = $details['quantity'];
-            $start_time = $details['start_time'];
-            $end_time = $details['end_time'];
+        /* --------------------- TEST MODE ---------------------- */
+        //$stripeSecretKey = config('stripe.sk_test');
+        //$price_id = "price_1NQnlOFWvpUMtb2uT3tAxQkM";
+        /* ------------------------------------------------------ */
 
-            $two0 = "00";
-            $unit_amount = "$total$two0";
+        \Stripe\Stripe::setApiKey($stripeSecretKey);
 
-            $productItems[] = [
-                'price_data' => [
-                    'product_data' => [
-                        'name' => $product_name,
-                    ],
-                    'currency'     => 'EUR',
-                    'unit_amount'  => $unit_amount,
+        $mode = $request->input('mode');
+
+        $checkout_session = \Stripe\Checkout\Session::create([
+            'line_items' => [
+                [
+                    'price' => $price_id,
+                    'quantity' => 1,
                 ],
-                'quantity' => $quantity
-            ];
-        }
-
-        $checkoutSession = \Stripe\Checkout\Session::create([
-            'line_items'            => [$productItems],
-            'mode'                  => 'payment',
-            'allow_promotion_codes' => true,
-            'metadata'              => [
-                'user_id' => "0001"
             ],
-            'customer_email' => "cairocoders-ednalan@gmail.com", //$user->email,
+            'mode' => $mode,
             'success_url' => route('success'),
-            'cancel_url'  => route('cancel'),
+            'cancel_url' => route('cancel'),
+            'automatic_tax' => [
+                'enabled' => true,
+            ],
         ]);
 
-        return redirect()->away($checkoutSession->url);
+        return redirect()->away($checkout_session->url);
     }
 
-    public function success()
-    {
-        // Diminuer la quantité des produits
-        foreach (session('cart') as $id => $details) {
-            $name = $details['name'];
-            $product = DB::table('materials')->where('name', $name)->first();
-
-            $event = Events::where('name', $name)->first();
-
-            if ($product) {
-                $quantity = $details['quantity'];
-                $productModel = Materials::find($product->id);
-                $productModel->decreaseQuantity($quantity);
-                $productModel->save();
-
-                $rental = Rentals::create([
-                    'user_id' => auth()->id(),
-                    'start_time' => $details['start_time'],
-                    'end_time' => $details['end_time'],
-                ]);
-
-                RentalProduct::create([
-                    'rental_id' => $rental->id,
-                    'material_id' => $product->id,
-                    'quantity' => $quantity,
-                ]);
-            }
-
-            if($event){
-                $event->decreaseCapacity();
-            }
-        }
-
-        return "Thanks for your order! You have just completed your payment. The seller will reach out to you as soon as possible.";
+    public function success(){
+        return view('checkout.success');
     }
-
-    public function cancel()
-    {
-        return view('cancel');
+    public function cancel(){
+        return view('checkout.cancel');
     }
 }

@@ -32,6 +32,10 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
     Route::get('/subscription', \App\Http\Livewire\Subscription::class)->name('subscription');
 
+    Route::get('/checkout', [StripeController::class, 'checkout'])->name('checkout');
+    Route::get('/checkout/success', [StripeController::class, 'success'])->name('success');
+    Route::get('/checkout/cancel', [StripeController::class, 'cancel'])->name('cancel');
+
     Route::get('/message', function () { return view('message'); })->name('message');
 
     Route::get('/interventions', function () { return view('interventions'); })->name('interventions');

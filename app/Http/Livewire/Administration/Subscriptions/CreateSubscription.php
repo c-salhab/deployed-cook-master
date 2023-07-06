@@ -4,19 +4,22 @@ namespace App\Http\Livewire\Administration\Subscriptions;
 
 use App\Models\Subscription;
 use Livewire\Component;
+use Illuminate\Support\Collection;
 
 class CreateSubscription extends Component
 {
     public $name;
     public $price;
     public $currency;
+    public $active = true;
     public $advantages = [];
+    public $advantage;
 
     public $successMessage;
 
     protected $rules = [
         'name' => ['required', 'string'],
-        'price' => ['required', 'string'],
+        'price' => ['required', 'integer'],
         'currency' => ['required', 'string'],
         'advantages' => ['required'],
     ];
@@ -32,20 +35,22 @@ class CreateSubscription extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function addAdvantages($string)
+    public function addAdvantage(): void
     {
-        array_push($this->advantages, $string);
+        $this->advantages[] = $this->advantage;
+        $this->advantage = '';
     }
 
-    public function resetAdvantages()
+    public function resetAdvantages(): void
     {
         $this->reset('advantages');
     }
+
     public function createSubscription()
     {
         $validatedData = $this->validate();
-        $this->successMessage = 'Subscription has been created successfully.';
         $this->reset(['name','price','currency','advantages',]);
-        //Subscription::create($validatedData);
+        Subscription::create($validatedData);
+        $this->successMessage = 'Subscription has been created successfully.';
     }
 }

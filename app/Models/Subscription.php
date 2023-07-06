@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use mysql_xdevapi\Exception;
 
 class Subscription extends Model
@@ -20,18 +21,20 @@ class Subscription extends Model
             $stripe = new \Stripe\StripeClient($stripeSecretKey);
             $product = $stripe->products->create([
                 'name' => $validatedData['name'],
-                'active' => $validatedData['active'],
+                'active' => true,
             ]);
 
             //Create a subscription price
             $response = $stripe->prices->create([
                 'unit_amount' => $validatedData['price'] * 100,
                 'currency' => $validatedData['currency'],
-                'recurring' => $validatedData['recurring'],
+                'recurring' => [
+                    'interval' => 'month',
+                ],
                 'product' => $product->id,
             ]);
         }catch(Exception $e){
-            dd('Stripe api error occured : ' . $e);
+            Log::error('Stripe api error occurred : ' . $e);
         }
 
         try{
@@ -41,39 +44,23 @@ class Subscription extends Model
                     'price' => $validatedData['price'],
                     'currency' => $validatedData['currency'],
                     'stripe_product_key' => $response->product,
-                    'stripe_price_key' => $response->id,
+                    'stripe_api_key' => $response->id,
                     'created_at' => now(),
                     'updated_at' => now()
                 ]
             );
 
             foreach ($validatedData['advantages'] as $advantage){
-                SubscriptionItem::create($advantage, $id);
+                DB::table('subscription_items')->insert(
+                    [
+                        'description' => $advantage,
+                        'subscription_id' => $id,
+                    ]
+                );
             }
+
         }catch(Exception $e){
-        dd('Database error occured : ' . $e);
+            Log::error('Database error occurred : ' . $e);
         }
-    }
-
-    public static function subscribe($price_id)
-    {
-        dd($price_id);
-
-        \Stripe\Stripe::setApiKey(config('stripe.sk'));
-
-        $checkout_session = \Stripe\Checkout\Session::create([
-            'line_items' => [[
-                'price' => $price_id,
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => route('subscription'),
-            'cancel_url' => route('subscription'),
-            'automatic_tax' => [
-                'enabled' => true,
-            ],
-        ]);
-
-        return $checkout_session->url;
     }
 }

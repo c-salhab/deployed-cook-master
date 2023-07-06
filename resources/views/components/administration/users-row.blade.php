@@ -1,7 +1,11 @@
 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-    <th scope="row" class="mx-auto px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        <img src="{{env('APP_URL') . "/storage/" . $pfp}}" alt="{{$name}}" class="rounded-full h-10 w-10 object-cover">
-    </th>
+    <td scope="row" class="mx-auto px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+        @if($pfp != null)
+            <img src="{{env('APP_URL') . $pfp}}" alt="{{$name}}" class="rounded-full h-10 w-10 object-cover">
+        @else
+            None
+        @endif
+    </td>
     <td class="px-6 py-4">
         {{$name}}
     </td>

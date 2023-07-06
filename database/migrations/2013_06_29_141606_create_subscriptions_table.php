@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->integer('price');
             $table->string('currency');
-            $table->string('product_id');
-            $table->string('price_id');
+            $table->string('product_id')->nullable();
+            $table->string('price_id')->nullable();
             $table->timestamps();
         });
     }

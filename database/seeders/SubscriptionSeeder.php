@@ -14,7 +14,7 @@ class SubscriptionSeeder extends Seeder
     {
 
         DB::table('subscriptions')->insert([
-            'id' => '1',
+            'id' => '2',
             'name' => 'Standard',
             'price' => '15',
             'currency' => 'eur',
@@ -26,7 +26,7 @@ class SubscriptionSeeder extends Seeder
         ]);
 
         DB::table('subscriptions')->insert([
-            'id' => '2',
+            'id' => '3',
             'name' => 'Master',
             'price' => '30',
             'currency' => 'eur',

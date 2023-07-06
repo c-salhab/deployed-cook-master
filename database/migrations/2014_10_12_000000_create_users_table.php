@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->foreignId('creator')->nullable()->constrained('users');
-            $table->foreignId('subscription_id')->nullable()->constrained('subscriptions');
+            $table->foreignId('subscription_id')->default(1)->constrained('subscriptions');
             $table->timestamps();
         });
     }

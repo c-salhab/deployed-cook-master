@@ -15,6 +15,17 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('subscriptions')->insert([
+            'id' => '1',
+            'name' => 'Free',
+            'price' => '0',
+            'currency' => 'eur',
+            'product_id' => null,
+            'price_id' => null,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
         DB::table('users')->insert([
             'name' => 'Administrator',
             'email' => 'yourcookmaster@gmail.com',
@@ -39,6 +50,7 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('Teddy123'),
             'role' => 'administrator',
+            'subscription_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);

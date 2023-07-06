@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StripeController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\Frontend\RentalsController;
 use App\Http\Controllers\Provider\ProviderController;
 use App\Http\Controllers\Provider\PDFController;
@@ -31,10 +31,10 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     })->name('dashboard');
 
     Route::get('/subscription', \App\Http\Livewire\Subscription::class)->name('subscription');
-
-    Route::get('/checkout', [StripeController::class, 'checkout'])->name('checkout');
-    Route::get('/checkout/success', [StripeController::class, 'success'])->name('success');
-    Route::get('/checkout/cancel', [StripeController::class, 'cancel'])->name('cancel');
+    Route::post('/subscription/delete', [SubscriptionController::class, 'delete'])->name('subscription.delete');
+    Route::get('/subscription/checkout', [SubscriptionController::class, 'checkout'])->name('subscription.checkout');
+    Route::get('/subscription/checkout/success', [SubscriptionController::class, 'success'])->name('subscription.checkout.success');
+    Route::get('/subscription/checkout/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.checkout.cancel');
 
     Route::get('/message', function () { return view('message'); })->name('message');
 

@@ -18,6 +18,6 @@
         <a href="{{'/administration/subscriptions/modify/'. $id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
     </td>
     <td class="px-6 py-4 text-right">
-        <button wire:click="delete" class="font-medium text-red-500 dark:text-red-400 hover:underline">Delete</button>
+        <button wire:click="deleteAll({{$id . "," . $productId}})" class="font-medium text-red-500 dark:text-red-400 hover:underline">Delete</button>
     </td>
 </tr>

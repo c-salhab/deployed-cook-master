@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->integer('price');
             $table->string('currency');
-            $table->string('stripe_product_key');
-            $table->string('stripe_api_key');
+            $table->string('product_id');
+            $table->string('price_id');
             $table->timestamps();
         });
     }

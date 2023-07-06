@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Administration\Subscriptions;
 
-use App\Http\Controllers\Subscription;
+use \App\Models\Subscription;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -10,14 +10,9 @@ use Livewire\Component;
 class ShowSubscriptions extends Component
 {
 
-    public function delete($id)
-    {
-        try{
-            DB::table('subscriptions')->delete($id);
-
-        }catch(Exception $e){
-            Log::error('Error occurred when trying to delete subscription : ' . $e);
-        }
+    public function deleteSubscription($id, $productId){
+        dd($id);
+        Subscription::deleteAll($id, $productId);
     }
     public function render()
     {

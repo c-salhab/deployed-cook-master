@@ -18,8 +18,8 @@ class SubscriptionSeeder extends Seeder
             'name' => 'Standard',
             'price' => '15',
             'currency' => 'eur',
-            'stripe_product_key' => 'prod_O82R0hvnqTGZkn',
-            'stripe_api_key' => 'price_1NLmMCFWvpUMtb2u5DAtgqkf',
+            'product_id' => 'prod_O82R0hvnqTGZkn',
+            'price_id' => 'price_1NLmMCFWvpUMtb2u5DAtgqkf',
             'created_at' => now(),
             'updated_at' => now()
 
@@ -30,8 +30,8 @@ class SubscriptionSeeder extends Seeder
             'name' => 'Master',
             'price' => '30',
             'currency' => 'eur',
-            'stripe_product_key' => 'prod_O999xWv53SzG3l',
-            'stripe_api_key' => 'price_1NMqrTFWvpUMtb2uWayx5fPr',
+            'product_id' => 'prod_O999xWv53SzG3l',
+            'price_id' => 'price_1NMqrTFWvpUMtb2uWayx5fPr',
             'created_at' => now(),
             'updated_at' => now()
        ]);

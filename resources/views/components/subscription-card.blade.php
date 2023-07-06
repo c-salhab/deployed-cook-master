@@ -19,7 +19,7 @@
             @endforeach
         @endif
     </ul>
-    <form action="{{route('checkout')}}">
+    <form action="{{route('subscription.checkout')}}">
         <input type="hidden" name ="_token" value="{{csrf_token()}}">
         <input type="hidden" name ="price_id" value="{{$priceId}}">
         <input type="hidden" name ="mode" value="subscription">

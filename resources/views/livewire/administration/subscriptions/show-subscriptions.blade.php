@@ -39,7 +39,7 @@
                 </thead>
                 <tbody>
                         @foreach($subscriptions as $subscription)
-                            <x-administration.subscriptions-row :id="$subscription->id" :name="$subscription->name" :price="$subscription->price" :currency="$subscription->currency" :createdDate="$subscription->created_at" :modifiedDate="$subscription->updated_at"></x-administration.subscriptions-row>
+                            <x-administration.subscriptions-row :id="$subscription->id" :name="$subscription->name" :price="$subscription->price" :currency="$subscription->currency" :createdDate="$subscription->created_at" :modifiedDate="$subscription->updated_at" :productId="$subscription->product_id"></x-administration.subscriptions-row>
                         @endforeach
                 </tbody>
             </table>

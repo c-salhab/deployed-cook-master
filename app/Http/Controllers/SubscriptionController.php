@@ -8,20 +8,20 @@ use App\Models\Rentals;
 use App\Models\RentalProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
 
-class StripeController extends Controller
+class SubscriptionController extends Controller
 {
     public function index(){
     }
     public function checkout(Request $request){
 
-        //$stripeSecretKey = config('stripe.sk');
-        //$price_id = $request->input('price_id');
+        $stripeSecretKey = config('stripe.sk');
+        $price_id = $request->input('price_id');
 
         /* --------------------- TEST MODE ---------------------- */
-        $stripeSecretKey = config('stripe.sk_test');
-        $price_id = "price_1NQzk4FWvpUMtb2ud2uWIhpe";
+        ////$price_id = "price_1NQzk4FWvpUMtb2ud2uWIhpe";
         /* ------------------------------------------------------ */
 
         \Stripe\Stripe::setApiKey($stripeSecretKey);
@@ -36,8 +36,8 @@ class StripeController extends Controller
                 ],
             ],
             'mode' => $mode,
-            'success_url' => route('success'),
-            'cancel_url' => route('cancel'),
+            'success_url' => route('subscription.checkout.success'),
+            'cancel_url' => route('subscription.checkout.cancel'),
             'automatic_tax' => [
                 'enabled' => true,
             ],
@@ -47,9 +47,9 @@ class StripeController extends Controller
     }
 
     public function success(){
-        return view('checkout.success');
+        return view('subscription.checkout.success');
     }
     public function cancel(){
-        return view('checkout.cancel');
+        return view('subscription.checkout.cancel');
     }
 }

@@ -16,12 +16,12 @@ class StripeController extends Controller
     }
     public function checkout(Request $request){
 
-        $stripeSecretKey = config('stripe.sk');
-        $price_id = $request->input('price_id');
+        //$stripeSecretKey = config('stripe.sk');
+        //$price_id = $request->input('price_id');
 
         /* --------------------- TEST MODE ---------------------- */
-        //$stripeSecretKey = config('stripe.sk_test');
-        //$price_id = "price_1NQnlOFWvpUMtb2uT3tAxQkM";
+        $stripeSecretKey = config('stripe.sk_test');
+        $price_id = "price_1NQzk4FWvpUMtb2ud2uWIhpe";
         /* ------------------------------------------------------ */
 
         \Stripe\Stripe::setApiKey($stripeSecretKey);

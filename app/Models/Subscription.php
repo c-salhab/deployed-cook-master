@@ -64,7 +64,7 @@ class Subscription extends Model
             Log::error('Database error occurred : ' . $e);
         }
     }
-
+    
     public function deleteAll(int $id, string $productId){
 
         try{

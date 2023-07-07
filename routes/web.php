@@ -31,7 +31,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     })->name('dashboard');
 
     Route::get('/subscription', \App\Http\Livewire\Subscription::class)->name('subscription');
-    Route::post('/subscription/delete', [SubscriptionController::class, 'delete'])->name('subscription.delete');
+    //Route::post('/subscription/delete', [SubscriptionController::class, 'delete'])->name('subscription.delete');
     Route::get('/subscription/checkout', [SubscriptionController::class, 'checkout'])->name('subscription.checkout');
     Route::get('/subscription/checkout/success', [SubscriptionController::class, 'success'])->name('subscription.checkout.success');
     Route::get('/subscription/checkout/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.checkout.cancel');
@@ -39,7 +39,6 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::get('/message', function () { return view('message'); })->name('message');
 
     Route::get('/interventions', function () { return view('interventions'); })->name('interventions');
-
     Route::get('/events', [\App\Http\Controllers\Frontend\EventsController::class, 'index'])->name('events.index');
     Route::get('/lessons', [\App\Http\Controllers\Frontend\LessonsController::class, 'index'])->name('lessons.index');
     Route::get('/shop', [\App\Http\Controllers\Frontend\ProductsController::class, 'index'])->name('shop.index');

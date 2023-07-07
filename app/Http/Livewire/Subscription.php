@@ -12,11 +12,6 @@ use Illuminate\Support\Collection;
 
 class Subscription extends Component
 {
-     public function checkout($price_id): RedirectResponse
-     {
-         return redirect()->away(\App\Models\Subscription::subscribe($price_id));
-     }
-
     protected function fetchSubscriptions(): Collection{
         $subscriptions = \App\Models\Subscription::all();
         $subscription_items = SubscriptionItem::all()->groupBy('subscription_id');

@@ -6,9 +6,11 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use PHPUnit\Exception;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -28,11 +30,20 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        return DB::transaction(function () use ($input) {
+        $stripeSecretKey = config('stripe.sk');
+
+        $stripe = new \Stripe\StripeClient($stripeSecretKey);
+        $response = $stripe->customers->create([
+            "name" => $input['name'],
+            "email" => $input['email']
+        ]);
+
+        return DB::transaction(function () use ($input, $response) {
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
+                'customer_id' => $response->id,
             ]), function (User $user) {
                 $this->createTeam($user);
             });

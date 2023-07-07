@@ -32,6 +32,7 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('2x4vjU6rFRpVXneg'),
             'role' => 'super administrator',
+            'customer_id' => 'cus_ODdMhN7xcWooYK',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -50,7 +51,7 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('Teddy123'),
             'role' => 'administrator',
-            'subscription_id' => 1,
+            'customer_id' => 'cus_ODdKRL44SAMGYl',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -69,6 +70,7 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('Charbel123'),
             'role' => 'administrator',
+            'customer_id' => 'cus_ODdKBFtmRXZn77',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -87,6 +89,7 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('Quang123'),
             'role' => 'administrator',
+            'customer_id' => 'cus_ODdKAdbvlMhjZ7',
             'created_at' => now(),
             'updated_at' => now()
         ]);

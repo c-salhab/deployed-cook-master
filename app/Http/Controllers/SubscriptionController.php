@@ -38,6 +38,7 @@ class SubscriptionController extends Controller
             ],
             'customer' => auth()->user()->customer_id,
             'mode' => $mode,
+            'allow_promotion_codes' => true,
             'success_url' => route('subscription.checkout.success'),
             'cancel_url' => route('subscription.checkout.cancel'),
         ]);

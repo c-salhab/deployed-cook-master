@@ -27,12 +27,12 @@ class AdminSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Administrator',
+            'name' => 'Super Administrator',
             'email' => 'yourcookmaster@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('2x4vjU6rFRpVXneg'),
             'role' => 'super administrator',
-            'customer_id' => 'cus_ODdMhN7xcWooYK',
+            'customer_id' => 'cus_OECqVZY4CiKFJn',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -51,7 +51,7 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('Teddy123'),
             'role' => 'administrator',
-            'customer_id' => 'cus_ODdKRL44SAMGYl',
+            'customer_id' => 'cus_OECptTFNH1UGGV',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -70,7 +70,7 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('Charbel123'),
             'role' => 'administrator',
-            'customer_id' => 'cus_ODdKBFtmRXZn77',
+            'customer_id' => 'cus_OECq4Gg2AMQl2l',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -89,7 +89,7 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('Quang123'),
             'role' => 'administrator',
-            'customer_id' => 'cus_ODdKAdbvlMhjZ7',
+            'customer_id' => 'cus_OECqXLH5Pc7git',
             'created_at' => now(),
             'updated_at' => now()
         ]);

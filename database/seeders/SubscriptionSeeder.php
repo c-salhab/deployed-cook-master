@@ -16,10 +16,10 @@ class SubscriptionSeeder extends Seeder
         DB::table('subscriptions')->insert([
             'id' => '2',
             'name' => 'Standard',
-            'price' => '15',
+            'price' => '14.99',
             'currency' => 'eur',
-            'product_id' => 'prod_O82R0hvnqTGZkn',
-            'price_id' => 'price_1NLmMCFWvpUMtb2u5DAtgqkf',
+            'product_id' => 'prod_OEClb3g0uWmiJN',
+            'price_id' => 'price_1NRkLwFJvMbSMVjzo4YdaAlG',
             'created_at' => now(),
             'updated_at' => now()
 
@@ -28,10 +28,10 @@ class SubscriptionSeeder extends Seeder
         DB::table('subscriptions')->insert([
             'id' => '3',
             'name' => 'Master',
-            'price' => '30',
+            'price' => '29.99',
             'currency' => 'eur',
-            'product_id' => 'prod_O999xWv53SzG3l',
-            'price_id' => 'price_1NMqrTFWvpUMtb2uWayx5fPr',
+            'product_id' => 'prod_OECjr42INYh31o',
+            'price_id' => 'price_1NRkKTFJvMbSMVjzPruZ4ODw',
             'created_at' => now(),
             'updated_at' => now()
        ]);

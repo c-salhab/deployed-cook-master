@@ -155,7 +155,7 @@ Route::middleware([
         return view('administration.subscriptions.create-subscription');
     })->name('administration.subscriptions.create');
 
-    Route::get('/coupons', Coupon::class)->name('coupons');
-    Route::get('/coupons/create', CreateCoupon::class)->name('coupons.create');
+    Route::get('/coupons', Coupon::class)->name('administration.coupons');
+    Route::get('/coupons/create', CreateCoupon::class)->name('administration.coupons.create');
 });
 

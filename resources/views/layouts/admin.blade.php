@@ -53,8 +53,8 @@
                         {{ __('Subscription') }}
                     </x-admin-nav-link>
 
-                    <x-admin-nav-link :href="route('coupons')"
-                                      :active="request()->routeIs('coupons')">
+                    <x-admin-nav-link :href="route('administration.coupons')"
+                                      :active="request()->routeIs('administration.coupons')">
                         {{ __('Coupons') }}
                     </x-admin-nav-link>
 

@@ -8,9 +8,9 @@ class CreateCoupon extends Component
 {
     public $name;
     public $value;
-    public $isAmount;
+    public $isAmount  = 'true';
 
-    public $duration_type;
+    public $duration_type = 'once';
     public $duration_value;
 
     protected $rules = [
@@ -23,18 +23,39 @@ class CreateCoupon extends Component
     protected $messages = [
         'name.required' => 'The coupon name cannot be empty.',
         'value.required' => 'The reduction cannot be empty.',
-        'advantages.required' => 'Show at least one advantage..',
     ];
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function createCoupon(){
+
         $stripe = new \Stripe\StripeClient(config('stripe.sk'));
-        $stripe->coupons->create([
-            'amount_off' => $this->isAmount ? $this->value : null,
-            'percent_off' => !$this->isAmount ? $this->value : null,
-            'duration' => $this->duration_type,
-            'duration_in_months' => $this->duration_type == 'repeating'? $this->duration_value : null,
-        ]);
+
+        $options = [];
+
+        $options['name'] = $this->name;
+
+        if ($this->isAmount == 'true') {
+            $options['amount_off'] = $this->value;
+            $options['currency'] = 'eur';
+        } else {
+            $options['percent_off'] = $this->value;
+        }
+
+        $options['duration'] = $this->duration_type;
+
+        if ($this->duration_type == 'repeating') {
+            $options['duration_in_months'] = $this->duration_value;
+        }
+
+        $stripe->coupons->create($options);
+
+        redirect()->away('administration/coupons');
     }
     public function render(){
-        return view('administration.coupons.create');
+        return view('administration.coupons.create')->layout('layouts.admin');
     }
 }

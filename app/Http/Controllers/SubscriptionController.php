@@ -42,8 +42,6 @@ class SubscriptionController extends Controller
             'cancel_url' => route('subscription.checkout.cancel'),
         ]);
 
-
-        dd($checkout_session);
         return redirect()->away($checkout_session->url);
     }
 

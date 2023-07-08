@@ -15,7 +15,6 @@ class Subscription extends Model
 
     public static function create(array $validatedData)
     {
-
         //Create the product
         try{
             $stripeSecretKey = config('stripe.sk');
@@ -65,25 +64,33 @@ class Subscription extends Model
         }
     }
     
-    public function deleteAll(int $id, string $productId){
+    public static function deleteAll(int $id, string $productId){
 
-        try{
-            DB::table('subscription_items')->where('subscription_id', '=', $id)->delete();
-        }catch(\Exception $e){
-            Log::error("Errored occurred while trying to delete a subscription's item. " . $e);
+        if(User::where('subscription_id', $id)->get()->isEmpty()){
+            try{
+                DB::table('subscription_items')->where('subscription_id', '=', $id)->delete();
+            }catch(\Exception $e){
+                Log::error("Errored occurred while trying to delete a subscription's item. " . $e);
+            }
+            try{
+                DB::table('subscriptions')->where('id', '=', $id)->delete();
+            }catch(\Exception $e){
+                Log::error("Errored occurred while trying to delete a subscription. " . $e);
+            }
+
+            try{
+                if($productId != null){
+                    $stripeSecretKey = config('stripe.sk');
+
+                    $stripe = new \Stripe\StripeClient($stripeSecretKey);
+                    $stripe->products->delete(
+                        $productId,
+                        []
+                    );
+                }
+            }catch(\Exception $e){
+                Log::error("Errored occurred while trying to delete a subscription in stripe. " . $e);
+            }
         }
-        try{
-            DB::table('subscriptions')->where('id', '=', $id)->delete();
-        }catch(\Exception $e){
-            Log::error("Errored occurred while trying to delete a subscription. " . $e);
-        }
-
-        $stripeSecretKey = config('stripe.sk');
-
-        $stripe = new \Stripe\StripeClient($stripeSecretKey);
-        $stripe->products->delete(
-            $productId,
-            []
-        );
     }
 }

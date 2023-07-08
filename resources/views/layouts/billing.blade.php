@@ -43,8 +43,8 @@
                         {{ __('Dashboard') }}
                     </x-admin-nav-link>
 
-                    <x-admin-nav-link :href="route('administration.users')"
-                                      :active="request()->routeIs('administration.users')">
+                    <x-admin-nav-link :href="route('billing.portal')"
+                                      :active="request()->routeIs('billing.portal')">
                         {{ __('Billing portal') }}
                     </x-admin-nav-link>
 

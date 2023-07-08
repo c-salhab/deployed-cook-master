@@ -1,14 +1,10 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Administration\Subscriptions;
 
 use App\Models\SubscriptionItem;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Livewire\Component;
 use Illuminate\Support\Collection;
+use Livewire\Component;
 
 class Subscription extends Component
 {

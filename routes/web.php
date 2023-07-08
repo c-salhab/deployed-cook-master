@@ -1,10 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\Frontend\RentalsController;
-use App\Http\Controllers\Provider\ProviderController;
 use App\Http\Controllers\Provider\PDFController;
+use App\Http\Controllers\Provider\ProviderController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Livewire\Administration\Coupons\Coupon;
+use App\Http\Livewire\Administration\Coupons\CreateCoupon;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +32,13 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
         return view('dashboard', compact('canManage'));
     })->name('dashboard');
 
-    Route::get('/subscription', \App\Http\Livewire\Subscription::class)->name('subscription');
-    //Route::post('/subscription/delete', [SubscriptionController::class, 'delete'])->name('subscription.delete');
+    Route::get('/billing', function(){
+        return view('billing.index');
+    })->name('billing');
+
+    Route::get('/billing/portal', [\App\Http\Controllers\BillingController::class, 'createPortalSession'])->name('billing.portal');
+
+    Route::get('/subscription', \App\Http\Livewire\Administration\Subscriptions\Subscription::class)->name('subscription');
     Route::get('/subscription/checkout', [SubscriptionController::class, 'checkout'])->name('subscription.checkout');
     Route::get('/subscription/checkout/success', [SubscriptionController::class, 'success'])->name('subscription.checkout.success');
     Route::get('/subscription/checkout/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.checkout.cancel');
@@ -148,5 +155,7 @@ Route::middleware([
         return view('administration.subscriptions.create-subscription');
     })->name('administration.subscriptions.create');
 
+    Route::get('/coupons', Coupon::class)->name('coupons');
+    Route::get('/coupons/create', CreateCoupon::class)->name('coupons.create');
 });
 

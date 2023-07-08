@@ -26,7 +26,7 @@ class CreateSubscription extends Component
 
     protected $messages = [
         'name.required' => 'The subscription name cannot be empty.',
-        'price.required' => 'The price name cannot be empty.',
+        'price.required' => 'The price cannot be empty.',
         'advantages.required' => 'Show at least one advantage..',
     ];
 

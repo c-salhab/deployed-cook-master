@@ -6,6 +6,7 @@ use App\Models\Events;
 use App\Models\Materials;
 use App\Models\Rentals;
 use App\Models\RentalProduct;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -13,15 +14,15 @@ use Stripe\Stripe;
 
 class SubscriptionController extends Controller
 {
-    public function index(){
-    }
+
     public function checkout(Request $request){
 
         $stripeSecretKey = config('stripe.sk');
         $price_id = $request->input('price_id');
 
         /* --------------------- TEST MODE ---------------------- */
-        ////$price_id = "price_1NQzk4FWvpUMtb2ud2uWIhpe";
+        //$stripeSecretKey = config('stripe.sk_test');
+        //$price_id = "price_1NQzk4FWvpUMtb2ud2uWIhpe";
         /* ------------------------------------------------------ */
 
         \Stripe\Stripe::setApiKey($stripeSecretKey);
@@ -35,14 +36,14 @@ class SubscriptionController extends Controller
                     'quantity' => 1,
                 ],
             ],
+            'customer' => auth()->user()->customer_id,
             'mode' => $mode,
             'success_url' => route('subscription.checkout.success'),
             'cancel_url' => route('subscription.checkout.cancel'),
-            'automatic_tax' => [
-                'enabled' => true,
-            ],
         ]);
 
+
+        dd($checkout_session);
         return redirect()->away($checkout_session->url);
     }
 

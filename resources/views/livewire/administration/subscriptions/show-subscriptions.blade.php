@@ -38,8 +38,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                        @foreach($subscriptions as $subscription)
-                            <x-administration.subscriptions-row :id="$subscription->id" :name="$subscription->name" :price="$subscription->price" :currency="$subscription->currency" :createdDate="$subscription->created_at" :modifiedDate="$subscription->updated_at" :productId="$subscription->product_id"></x-administration.subscriptions-row>
+                @foreach($subscriptions as $subscription)
+                            <x-administration.subscriptions-row :subscription="$subscription"></x-administration.subscriptions-row>
                         @endforeach
                 </tbody>
             </table>
@@ -48,6 +48,11 @@
     <a href="{{route('administration.subscriptions.create')}}">
         <button class="mt-3 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-400 rounded">
             Add plan
+        </button>
+    </a>
+    <a href="{{route('administration.subscriptions.create')}}">
+        <button class="mt-3 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-400 rounded">
+            Create coupon
         </button>
     </a>
 

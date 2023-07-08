@@ -11,7 +11,6 @@ class ShowSubscriptions extends Component
 {
 
     public function deleteSubscription($id, $productId){
-        dd($id);
         Subscription::deleteAll($id, $productId);
     }
     public function render()

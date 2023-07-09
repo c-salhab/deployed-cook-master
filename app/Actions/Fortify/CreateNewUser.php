@@ -25,6 +25,8 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
@@ -34,14 +36,16 @@ class CreateNewUser implements CreatesNewUsers
 
         $stripe = new \Stripe\StripeClient($stripeSecretKey);
         $response = $stripe->customers->create([
-            "name" => $input['name'],
-            "email" => $input['email']
+            "name" => $input['last_name'] . ' ' . $input['first_name'],
+            "email" => $input['email'],
         ]);
 
         return DB::transaction(function () use ($input, $response) {
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
+                "first_name" => $input['first_name'],
+                "last_name" => $input['last_name'],
                 'password' => Hash::make($input['password']),
                 'customer_id' => $response->id,
             ]), function (User $user) {

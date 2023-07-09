@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->string('image_url');
+            $table->enum('difficulty', ['easy', 'medium', 'hard']);
+            $table->float('price');
+            $table->boolean('validated')->default(false);
+            $table->string('product_id')->nullable();
+            $table->string('price_id')->nullable();
             $table->timestamps();
-            $table->string('name');
-            $table->string('description');
-            $table->decimal('price', 10, 2);
-            $table->timestamp('creation_date')->default(now());
-            $table->integer('score');
-            $table->string('image');
-            $table->string('duration');
-            $table->foreignId('creator')->nullable()->constrained('users');
         });
     }
 

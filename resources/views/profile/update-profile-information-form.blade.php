@@ -58,6 +58,16 @@
             <x-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
             <x-input-error for="name" class="mt-2" />
         </div>
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="first_name" value="{{ __('First name') }}" />
+            <x-input id="first_name" type="text" class="mt-1 block w-full" wire:model.defer="state.first_name" autocomplete="first_name" />
+            <x-input-error for="first_name" class="mt-2" />
+        </div>
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="last_name" value="{{ __('Last name') }}" />
+            <x-input id="last_name" type="text" class="mt-1 block w-full" wire:model.defer="state.last_name" autocomplete="last_name" />
+            <x-input-error for="last_name" class="mt-2" />
+        </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">

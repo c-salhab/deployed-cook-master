@@ -19,6 +19,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
@@ -33,8 +35,11 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         } else {
             $user->forceFill([
                 'name' => $input['name'],
+                'first_name' => $input['first_name'],
+                'last_name' => $input['last_name'],
                 'email' => $input['email'],
             ])->save();
+            $this->updateCustomerStripe($input);
         }
     }
 
@@ -47,10 +52,23 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     {
         $user->forceFill([
             'name' => $input['name'],
+            'first_name' => $input['first_name'],
+            'last_name' => $input['last_name'],
             'email' => $input['email'],
             'email_verified_at' => null,
         ])->save();
-
+        $this->updateCustomerStripe($input);
         $user->sendEmailVerificationNotification();
+    }
+
+    protected function updateCustomerStripe(array $input){
+        $stripe = new \Stripe\StripeClient(config('stripe.sk'));
+        $stripe->customers->update(
+            auth()->user()->customer_id,
+            [
+                'email' => $input['email'],
+                'name' => $input['last_name'] . ' ' . $input['first_name']
+            ]
+        );
     }
 }

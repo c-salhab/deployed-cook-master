@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Livewire\Administration\Subscriptions;
 
 use \App\Models\Subscription;

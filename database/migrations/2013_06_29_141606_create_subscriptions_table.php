@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->integer('price');
+            $table->float('price');
             $table->string('currency');
             $table->string('product_id')->nullable();
             $table->string('price_id')->nullable();

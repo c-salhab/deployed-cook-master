@@ -35,33 +35,38 @@ class Subscription extends Model
             ]);
         }catch(Exception $e){
             Log::error('Stripe api error occurred : ' . $e);
+            return false;
         }
 
         try{
-            $id = DB::table('subscriptions')->insertGetId(
-                [
-                    'name' => $validatedData['name'],
-                    'price' => $validatedData['price'],
-                    'currency' => $validatedData['currency'],
-                    'product_id' => $response->product,
-                    'price_id' => $response->id,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]
-            );
-
-            foreach ($validatedData['advantages'] as $advantage){
-                DB::table('subscription_items')->insert(
+            if(Subscription::where('name', '=', $validatedData['name'])->get() == null){
+                $id = DB::table('subscriptions')->insertGetId(
                     [
-                        'description' => $advantage,
-                        'subscription_id' => $id,
+                        'name' => $validatedData['name'],
+                        'price' => $validatedData['price'],
+                        'currency' => $validatedData['currency'],
+                        'product_id' => $response->product,
+                        'price_id' => $response->id,
+                        'created_at' => now(),
+                        'updated_at' => now()
                     ]
                 );
-            }
 
+                foreach ($validatedData['advantages'] as $advantage){
+                    DB::table('subscription_items')->insert(
+                        [
+                            'description' => $advantage,
+                            'subscription_id' => $id,
+                        ]
+                    );
+                }
+            }
         }catch(Exception $e){
             Log::error('Database error occurred : ' . $e);
+            return false;
         }
+
+        return true;
     }
     
     public static function deleteAll(int $id, string $productId){
@@ -79,17 +84,17 @@ class Subscription extends Model
             }
 
             try{
-                if($productId != null){
-                    $stripeSecretKey = config('stripe.sk');
 
-                    $stripe = new \Stripe\StripeClient($stripeSecretKey);
-                    $stripe->products->delete(
-                        $productId,
-                        []
-                    );
-                }
+                $stripeSecretKey = config('stripe.sk');
+                $stripe = new \Stripe\StripeClient($stripeSecretKey);
+
+                $stripe->products->update(
+                    $productId,
+                    ['active' => false]
+                );
+
             }catch(\Exception $e){
-                Log::error("Errored occurred while trying to delete a subscription in stripe. " . $e);
+                Log::error("Error occurred while trying to deactivate a subscription in stripe. " . $e);
             }
         }
     }

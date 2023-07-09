@@ -15,7 +15,7 @@ class SubscriptionSeeder extends Seeder
 
         DB::table('subscriptions')->insert([
             'id' => '2',
-            'name' => 'Standard',
+            'name' => 'Standard plan',
             'price' => '14.99',
             'currency' => 'eur',
             'product_id' => 'prod_OEClb3g0uWmiJN',
@@ -27,7 +27,7 @@ class SubscriptionSeeder extends Seeder
 
         DB::table('subscriptions')->insert([
             'id' => '3',
-            'name' => 'Master',
+            'name' => 'Master plan',
             'price' => '29.99',
             'currency' => 'eur',
             'product_id' => 'prod_OECjr42INYh31o',

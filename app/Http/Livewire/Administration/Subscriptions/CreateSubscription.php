@@ -10,12 +10,12 @@ class CreateSubscription extends Component
 {
     public $name;
     public $price;
-    public $currency;
-    public $active = true;
+    public $currency ='eur';
     public $advantages = [];
     public $advantage;
 
     public $successMessage;
+    public $errorMessage;
 
     protected $rules = [
         'name' => ['required', 'string'],
@@ -37,8 +37,10 @@ class CreateSubscription extends Component
 
     public function addAdvantage(): void
     {
-        $this->advantages[] = $this->advantage;
-        $this->advantage = '';
+        if(!empty($this->advantage)){
+            $this->advantages[] = $this->advantage;
+            $this->advantage = '';
+        }
     }
 
     public function resetAdvantages(): void
@@ -49,8 +51,11 @@ class CreateSubscription extends Component
     public function createSubscription()
     {
         $validatedData = $this->validate();
-        $this->reset(['name','price','currency','advantages',]);
-        Subscription::create($validatedData);
-        $this->successMessage = 'Subscription has been created successfully.';
+        $this->reset(['name','price','currency','advantages']);
+        if(Subscription::create($validatedData)){
+            $this->successMessage = 'Subscription has been created successfully.';
+        }else{
+            $this->errorMessage = 'An error occurred.';
+        }
     }
 }

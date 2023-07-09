@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
     {
         DB::table('subscriptions')->insert([
             'id' => '1',
-            'name' => 'Free',
+            'name' => 'Free plan',
             'price' => '0',
             'currency' => 'eur',
             'product_id' => null,

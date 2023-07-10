@@ -4,68 +4,32 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="container-fluid">
+                <div class="shrink-0 flex items-center">
                     <a class="navbar-brand" href="{{ route('welcome') }}">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" width="68" height="65" class="d-inline-block align-text-top">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" width="45" height="45" class="d-inline-block align-text-top">
                     </a>
                 </div>
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <x-nav-link href="{{ route('subscription') }}" :active="request()->routeIs('subscription')">
+                    {{ __('Subscription') }}
+                </x-nav-link>
+            </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('subscription') }}" :active="request()->routeIs('subscription')">
-                        {{ __('Subscription') }}
-                    </x-nav-link>
-                </div>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <x-nav-link href="{{ route('message') }}" :active="request()->routeIs('message')">
+                    {{ __('Message') }}
+                </x-nav-link>
+            </div>
+            </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('message') }}" :active="request()->routeIs('message')">
-                        {{ __('Message') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" x-data="{ dropdownOpen: false }">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3 mb-3" id="dropdownDefaultButton" @click="dropdownOpen = !dropdownOpen">cart
-                        <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-1 rounded dark:bg-red-900 dark:text-red-300">{{ count((array) session('cart')) }}</span>
-                    </button>
-
-                    <!-- Dropdown menu -->
-                    <div class="absolute right-0 mt-2 w-72 bg-white border border-gray-300 shadow-lg rounded-md z-10" x-show="dropdownOpen" @click.away="dropdownOpen = false">
-                        <div class="py-2">
-                            <div class="px-4 flex items-center justify-between">
-                                <h2 class="text-lg font-semibold">Shopping Cart</h2>
-                                @php $total = 0 @endphp
-                                @foreach((array) session('cart') as $id => $details)
-                                    @php $total += $details['price'] * $details['quantity'] @endphp
-                                @endforeach
-                                <p class="text-success">Total: €{{ $total }}</p>
-                            </div>
-                            @if(session('cart'))
-                                @foreach(session('cart') as $id => $details)
-                                    <div class="flex items-center mt-4 px-4">
-                                        <div class="w-16 h-16 mr-4">
-                                            <img src="{{ asset($details['image']) }}" class="w-full h-full object-cover rounded">
-                                        </div>
-                                        <div>
-                                            <p>{{ $details['name'] }}</p>
-                                            <span class="price text-success">€{{ $details['price'] }}</span>
-                                            <span class="count">Quantity: {{ $details['quantity'] }}</span>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                            <div class="flex justify-center mt-4">
-                                <a href="{{ route('cart') }}" class="btn btn-primary btn-block">View all</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ml-3 relative">
@@ -130,7 +94,6 @@
                                 <span class="inline-flex rounded-md">
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
                                         {{ Auth::user()->name }}
-
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                         </svg>
@@ -140,16 +103,13 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            <!-- Account Management -->
+                            <div class="block px-4 py-2 text-xs text-green-300">
+                                {{ __('Manage Account') }}
+                            </div>
+
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
-                            </x-dropdown-link>
-
-                            <x-dropdown-link href="{{ route('billing') }}">
-                                {{ __('Billing') }}
-                            </x-dropdown-link>
-
-                            <x-dropdown-link href="{{ route('api-tokens.index') }}">
-                                {{ __('API Tokens') }}
                             </x-dropdown-link>
 
                             <x-manage-permissions-drop></x-manage-permissions-drop>
@@ -161,7 +121,7 @@
                                 @csrf
 
                                 <x-dropdown-link href="{{ route('logout') }}"
-                                         @click.prevent="$root.submit();">
+                                                 @click.prevent="$root.submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
@@ -203,9 +163,11 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
-                <div class="shrink-0 mr-3">
-                    <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                </div>
+                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                    <div class="shrink-0 mr-3">
+                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                    </div>
+                @endif
 
                 <div>
                     <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
@@ -236,7 +198,7 @@
                     @csrf
 
                     <x-responsive-nav-link href="{{ route('logout') }}"
-                                   @click.prevent="$root.submit();">
+                                           @click.prevent="$root.submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
@@ -254,9 +216,11 @@
                         {{ __('Team Settings') }}
                     </x-responsive-nav-link>
 
-                    <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
-                        {{ __('Create New Team') }}
-                    </x-responsive-nav-link>
+                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                        <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
+                            {{ __('Create New Team') }}
+                        </x-responsive-nav-link>
+                    @endcan
 
                     <!-- Team Switcher -->
                     @if (Auth::user()->allTeams()->count() > 1)
@@ -274,30 +238,4 @@
             </div>
         </div>
     </div>
-    </div>
-</nav
-
-@if(request()->is('rentals') || request()->is('events') || request()->is('cart') || request()->is('lessons') || request()->is('certified_courses') || request()->is('formations') || request()->is('shop'))
-<div class="container w-full px-5 py-6 mx-auto">
-    @if(session('success'))
-        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
-            {{ session('error') }}
-        </div>
-    @endif
-    @if(session('warning'))
-        <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
-            {{ session('warning') }}
-        </div>
-    @endif
-</div>
-@endif
-
-
-@yield('content')
-
-@yield('scripts')
+</nav>

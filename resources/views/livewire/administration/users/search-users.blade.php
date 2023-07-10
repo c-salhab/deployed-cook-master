@@ -41,16 +41,13 @@
                             </div>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Edit</span>
-                        </th>
-                        <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Delete</span>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach($users as $user)
-                            <x-administration.users-row :pfp="$user->profile_photo_path" :name="$user->name" :email="$user->email" :role="$user->role" :createdDate="$user->created_at"></x-administration.users-row>
+                            <x-administration.users-row :id="$user->id" :pfp="$user->profile_photo_path" :name="$user->name" :email="$user->email" :role="$user->role" :createdDate="$user->created_at"></x-administration.users-row>
                         @endforeach
                     </tbody>
                 </table>

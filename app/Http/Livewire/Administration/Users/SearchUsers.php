@@ -30,6 +30,11 @@ class SearchUsers extends Component
     public function updatingSearch(){
         $this->resetPage();
     }
+
+    public function delete($id){
+        $user = User::find($id);
+        $user->delete();
+    }
     public function render()
     {
         return view('livewire.administration.users.search-users', [

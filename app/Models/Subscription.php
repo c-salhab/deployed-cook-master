@@ -26,7 +26,7 @@ class Subscription extends Model
 
             //Create a subscription price
             $response = $stripe->prices->create([
-                'unit_amount' => $validatedData['price'] * 100,
+                'unit_amount' => (int)($validatedData['price'] * 100),
                 'currency' => $validatedData['currency'],
                 'recurring' => [
                     'interval' => 'month',

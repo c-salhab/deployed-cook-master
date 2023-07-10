@@ -9,12 +9,12 @@
         {{$subscription->currency}}
     </td>
     <td class="px-6 py-4">
-        {{$subscription->createdDate}}
+        {{$subscription->created_at}}
     </td>
     <td class="px-6 py-4">
-        {{$subscription->modifiedDate}}
+        {{$subscription->updated_at}}
     </td>
-    <td class="px-6 py-4 text-right">
+    <td class="pr-6 py-4 text-right">
         <a href="{{'/administration/subscriptions/modify/'. $subscription->id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
     </td>
     <td class="px-6 py-4 text-right">

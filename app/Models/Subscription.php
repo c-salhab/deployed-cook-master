@@ -33,13 +33,14 @@ class Subscription extends Model
                 ],
                 'product' => $product->id,
             ]);
+
         }catch(Exception $e){
             Log::error('Stripe api error occurred : ' . $e);
             return false;
         }
 
         try{
-            if(Subscription::where('name', '=', $validatedData['name'])->get() == null){
+            if(Subscription::where('name', '=', $validatedData['name'])->get()->isEmpty()){
                 $id = DB::table('subscriptions')->insertGetId(
                     [
                         'name' => $validatedData['name'],
@@ -65,7 +66,6 @@ class Subscription extends Model
             Log::error('Database error occurred : ' . $e);
             return false;
         }
-
         return true;
     }
     

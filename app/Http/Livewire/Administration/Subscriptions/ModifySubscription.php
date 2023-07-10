@@ -95,7 +95,8 @@ class ModifySubscription extends Component
                     'name' => $this->name,
                     'price' => $this->price,
                     'currency' => $this->currency,
-                    'price_id' => $price->id
+                    'price_id' => $price->id,
+                    'updated_at' => now()
                 ]);
 
             DB::table('subscription_items')->where('subscription_id', '=', $this->subscription->id)->delete();

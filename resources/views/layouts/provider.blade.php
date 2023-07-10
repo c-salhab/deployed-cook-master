@@ -72,7 +72,6 @@
                             <div class="px-2 py-2 bg-white rounded-md shadow dark:bg-gray-700">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-
                                     <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                             this.closest('form').submit();">
                                         {{ __('Log Out') }}

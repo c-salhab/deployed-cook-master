@@ -15,13 +15,6 @@ class CreateLesson extends Component
     use WithFileUploads;
 
     public $lesson;
-    /*
-    public $title;
-    public $description;
-    public $price;
-    public $image;
-    public $difficulty;
-    */
     public $lesson_steps = [];
     public $number_lesson_steps = 0;
 
@@ -34,7 +27,7 @@ class CreateLesson extends Component
     }
 
     public function showStep(){
-        dd($this->lesson_steps);
+        dd($this->lesson);
     }
 
     public function render()

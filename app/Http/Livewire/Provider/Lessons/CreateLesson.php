@@ -29,6 +29,14 @@ class CreateLesson extends Component
 
     }
 
+    public function addStep(){
+        $this->number_lesson_steps++;
+    }
+
+    public function showStep(){
+        dd($this->lesson_steps);
+    }
+
     public function render()
     {
         $lessons = Lessons::where('creator_id', auth()->user()->id)->get();

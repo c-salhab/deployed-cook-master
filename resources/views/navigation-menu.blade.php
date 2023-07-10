@@ -16,17 +16,23 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <x-nav-link href="{{ route('subscription') }}" :active="request()->routeIs('subscription')">
-                    {{ __('Subscription') }}
-                </x-nav-link>
-            </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('subscription') }}" :active="request()->routeIs('subscription')">
+                        {{ __('Subscription') }}
+                    </x-nav-link>
+                </div>
 
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <x-nav-link href="{{ route('message') }}" :active="request()->routeIs('message')">
-                    {{ __('Message') }}
-                </x-nav-link>
-            </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('message') }}" :active="request()->routeIs('message')">
+                        {{ __('Message') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('cart') }}" :active="request()->routeIs('cart')">
+                        {{ __('Cart') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

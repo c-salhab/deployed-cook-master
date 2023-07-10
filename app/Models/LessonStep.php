@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lessons extends Model
+class LessonStep extends Model
 {
     use HasFactory;
 
@@ -15,6 +15,6 @@ class Lessons extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'title','description', 'image_url', 'difficulty', 'price', 'validated', 'product_id', 'price_id', 'creator_id'
+        'sub_title','description', 'order', 'duration', 'video_url'
     ];
 }

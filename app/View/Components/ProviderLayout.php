@@ -8,6 +8,6 @@ class ProviderLayout extends Component
 {
     public function render()
     {
-        return view('components.provider');
+        return view('layouts.provider');
     }
 }

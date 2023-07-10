@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('class_id')->constrained('classes');
+            $table->string('url_to_exam')->nullable();
+            $table->dateTime('time_of_exam')->nullable();
             $table->timestamps();
         });
     }

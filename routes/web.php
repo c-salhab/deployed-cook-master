@@ -7,6 +7,8 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Livewire\Administration\Coupons\Coupon;
 use App\Http\Livewire\Administration\Coupons\CreateCoupon;
 use App\Http\Livewire\Administration\Coupons\ShowCodes;
+use App\Http\Livewire\Provider\Lessons\CreateLesson;
+use App\Http\Livewire\Provider\Lessons\ShowLessons;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,34 +59,12 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::post('/search-recipes', '\App\Http\Controllers\Frontend\RecipesController@search')->name('recipes.search');
 
     Route::prefix('cart')->group(function () {
-
-        Route::get('/', [RentalsController::class, 'cart'])->name('cart');
-
-        Route::patch('update', [RentalsController::class, 'update'])->name('update_cart');
-
-        Route::delete('remove', [RentalsController::class, 'remove'])->name('remove_from_cart');
-
-        Route::prefix('rentals')->group(function () {
-            Route::get('add-rental-to-cart/{id}', [RentalsController::class, 'addToCart'])->name('add_rental_to_cart');
-        });
-
-        Route::prefix('events')->group(function () {
-            Route::get('add-event-to-cart/{id}', [App\Http\Controllers\Frontend\EventsController::class, 'addToCart'])->name('add_event_to_cart');
-        });
-
-        Route::prefix('certified_courses')->group(function () {
-            Route::get('add-formations-to-cart/{id}', [App\Http\Controllers\Frontend\FormationsController::class, 'addToCart'])->name('add_formation_to_cart');
-        });
-
-        Route::prefix('lessons')->group(function () {
-            Route::get('add-lessons-to-cart/{id}', [App\Http\Controllers\Frontend\LessonsController::class, 'addToCart'])->name('add_lesson_to_cart');
-        });
-
-        Route::prefix('shop')->group(function () {
-            Route::get('add-product-to-cart/{id}', [App\Http\Controllers\Frontend\ProductsController::class, 'addToCart'])->name('add_product_to_cart');
-        });
+        Route::get('/', function () { return view('cart.index'); })->name('cart');
     });
 
+    Route::prefix('calendar')->group(function () {
+        Route::get('/', function () { return view('calendar.index'); })->name('calendar');
+    });
 });
 
 Route::middleware(['auth', 'management'])->name('management.')->prefix('management')->group(function () {
@@ -118,17 +98,17 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/search-rentals', '\App\Http\Controllers\Management\RentalsController@search')->name('rentals.search');
 });
 
-Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->group(function () {
-    Route::get('/', [ProviderController::class, 'index'])->name('index');
+Route::middleware(['auth', 'provider'])->prefix('provider')->group(function () {
+    Route::get('/', function(){
+        return view('provider.index');
+    })->name('provider');
 
-    Route::resource('/courses', \App\Http\Controllers\Provider\CoursesController::class);
-    Route::resource('/students', \App\Http\Controllers\Provider\StudentsController::class);
-    Route::resource('/certifications', \App\Http\Controllers\Provider\CertificationsController::class);
-    Route::post('/search-certifications', '\App\Http\Controllers\Provider\CertificationsController@search')->name('certifications.search');
-    Route::post('/search-courses', '\App\Http\Controllers\Provider\CoursesController@search')->name('courses.search');
-    Route::post('/search-students', '\App\Http\Controllers\Provider\StudentsController@search')->name('students.search');
-    Route::post('/generate-pdf/{certificationId}', [PDFController::class, 'generatePDF'])->name('certifications.generate-pdf');
+    Route::get('/classes', function(){
+        return view('provider.classes.index');
+    })->name('provider.classes');
 
+    Route::get('/lessons', ShowLessons::class)->name('provider.lessons');
+    Route::get('/lessons/create', CreateLesson::class)->name('provider.lessons.create');
 });
 
 Route::middleware([

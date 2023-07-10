@@ -6,6 +6,7 @@ use App\Http\Controllers\Provider\ProviderController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Livewire\Administration\Coupons\Coupon;
 use App\Http\Livewire\Administration\Coupons\CreateCoupon;
+use App\Http\Livewire\Administration\Coupons\ShowCodes;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -157,5 +158,6 @@ Route::middleware([
 
     Route::get('/coupons', Coupon::class)->name('administration.coupons');
     Route::get('/coupons/create', CreateCoupon::class)->name('administration.coupons.create');
+    Route::get('/coupons/{coupon_id}', ShowCodes::class)->name('administration.coupons.codes');
 });
 

@@ -4,7 +4,7 @@
         <p>No coupon has been created yet !</p>
     </div>
 @else
-    <div class="mt-6 bg-white w-1/2 overflow-hidden shadow-xl sm:rounded-lg">
+    <div class="mt-6 bg-white w-8/12 2 overflow-hidden shadow-xl sm:rounded-lg">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -24,6 +24,9 @@
                         <div class="flex items-center">
                             Duration
                         </div>
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Generation</span>
                     </th>
                     <th scope="col" class="px-6 py-3">
                         <span class="sr-only">Delete</span>
@@ -48,6 +51,9 @@
                             </td>
                             <td class="px-6 py-4">
                                 {{$coupon->duration}}
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="/administration/coupons/{{$coupon->id}}" type="button" class="font-medium text-blue-500 dark:text-blue-400 hover:underline">Codes</a>
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <button wire:click="delete('{{$coupon->id}}')" type="button" class="font-medium text-red-500 dark:text-red-400 hover:underline">Delete</button>

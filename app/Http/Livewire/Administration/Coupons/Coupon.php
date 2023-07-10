@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Administration\Coupons;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Coupon extends Component
 {

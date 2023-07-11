@@ -41,7 +41,7 @@ class Subscription extends Model
 
         try{
             if(Subscription::where('name', '=', $validatedData['name'])->get()->isEmpty()){
-                $id = DB::table('subscriptions')->insertGetId(
+                $subscription_id = DB::table('subscriptions')->insertGetId(
                     [
                         'name' => $validatedData['name'],
                         'price' => $validatedData['price'],
@@ -54,14 +54,27 @@ class Subscription extends Model
                 );
 
                 foreach ($validatedData['advantages'] as $advantage){
-                    DB::table('subscription_items')->insert(
+                    DB::table('subscription_items')->insertGetId(
                         [
                             'description' => $advantage,
-                            'subscription_id' => $id,
+                            'subscription_id' => $subscription_id,
                         ]
                     );
                 }
+
+                try{
+                    $stripe->products->update(
+                        'prod_OECdFUXibD48XK',
+                        ['metadata' => ['subscription_id' => $subscription_id]]
+                    );
+                }catch (Exception $e){
+                    Log::error('Meta data sending error : ' . $e);
+                    return false;
+                }
             }
+
+            //Update meta data of stripe product for subscription
+
         }catch(Exception $e){
             Log::error('Database error occurred : ' . $e);
             return false;

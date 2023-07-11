@@ -4,9 +4,8 @@
 namespace App\Http\Livewire\Provider\Lessons;
 
 use App\Models\Lessons;
-use \App\Models\Subscription;
-use App\Models\Video;
-use Illuminate\Support\Facades\DB;
+use App\Models\LessonStep;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -57,6 +56,22 @@ class CreateLesson extends Component
                         'product_id' => $product->id,
                         'price_id' => $price->id,
                     ]);
+                    try{
+                        foreach ($this->lesson_steps as $step){
+                            $path = $step['video']->store('lessons');
+                            LessonStep::create([
+                                'sub_title' => $step['sub_title'],
+                                'description' => $step['description'],
+                                'order' => $step['order'],
+                                'duration' => $step['duration'],
+                                'video_url' => $path,
+                                'lesson_id' => $lesson->id
+                            ]);
+                        }
+                    }catch (Exception $e){
+                        Log::error($e);
+                        $this->errorMessage = "Couldn't create lesson's step in database.";
+                    }
                 }catch (Exception $e){
                     Log::error($e);
                     $this->errorMessage = "Couldn't create lesson in database.";
@@ -69,11 +84,6 @@ class CreateLesson extends Component
         }catch (\Exception $e){
             Log::error($e);
             $this->errorMessage = "An error occurred.";
-        }
-
-
-        foreach ($this->lesson_steps as $lesson){
-            $path = $lesson['video']->store('lessons');
         }
     }
 

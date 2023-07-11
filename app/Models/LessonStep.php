@@ -15,6 +15,6 @@ class LessonStep extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'sub_title','description', 'order', 'duration', 'video_url'
+        'sub_title','description', 'order', 'duration', 'video_url', 'lesson_id'
     ];
 }

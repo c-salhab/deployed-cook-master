@@ -109,6 +109,8 @@ Route::middleware(['auth', 'provider'])->prefix('provider')->group(function () {
 
     Route::get('/lessons', ShowLessons::class)->name('provider.lessons');
     Route::get('/lessons/create', CreateLesson::class)->name('provider.lessons.create');
+
+    Route::post('/uploadVideo', 'VideoController@uploadVideo')->name('videos.uploadedVideo');
 });
 
 Route::middleware([
@@ -140,4 +142,5 @@ Route::middleware([
     Route::get('/coupons/create', CreateCoupon::class)->name('administration.coupons.create');
     Route::get('/coupons/{coupon_id}', ShowCodes::class)->name('administration.coupons.codes');
 });
+
 

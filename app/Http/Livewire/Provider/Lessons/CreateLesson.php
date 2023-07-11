@@ -25,15 +25,40 @@ class CreateLesson extends Component
     public function createLesson(){
 
         try{
-            $path = $this->lesson['image']->store('lessons');
+            $path = $this->lesson['image']->store('lessons', 'images');
+
+            //Create the product
+            try{
+                $stripeSecretKey = config('stripe.sk');
+                $stripe = new \Stripe\StripeClient($stripeSecretKey);
+                $product = $stripe->products->create([
+                    'name' => $this->lesson['title'],
+                    'active' => true,
+                    'image' => env('APP_URL') . $path
+                ]);
+
+                //Create a subscription price
+                $response = $stripe->prices->create([
+                    'unit_amount' => (int)($this->lesson['price'] * 100),
+                    'currency' => 'eur',
+                    'product' => $product->id,
+                ]);
+            }catch(Exception $e){
+                Log::error($e);
+                $this->errorMessage = "Stripe api error occurred.";
+            }
+            $lesson = Lessons::create([
+                'title' => $this->lesson['title'],
+                'description' => $this->lesson['description'],
+                'image_url' => $path,
+                'difficulty' => $this->lesson['difficulty'],
+                'price' => $this->lesson['price'],
+            ]);
         }catch (\Exception $e){
             Log::error($e);
-            $this->errorMessage = "Couldn't store image.";
+            $this->errorMessage = "An error occurred.";
         }
 
-        $lesson = Lessons::create([
-
-        ]);
 
         foreach ($this->lesson_steps as $lesson){
             $path = $lesson['video']->store('lessons');

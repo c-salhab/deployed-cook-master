@@ -43,7 +43,7 @@ return [
             'visibility' => 'public',
         ],
 
-        'lesson_videos' => [
+        'images' => [
             'driver' => 'local',
             'root'   => public_path() . '/'
         ]

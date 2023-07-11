@@ -105,11 +105,5 @@
                 Create lesson
             </button>
         @endif
-        <button wire:click="showStep" type="button" class="mt-3 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-400 rounded">
-            Show
-        </button>
-        <button type="submit" class="mt-3 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-400 rounded">
-            Submit
-        </button>
     </form>
 </div>

@@ -80,11 +80,11 @@ class CreateLesson extends Component
                 Log::error($e);
                 $this->errorMessage = "Stripe api error occurred.";
             }
-
         }catch (\Exception $e){
             Log::error($e);
             $this->errorMessage = "An error occurred.";
         }
+        $this->successMessage = "Lesson has been created successfully !";
     }
 
     public function addStep(){

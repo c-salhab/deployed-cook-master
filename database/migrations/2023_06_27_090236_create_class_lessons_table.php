@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('class_lessons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('class_id')->constrained('classes');
-            $table->foreignId('lesson_id')->constrained('lessons');
+            $table->foreignId('class_id')->constrained('classes')->onDelete('cascade');
+            $table->foreignId('lesson_id')->constrained('lessons')->onDelete('cascade');
             $table->integer('order');
         });
     }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('possess_classes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('class_id')->constrained('classes');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('class_id')->constrained('classes')->onDelete('cascade');
             $table->string('url_to_exam')->nullable();
             $table->dateTime('time_of_exam')->nullable();
             $table->timestamps();

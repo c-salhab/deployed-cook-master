@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('order');
             $table->time('duration');
             $table->string('video_url')->nullable();
-            $table->foreignId('lesson_id')->constrained('lessons');
+            $table->foreignId('lesson_id')->constrained('lessons')->onDelete('cascade');
             $table->timestamps();
         });
     }

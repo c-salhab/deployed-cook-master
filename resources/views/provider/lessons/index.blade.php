@@ -2,7 +2,7 @@
     @if($lessons->isEmpty())
         <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
             <p class="font-bold">What ?!</p>
-            <p>No lessons has been created by youyet !</p>
+            <p>No lessons has been created by you yet !</p>
         </div>
     @else
         <div class="mt-6 bg-white w-full 2 overflow-hidden shadow-xl sm:rounded-lg">
@@ -55,7 +55,7 @@
                                 <a href="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <button wire:click="" class="font-medium text-red-500 dark:text-red-400 hover:underline">Delete</button>
+                                <button wire:click="deleteLesson({{$lesson->id}})" class="font-medium text-red-500 dark:text-red-400 hover:underline">Delete</button>
                             </td>
                         </tr>
                     @endforeach

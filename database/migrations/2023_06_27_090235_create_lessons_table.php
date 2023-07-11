@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('validated')->default(false);
             $table->string('product_id')->nullable();
             $table->string('price_id')->nullable();
-            $table->foreignId('creator_id')->constrained('users');
+            $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

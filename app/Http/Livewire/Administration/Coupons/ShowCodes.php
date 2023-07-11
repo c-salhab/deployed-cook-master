@@ -29,9 +29,6 @@ class ShowCodes extends Component
         $stripe->promotionCodes->create($options);
     }
 
-    public function deleteCode($id){
-
-    }
     public function render(){
         $stripe = new \Stripe\StripeClient(config('stripe.sk'));
         $codes = $stripe->promotionCodes->all(

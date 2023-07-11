@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('subscription_items', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->foreignId('subscription_id')->constrained('subscriptions');
+            $table->foreignId('subscription_id')->constrained('subscriptions')->onDelete('cascade');
         });
     }
 

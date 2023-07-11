@@ -118,6 +118,10 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link href="{{ route('billing') }}">
+                                {{ __('Billing') }}
+                            </x-dropdown-link>
+
                             <x-manage-permissions-drop></x-manage-permissions-drop>
 
                             <div class="border-t border-gray-200"></div>

@@ -39,7 +39,7 @@
                 </div>
                 <nav :class="{'block': open, 'hidden': !open}"
                      class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
-                    <x-admin-nav-link :href="route('administration')" :active="request()->routeIs('administration')">
+                    <x-admin-nav-link :href="route('billing')" :active="request()->routeIs('billing')">
                         {{ __('Dashboard') }}
                     </x-admin-nav-link>
 
@@ -48,13 +48,13 @@
                         {{ __('Billing portal') }}
                     </x-admin-nav-link>
 
-                    <x-admin-nav-link :href="route('administration.subscriptions')"
-                                      :active="request()->routeIs('administration.subscriptions')">
+                    <x-admin-nav-link :href="route('dashboard')"
+                                      :active="request()->routeIs('dashboard')">
                         {{ __('Products') }}
                     </x-admin-nav-link>
 
-                    <x-admin-nav-link :href="route('administration.subscriptions')"
-                                      :active="request()->routeIs('administration.subscriptions')">
+                    <x-admin-nav-link :href="route('dashboard')"
+                                      :active="request()->routeIs('dashboard')">
                         {{ __('Subscriptions') }}
                     </x-admin-nav-link>
 

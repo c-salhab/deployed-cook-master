@@ -7,7 +7,7 @@
                    <div class="px-6 py-4">
                        <div class="font-bold text-xl mb-2">{{$lesson->title}}</div>
                        <p class="text-gray-700 text-base">
-                           {{$lesson->description}}
+                           {{$lesson->description . '...'}}
                        </p>
                    </div>
 
@@ -33,9 +33,11 @@
                    </div>
 
                    <div class="grid grid-cols-2 px-6 py-4">
-                       <button class="grid-span-1 bg-blue-500 hover:bg-blue-400 text-gray-900 bg-gray-100 font-bold py-2 px-4 border-b-4 border-gray-400  hover:bg-gray-100 hover:text-blue-700 rounded text-sm	">
-                           Preview
-                       </button>
+                       <a href="/lessons/preview/{{$id}}" class="grid-span-1">
+                           <button class="bg-blue-500 hover:bg-blue-400 text-gray-900 bg-gray-100 font-bold py-2 px-4 border-b-4 border-gray-400  hover:bg-gray-100 hover:text-blue-700 rounded text-sm	">
+                               Preview
+                           </button>
+                       </a>
                        @if($lesson['active'])
                            <button wire:click="removeCart({{$lesson->id}})" class="grid-span-1 bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded text-sm">
                                Remove

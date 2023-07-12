@@ -9,6 +9,7 @@ use App\Models\LessonStep;
 use \App\Models\Subscription;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class LessonsShop extends Component
@@ -33,6 +34,7 @@ class LessonsShop extends Component
     {
         $lessons = Lessons::all();
         foreach ($lessons as $lesson){
+            $lesson->description = Str::limit($lesson->description, 25);
             if(DB::table('carts')->where('lesson_id', $lesson->id)->first()){
                 $lesson['active'] = true;
             }else{

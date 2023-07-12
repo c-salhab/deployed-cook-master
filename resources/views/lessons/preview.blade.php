@@ -2,27 +2,24 @@
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 mb-6">
-            <div class="grid-span-1">
+            <div class="grid-span-1 mb-3">
                 <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{$lesson->title}}</h1>
             </div>
             <div class="grid grid-cols-2 grid-span-1">
                 <img class="grid-span-1 h-80" src="{{env('APP_URL') . $lesson->image_url}}">
-                <div class="grid-span-1 grid">
-                    <div class="flex flex-row mb-6">
-                        <div class="grow-0 place-self-center">
-                            <p class="font-bold text-lg text-gray-700 lg:text-xl dark:text-gray-400">Duration : {{$duration}} min</p>
-                            <p class="font-bold text-lg text-gray-700 lg:text-xl dark:text-gray-400">Difficulty : {{$lesson->difficulty}}</p>
-                        </div>
-                        <div class="ml-auto">
-                            @if($creator->profile_photo_path)
-                                <div class="flex flex-row">
-                                    <img class="grid-span-1 rounded-full w-24 h-24" src="{{env('APP_URL') . $creator->profile_photo_path}}" alt="creator_pfp">
-                                    <p class="ml-6 place-self-center grid-span-1 font-bold text-2xl text-gray-700 lg:text-6xl dark:text-gray-400">{{$creator->name}}</p>
-                                </div>
-                            @else
-                                <p class="grid-span-2 font-bold	mb-6 text-2xl text-gray-700 lg:text-6xl sm:pr-8 xl:pr-16 dark:text-gray-400">{{$creator->name}}</p>
-                            @endif
-                        </div>
+                <div class="grid-span-1 grid content-start">
+                    <div class="justify-self-start">
+                        @if($creator->profile_photo_path)
+                            <div class="flex flex-row place-items-start">
+                                <img class="rounded-full w-36 h-36" src="{{env('APP_URL') . $creator->profile_photo_path}}" alt="creator_pfp">
+                                <p class="ml-6 place-self-center grid-span-1 font-bold text-2xl text-gray-700 lg:text-6xl dark:text-gray-400">{{$creator->name}}</p>
+                            </div>
+                        @else
+                            <p class="grid-span-2 font-bold	mb-6 text-2xl text-gray-700 lg:text-6xl sm:pr-8 xl:pr-16 dark:text-gray-400">{{$creator->name}}</p>
+                        @endif
+                    </div>
+                    <div class="grow-0">
+                        <p class="font-bold text-lg text-gray-700 lg:text-xl dark:text-gray-400">Duration : {{$duration}} min | Difficulty : {{$lesson->difficulty}} | Price : {{$lesson->price}}€</p>
                     </div>
                     <div>
                         <p class="grid-span-2 mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">{{$lesson->description}}</p>

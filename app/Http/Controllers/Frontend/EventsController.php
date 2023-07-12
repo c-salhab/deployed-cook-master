@@ -47,4 +47,27 @@ class EventsController extends Controller
 
         return view('events.index', compact('events'));
     }
+
+
+    public function register(Request $request, $eventId)
+    {
+        $user = auth()->user();
+        $event = Events::findOrFail($eventId);
+
+        if ($event->places_left <= 0) {
+            return redirect()->back()->with('error', 'Event fully booked');
+        }
+
+        if ($user->event()->where('id', $eventId)->exists()) {
+            return redirect()->back()->with('error', 'Already registered to event');
+        }
+
+        $user->event()->attach($event);
+
+        $event->decrement('places_left');
+
+        return redirect()->back()->with('success', 'Registered to the event successfully');
+    }
+
+
 }

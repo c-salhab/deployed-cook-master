@@ -95,6 +95,7 @@ class EventsController extends Controller
             'name' => $request->input('name'),
             'address' => $request->input('address'),
             'max_capacity' => $request->input('max_capacity'),
+            'places_left' => $request->input('max_capacity'),
             'description' => $request->input('description'),
             'start_time' => $request->input('start_time'),
             'image' => $image,

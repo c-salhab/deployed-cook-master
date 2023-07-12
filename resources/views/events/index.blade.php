@@ -1,5 +1,6 @@
 <x-app-layout>
 
+    @yield('scripts')
     <div class="container w-full md:px-40 mx-auto py-20">
     <div class="container flex">
         <button onclick="window.location.href = '{{ route('events.index') }}'" class="bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
@@ -30,7 +31,7 @@
                         <img class="w-full h-48" src="{{ asset($event->image) }}" alt="Image" />
                         <div class="px-6 py-4">
                             <h2 class="mb-3 text-xl font-semibold tracking-tight text-indigo-500 uppercase">{{ $event->name }}</h2>
-                            <h4 class="mb-3 text-l font-semibold tracking-tight text-indigo-500">Max Capacity : {{ $event->max_capacity }}</h4>
+                            <h4 class="mb-3 text-l font-semibold tracking-tight text-indigo-500">Places Left : {{ $event->places_left }}</h4>
                             <p class="leading-normal text-gray-700">Type : {{ $event->type }}</p>
                             <p class="leading-normal text-gray-700">Difficulty : {{ $event->difficulty }}</p>
                             <p class="leading-normal text-gray-700">Address : {{ $event->address }}@if ($event->room) ({{ $event->room->name }}) @endif</p>
@@ -39,9 +40,12 @@
                             <p class="leading-normal text-gray-500 text-sm">End Time : {{ date('Y-m-d', strtotime($event->end_time)) }}</p>
                         </div>
                         <div class="flex items-center justify-between p-4">
-                            <button class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">
-                                <a href="#" class="btn btn-primary btn-block text-center" role="button">Join the event !</a>
-                            </button>
+                            <form action="{{ route('events.register', $event->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">
+                                    Join the event!
+                                </button>
+                            </form>
                         </div>
                     </div>
                 @endif

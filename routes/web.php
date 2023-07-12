@@ -57,6 +57,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::get('/rentals', [\App\Http\Controllers\Frontend\RentalsController::class, 'index'])->name('rentals.index');
     Route::post('/search-events', '\App\Http\Controllers\Frontend\EventsController@search')->name('events.search');
 
+    Route::post('/events/{event}/register', '\App\Http\Controllers\Frontend\EventsController@register')->name('events.register');
+
     Route::post('/search-recipes', '\App\Http\Controllers\Frontend\RecipesController@search')->name('recipes.search');
 
     Route::prefix('cart')->group(function () {

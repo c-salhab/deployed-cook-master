@@ -32,10 +32,14 @@ class EventsController extends Controller
 
         $event = new Events();
         $event->fill($validated);
+
+        $event->places_left = $event->max_capacity;
+
         $request->session()->put('event', $event);
 
         return redirect()->route('management.events.step-two');
     }
+
 
     public function stepTwo(Request $request)
     {

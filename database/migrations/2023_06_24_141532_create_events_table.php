@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('address')->nullable();
             $table->integer('max_capacity');
+            $table->integer('places_left')->nullable();
             $table->string('description');
             $table->string('difficulty')->nullable();
             $table->string('type');

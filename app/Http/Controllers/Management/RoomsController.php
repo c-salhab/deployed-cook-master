@@ -38,7 +38,6 @@ class RoomsController extends Controller
     public function store(RoomStoreRequest $request)
     {
         $validator = Validator::make($request->all(), [
-            'price' => 'required|numeric',
             'max_capacity' => 'required|integer',
         ]);
 
@@ -52,7 +51,6 @@ class RoomsController extends Controller
             'image' => $image,
             'name' => $request->name,
             'description' => $request->description,
-            'price' => $request->price,
             'max_capacity' => $request->max_capacity,
             'address' => $request->address,
             'user_id' => Auth::id(),
@@ -100,7 +98,6 @@ class RoomsController extends Controller
         $room->image = $image;
         $room->name = $request->input('name');
         $room->description = $request->input('description');
-        $room->price = $request->input('price');
         $room->max_capacity = $request->input('max_capacity');
         $room->address = $request->input('address');
 

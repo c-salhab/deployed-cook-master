@@ -59,9 +59,6 @@
                     Description
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Price
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Quantity
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -86,9 +83,6 @@
                 </th>
                 <td class="px-6 py-4">
                     {{ $material->description }}
-                </td>
-                <td class="px-6 py-4">
-                    € {{ number_format($material->price, 2, ',', '.') }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $material->quantity }}

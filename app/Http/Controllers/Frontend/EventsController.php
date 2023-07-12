@@ -39,4 +39,12 @@ class EventsController extends Controller
 
         return redirect()->back()->with('success', 'Event added to cart successfully!');
     }
+
+    public function search(Request $request)
+    {
+        $search_text = $request->input('query');
+        $events = Events::where('name', 'LIKE', '%' . $search_text . '%')->get();
+
+        return view('events.index', compact('events'));
+    }
 }

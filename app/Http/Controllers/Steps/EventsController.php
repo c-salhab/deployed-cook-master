@@ -25,7 +25,7 @@ class EventsController extends Controller
         $validated = $request->validate([
             'name' => ['required'],
             'description' => ['required'],
-            'address' => ['required'],
+            'address' => ['nullable'],
             'max_capacity' => ['required', 'integer'],
             'type' => ['required'],
         ]);

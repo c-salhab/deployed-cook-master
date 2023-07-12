@@ -23,7 +23,6 @@ class RoomStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:255'],
-            'price' => ['required'],
             'address' => ['required'],
             'max_capacity' => ['required'],
             'image' => ['required','image'],

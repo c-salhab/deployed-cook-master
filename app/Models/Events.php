@@ -15,7 +15,6 @@ class Events extends Model
         'address',
         'max_capacity',
         'description',
-        'price',
         'difficulty',
         'type',
         'start_time',

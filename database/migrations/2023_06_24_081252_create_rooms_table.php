@@ -16,7 +16,6 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('description');
-            $table->decimal('price',10,2);
             $table->string('address');
             $table->integer('max_capacity');
             $table->string('image');

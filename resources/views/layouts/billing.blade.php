@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Cook Master') }}</title>
-
+        <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/icon type">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
@@ -46,6 +46,12 @@
                     <x-admin-nav-link :href="route('billing.portal')"
                                       :active="request()->routeIs('billing.portal')">
                         {{ __('Billing portal') }}
+                    </x-admin-nav-link>
+
+
+                    <x-admin-nav-link :href="route('joined.events')"
+                                      :active="request()->routeIs('joined.events')">
+                        {{ __('Joined Events') }}
                     </x-admin-nav-link>
 
                     <div @click.away="open = false" class="relative" x-data="{ open: false }">

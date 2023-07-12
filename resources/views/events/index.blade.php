@@ -27,7 +27,7 @@
                     $show = $endTime >= $currentTime;
                 @endphp
                 @if ($show && $event->max_capacity != 0)
-                    <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg">
+                    <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg w-80">
                         <img class="w-full h-48" src="{{ asset($event->image) }}" alt="Image" />
                         <div class="px-6 py-4">
                             <h2 class="mb-3 text-xl font-semibold tracking-tight text-indigo-500 uppercase">{{ $event->name }}</h2>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Events;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -67,6 +68,25 @@ class EventsController extends Controller
         $event->decrement('places_left');
 
         return redirect()->back()->with('success', 'Registered to the event successfully');
+    }
+
+    public function cancel(Request $request, $eventId)
+    {
+        $event = Events::findOrFail($eventId);
+
+        $startDate = Carbon::parse($event->start_time);
+        $cancelDate = Carbon::now()->addDays(2);
+
+        if ($startDate->isBefore($cancelDate)) {
+            return redirect()->back()->with('error', 'Cancellation not allowed');
+        }
+
+        DB::table('events')->where('id', $eventId)->increment('places_left');
+
+        $user = auth()->user();
+        $user->events()->detach($eventId);
+
+        return redirect()->back()->with('success', 'Reservation canceled successfully');
     }
 
 

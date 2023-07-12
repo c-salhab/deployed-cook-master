@@ -250,7 +250,7 @@
     </div>
 </nav>
 
-@if(request()->is('rentals') || request()->is('events'))
+@if(request()->is('rentals') || request()->is('events') || request()->is('billing'))
     <div class="container w-full px-5 py-6 mx-auto">
         @if(session('success'))
             <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
@@ -262,12 +262,6 @@
                 {{ session('error') }}
             </div>
         @endif
-        @if(session('warning'))
-            <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
-                {{ session('warning') }}
-            </div>
-        @endif
-
     </div>
 @endif
 @yield('content')

@@ -1,3 +1,4 @@
+
 <x-guest-layout>
     <!-- Main Hero Content -->
     <div class="container max-w-lg px-4 py-32 mx-auto text-left bg-center bg-no-repeat bg-cover md:max-w-none md:text-center"
@@ -136,3 +137,4 @@
         </div>
     </section>
 </x-guest-layout>
+

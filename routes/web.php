@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', function () { return view('welcome'); })->name('welcome');
 
 Route::get('/aboutus', function () { return view('aboutus'); })->name('aboutus');
@@ -39,6 +38,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::prefix('billing')->group(function () {
         Route::get('/', BillingDashboard::class)->name('billing');
         Route::get('/portal', [\App\Http\Controllers\BillingController::class, 'createPortalSession'])->name('billing.portal');
+        Route::get('/events', [\App\Http\Controllers\JoinedEventsController::class, 'index'])->name('joined.events');
+        Route::post('/events/{event}/cancel', '\App\Http\Controllers\Frontend\EventsController@cancel')->name('events.cancel');
+        Route::post('/search-events', '\App\Http\Controllers\JoinedEventsController@search')->name('event.search');
     });
 
     Route::get('/subscription', \App\Http\Livewire\Administration\Subscriptions\Subscription::class)->name('subscription');
@@ -57,6 +59,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::get('/shop', [\App\Http\Controllers\Frontend\ProductsController::class, 'index'])->name('shop.index');
     Route::get('/recipes', [\App\Http\Controllers\Frontend\RecipesController::class, 'index'])->name('recipes.index');
     Route::get('/rentals', [\App\Http\Controllers\Frontend\RentalsController::class, 'index'])->name('rentals.index');
+    Route::post('/search-events', '\App\Http\Controllers\Frontend\EventsController@search')->name('events.search');
+
+    Route::post('/events/{event}/register', '\App\Http\Controllers\Frontend\EventsController@register')->name('events.register');
 
     Route::post('/search-recipes', '\App\Http\Controllers\Frontend\RecipesController@search')->name('recipes.search');
 
@@ -136,5 +141,4 @@ Route::middleware([
         Route::get('/coupons/create', CreateCoupon::class)->name('administration.coupons.create');
         Route::get('/coupons/{coupon_id}', ShowCodes::class)->name('administration.coupons.codes');
     });
-
 

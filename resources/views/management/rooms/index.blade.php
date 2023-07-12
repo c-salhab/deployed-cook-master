@@ -60,9 +60,6 @@
                     Description
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Price
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Address
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -87,9 +84,6 @@
                 </th>
                 <td class="px-6 py-4">
                     {{ $room->description }}
-                </td>
-                <td class="px-6 py-4">
-                    € {{ number_format($room->price, 2, ',', '.') }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $room->address }}

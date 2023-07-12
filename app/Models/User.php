@@ -85,4 +85,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Formation::class, 'user_formation');
     }
 
+    public function event()
+    {
+        return $this->belongsToMany(Events::class, 'user_event');
+    }
 }

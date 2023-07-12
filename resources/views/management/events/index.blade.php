@@ -71,9 +71,6 @@
                     Room Name
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Price
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Difficulty
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -121,9 +118,6 @@
                         @endif
                     </td>
 
-                    <td class="px-6 py-4">
-                        € {{ number_format($event->price, 2, ',', '.') }}
-                    </td>
                     <td class="px-6 py-4">
                         {{ $event->difficulty }}
                     </td>

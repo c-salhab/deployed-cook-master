@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name')->unique();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->integer('max_capacity');
+            $table->integer('places_left')->nullable();
             $table->string('description');
-            $table->decimal('price',10,2)->nullable();
             $table->string('difficulty')->nullable();
             $table->string('type');
             $table->timestamp('start_time')->default(now());

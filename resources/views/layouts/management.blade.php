@@ -54,16 +54,8 @@
                     {{ __('Used Materials') }}
                 </x-admin-nav-link>
 
-                <x-admin-nav-link :href="route('management.products.index')" :active="request()->routeIs('management.products.index')">
-                    {{ __('Products') }}
-                </x-admin-nav-link>
-
                 <x-admin-nav-link :href="route('management.recipes.index')" :active="request()->routeIs('management.recipes.index')">
                     {{ __('Recipes') }}
-                </x-admin-nav-link>
-
-                <x-admin-nav-link :href="route('management.rentals.index')" :active="request()->routeIs('management.rentals.index')">
-                    {{ __('Rentals') }}
                 </x-admin-nav-link>
 
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">

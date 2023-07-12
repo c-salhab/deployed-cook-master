@@ -25,17 +25,21 @@ class EventsController extends Controller
         $validated = $request->validate([
             'name' => ['required'],
             'description' => ['required'],
-            'address' => ['required'],
+            'address' => ['nullable'],
             'max_capacity' => ['required', 'integer'],
             'type' => ['required'],
         ]);
 
         $event = new Events();
         $event->fill($validated);
+
+        $event->places_left = $event->max_capacity;
+
         $request->session()->put('event', $event);
 
         return redirect()->route('management.events.step-two');
     }
+
 
     public function stepTwo(Request $request)
     {
@@ -56,7 +60,6 @@ class EventsController extends Controller
     {
         $validated = $request->validate([
             'room_name' => ['nullable', 'exists:rooms,name'],
-            'price' => ['required', 'numeric'],
             'difficulty' => ['required'],
             'start_time' => ['required'],
             'end_time' => ['required'],

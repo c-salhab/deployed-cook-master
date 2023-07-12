@@ -23,7 +23,6 @@ class MaterialStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:255'],
-            'price' => ['required'],
             'quantity' => ['required'],
             'state' => ['required'],
             'image' => ['required','image'],

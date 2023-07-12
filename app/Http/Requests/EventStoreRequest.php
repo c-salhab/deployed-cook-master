@@ -26,7 +26,6 @@ class EventStoreRequest extends FormRequest
             'address' => ['required'],
             'max_capacity' => ['required'],
             'description' => ['required'],
-            'price' => ['required'],
             'type' => ['required'],
             'start_time' => ['required'],
             'end_time' => ['required'],

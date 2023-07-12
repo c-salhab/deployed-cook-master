@@ -38,7 +38,6 @@ class MaterialsController extends Controller
     public function store(MaterialStoreRequest $request)
     {
         $validator = Validator::make($request->all(), [
-            'price' => 'required|numeric',
             'quantity' => 'required|integer',
         ]);
 
@@ -52,7 +51,6 @@ class MaterialsController extends Controller
             'image' => $image,
             'name' => $request->name,
             'description' => $request->description,
-            'price' => $request->price,
             'quantity' => $request->quantity,
             'state' => $request->state,
             'user_id' => Auth::id(),
@@ -100,7 +98,6 @@ class MaterialsController extends Controller
         $material->image = $image;
         $material->name = $request->input('name');
         $material->description = $request->input('description');
-        $material->price = $request->input('price');
         $material->quantity = $request->input('quantity');
         $material->state = $request->input('state');
 

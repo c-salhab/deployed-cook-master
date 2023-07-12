@@ -75,12 +75,12 @@
         <div class="flex items-center">
             <x-cooptation-logo></x-cooptation-logo>
             <h2 class="ml-3 text-xl font-semibold text-gray-900">
-                <a href="{{ route('dashboard') }}">Certified courses</a>
+                <a href="{{ route('courses.shop') }}">Certified courses</a>
             </h2>
         </div>
         <p class="mt-4 text-gray-500 text-sm leading-relaxed">
             Take classes to prepare for an official exam with a renowned chef. After graduating, there's no stopping you from opening your own restaurant.
-            <a href="{{ route('dashboard') }}" class="inline-flex items-center font-semibold text-indigo-700">
+            <a href="{{ route('courses.shop') }}" class="inline-flex items-center font-semibold text-indigo-700">
                 Obtain your certified diploma like a chief
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-indigo-500">
                     <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />

@@ -6,6 +6,7 @@ use App\Http\Livewire\Administration\Coupons\Coupon;
 use App\Http\Livewire\Administration\Coupons\CreateCoupon;
 use App\Http\Livewire\Administration\Coupons\ShowCodes;
 use App\Http\Livewire\Cart\Cart;
+
 use App\Http\Livewire\Lessons\LessonPage;
 use App\Http\Livewire\Lessons\LessonPreview;
 use App\Http\Livewire\Lessons\LessonsShop;
@@ -58,7 +59,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
         Route::get('/preview/{lesson_id}', LessonPreview::class)->name('lessons.preview');
     });
 
-    Route::get('/message', function () { return view('message'); })->name('message');
+    Route::get('/courses/shop', \App\Http\Livewire\Courses\CoursesShop::class)->name('courses.shop');
+
     Route::get('/interventions', function () { return view('interventions'); })->name('interventions');
     Route::get('/events', [\App\Http\Controllers\Frontend\EventsController::class, 'index'])->name('events.index');
     Route::get('/shop', [\App\Http\Controllers\Frontend\ProductsController::class, 'index'])->name('shop.index');
@@ -107,9 +109,6 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/search-recipes', '\App\Http\Controllers\Management\RecipesController@search')->name('recipes.search');
     Route::post('/search-rentals', '\App\Http\Controllers\Management\RentalsController@search')->name('rentals.search');
 });
-
-
-
 
 Route::middleware(['auth', 'provider'])->prefix('provider')->group(function () {
 

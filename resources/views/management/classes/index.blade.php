@@ -68,9 +68,9 @@
                                 {{$class->created_at}}
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                @if($class->valited)
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 256 256" xml:space="preserve">
-                                        <defs></defs>
+                                @if($class->validated)
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="18" height="18" viewBox="0 0 256 256" xml:space="preserve">
+                                    <defs></defs>
                                         <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
                                             <path d="M 29.452 78.819 L 1.601 50.968 c -2.134 -2.134 -2.134 -5.595 0 -7.729 l 8.691 -8.691 c 2.134 -2.134 5.595 -2.134 7.729 0 l 13.058 13.058 c 1.236 1.236 3.239 1.236 4.475 0 l 36.425 -36.425 c 2.134 -2.134 5.595 -2.134 7.729 0 l 8.691 8.691 c 2.134 2.134 2.134 5.595 0 7.729 L 37.181 78.819 C 35.046 80.953 31.586 80.953 29.452 78.819 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(42,211,42); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
                                         </g></svg>
@@ -79,7 +79,7 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <button wire:click="validateClass({{$class->id}})" class="font-medium text-green-500 dark:text-green-400 hover:underline">Validate</button>
+                                <button wire:click="validateClass({{$class->id}})" class="font-medium text-orange-500 dark:text-orange-400 hover:underline">Unvalidate</button>
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <button wire:click="deleteClass({{$class->id}})" class="font-medium text-red-500 dark:text-red-400 hover:underline">Delete</button>
@@ -92,3 +92,4 @@
         </div>
     @endif
 </div>
+

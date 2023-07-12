@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Livewire\Lessons;
+namespace App\Http\Livewire\Courses;
 
 use App\Models\Lessons;
 use App\Models\LessonStep;
@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class LessonPage extends Component
+class CoursePage extends Component
 {
 
     public $lesson_id;

@@ -11,10 +11,6 @@ use Livewire\Component;
 class LessonsShop extends Component
 {
 
-    public function preview(){
-
-    }
-
     public function addCart($id){
 
         DB::table('carts')->insert([

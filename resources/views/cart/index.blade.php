@@ -49,7 +49,7 @@
             @endif
             @if(!empty($classes))
                 <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700">
-                <p class="text-gray-500 dark:text-gray-400">Lessons</p>
+                <p class="text-gray-500 dark:text-gray-400">Certificated courses</p>
                 @foreach($classes as $class)
                     <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
                         <div class="flex w-2/5"> <!-- product -->

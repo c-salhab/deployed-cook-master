@@ -59,6 +59,7 @@ class CreateClass extends Component
                         'image_url' => $path,
                         'difficulty' => $this->class['difficulty'],
                         'price' => $this->class['price'],
+                        'validated' => true,
                         'created_at' => now(),
                         'updated_at' => now(),
                         'product_id' => $product->id,

@@ -33,7 +33,7 @@
                    </div>
 
                    <div class="grid grid-cols-2 px-6 py-4">
-                       <a href="/lessons/preview/{{$id}}" class="grid-span-1">
+                       <a href="/lessons/preview/{{$lesson->id}}" class="grid-span-1">
                            <button class="bg-blue-500 hover:bg-blue-400 text-gray-900 bg-gray-100 font-bold py-2 px-4 border-b-4 border-gray-400  hover:bg-gray-100 hover:text-blue-700 rounded text-sm	">
                                Preview
                            </button>

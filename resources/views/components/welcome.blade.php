@@ -54,44 +54,6 @@
             </a>
         </p>
     </div>
-
-    <div>
-        <div class="flex items-center">
-            <x-shop-logo></x-shop-logo>
-            <h2 class="ml-3 text-xl font-semibold text-gray-900">
-                <a href="{{ route('shop.index') }}">Shop</a>
-            </h2>
-        </div>
-
-        <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-            Discover our online store, where you can find a wide selection of quality products. From books and resources to tools and equipment, our boutique offers everything you need to support your learning journey.        </p>
-        <p class="mt-4 text-sm">
-            <a href="{{ route('shop.index') }}" class="inline-flex items-center font-semibold text-indigo-700">
-                Come and buy incredible stuff !
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-indigo-500">
-                    <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
-                </svg>
-            </a>
-        </p>
-    </div>
-    <div>
-        <div class="flex items-center">
-            <x-rentals-logo></x-rentals-logo>
-            <h2 class="ml-3 text-xl font-semibold text-gray-900">
-                <a href="{{ route('rentals.index') }}">Rentals</a>
-            </h2>
-        </div>
-        <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-            Rent our fully equipped kitchen space, ideal for culinary enthusiasts and professionals. Whether you're planning a cooking workshop or need a professional setting for your culinary creations, our kitchen rental service has you covered.        </p>
-        <p class="mt-4 text-sm">
-            <a href="{{ route('rentals.index') }}" class="inline-flex items-center font-semibold text-indigo-700">
-                What can I rent ?
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-indigo-500">
-                    <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
-                </svg>
-            </a>
-        </p>
-    </div>
     <div>
         <div class="flex items-center">
             <x-events-logo></x-events-logo>
@@ -113,12 +75,12 @@
         <div class="flex items-center">
             <x-cooptation-logo></x-cooptation-logo>
             <h2 class="ml-3 text-xl font-semibold text-gray-900">
-                <a href="{{ route('formations.index') }}">Certified courses</a>
+                <a href="{{ route('dashboard') }}">Certified courses</a>
             </h2>
         </div>
         <p class="mt-4 text-gray-500 text-sm leading-relaxed">
             Take classes to prepare for an official exam with a renowned chef. After graduating, there's no stopping you from opening your own restaurant.
-            <a href="{{ route('formations.index') }}" class="inline-flex items-center font-semibold text-indigo-700">
+            <a href="{{ route('dashboard') }}" class="inline-flex items-center font-semibold text-indigo-700">
                 Obtain your certified diploma like a chief
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-indigo-500">
                     <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />

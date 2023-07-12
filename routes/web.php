@@ -1,14 +1,12 @@
 <?php
 
-use App\Http\Controllers\Frontend\RentalsController;
-use App\Http\Controllers\Provider\PDFController;
-use App\Http\Controllers\Provider\ProviderController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Livewire\Administration\Coupons\Coupon;
 use App\Http\Livewire\Administration\Coupons\CreateCoupon;
 use App\Http\Livewire\Administration\Coupons\ShowCodes;
 use App\Http\Livewire\Provider\Lessons\CreateLesson;
 use App\Http\Livewire\Provider\Lessons\ShowLessons;
+use App\Http\Livewire\Users\BillingDashboard;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,11 +33,11 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
         return view('dashboard', compact('canManage'));
     })->name('dashboard');
 
-    Route::get('/billing', function(){
-        return view('billing.index');
-    })->name('billing');
+    Route::prefix('billing')->group(function () {
+        Route::get('/', BillingDashboard::class)->name('billing');
+        Route::get('/portal', [\App\Http\Controllers\BillingController::class, 'createPortalSession'])->name('billing.portal');
+    });
 
-    Route::get('/billing/portal', [\App\Http\Controllers\BillingController::class, 'createPortalSession'])->name('billing.portal');
 
     Route::get('/subscription', \App\Http\Livewire\Administration\Subscriptions\Subscription::class)->name('subscription');
     Route::get('/subscription/checkout', [SubscriptionController::class, 'checkout'])->name('subscription.checkout');
@@ -120,27 +118,27 @@ Route::middleware([
     'administrator'
 ])->prefix('administration')
     ->group(function(){
-    Route::get('/', function(){
-        return view('administration.index');
-    })->name('administration');
+        Route::get('/', function(){
+            return view('administration.index');
+        })->name('administration');
 
-    Route::get('/users', function(){
-        return view('administration.users.index');
-    })->name('administration.users');
+        Route::get('/users', function(){
+            return view('administration.users.index');
+        })->name('administration.users');
 
-    Route::get('/subscriptions', function(){
-        return view('administration.subscriptions.index');
-    })->name('administration.subscriptions');
+        Route::get('/subscriptions', function(){
+            return view('administration.subscriptions.index');
+        })->name('administration.subscriptions');
 
-    Route::get('/subscriptions/modify/{id}', \App\Http\Livewire\Administration\Subscriptions\ModifySubscription::class);
+        Route::get('/subscriptions/modify/{id}', \App\Http\Livewire\Administration\Subscriptions\ModifySubscription::class);
 
-    Route::get('/subscriptions/create', function(){
-        return view('administration.subscriptions.create-subscription');
-    })->name('administration.subscriptions.create');
+        Route::get('/subscriptions/create', function(){
+            return view('administration.subscriptions.create-subscription');
+        })->name('administration.subscriptions.create');
 
-    Route::get('/coupons', Coupon::class)->name('administration.coupons');
-    Route::get('/coupons/create', CreateCoupon::class)->name('administration.coupons.create');
-    Route::get('/coupons/{coupon_id}', ShowCodes::class)->name('administration.coupons.codes');
-});
+        Route::get('/coupons', Coupon::class)->name('administration.coupons');
+        Route::get('/coupons/create', CreateCoupon::class)->name('administration.coupons.create');
+        Route::get('/coupons/{coupon_id}', ShowCodes::class)->name('administration.coupons.codes');
+    });
 
 

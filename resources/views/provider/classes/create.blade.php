@@ -28,81 +28,85 @@
     <form wire:submit.prevent="createLesson" class="w-1/2">
         @csrf
         <div class="relative z-0 w-full mb-3 group">
-            <input wire:model="lesson.title" id="title" type="text" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <input wire:model="class.title" id="title" type="text" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
             <label for="title" class="peer-focus:font-medium absolute text-sm text-gray-900 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
-            @error('lesson.title') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
+            @error('class.title') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
         <div class="relative z-0 w-full mb-3 group">
-            <input wire:model="lesson.price" id="price" type="number" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <input wire:model="class.price" id="price" type="number" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
             <label for="price" class="peer-focus:font-medium absolute text-sm text-gray-900 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Price</label>
-            @error('lesson.title') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
+            @error('class.title') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
         <div class="mt-6 my-3 relative z-0 w-full group">
             <label for="description" class="block mb-2 text-sm text-gray-900 dark:text-white">Your description</label>
-            <textarea wire:model="lesson.description" id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write the description of your lesson..."></textarea>
-            @error('lesson.description') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
+            <textarea wire:model="class.description" id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write the description of your lesson..."></textarea>
+            @error('class.description') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div class="content-center mt-8 relative z-0 w-full mb-3 group grid grid-cols-2">
             <div class="col-span-1 ">
-                <input wire:model="lesson.image" id="image" type="file" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <input wire:model="class.image" id="image" type="file" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                 <label for="image" class="peer-focus:font-medium absolute text-sm text-gray-900 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Image</label>
             </div>
-            @if(!empty($lesson['image']))
-                <img class="mx-auto col-span-1 w-16 h-16" src="{{ $lesson['image']->temporaryUrl() }}">
+            @if(!empty($class['image']))
+                <img class="mx-auto col-span-1 w-16 h-16" src="{{ $class['image']->temporaryUrl() }}">
             @endif
         </div>
 
-        @error('lesson.image') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
+        @error('class.image') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
         <div class="mt-6 my-3">
             <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
-                <input checked wire:model="lesson.difficulty" id="easy" value="easy" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input checked wire:model="class.difficulty" id="easy" value="easy" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="easy" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Easy</label>
             </div>
             <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
-                <input wire:model="lesson.difficulty" id="medium" value="medium" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input wire:model="class.difficulty" id="medium" value="medium" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="medium" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Medium</label>
             </div>
             <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
-                <input wire:model="lesson.difficulty" id="hard" value="hard" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input wire:model="class.difficulty" id="hard" value="hard" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="hard" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Hard</label>
             </div>
         </div>
-        @for($i = 0; $i < $number_lesson_steps; $i++)
+        @for($i = 0; $i < $number_lessons; $i++)
             <div class="relative z-0 w-full mb-3 group">
                 <div class="inline-flex items-center justify-center w-full">
                     <hr class="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-                    <span class="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">Step {{$i + 1}}</span>
+                    <span class="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">Lesson n°{{$i + 1}}</span>
                 </div>
-                <div class="relative z-0 w-full mb-3 group">
-                    <input wire:model="lesson_steps.{{$i}}.sub_title" id="step{{$i}}_sub_title" type="text" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                    <label for="step{{$i}}_sub_title" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Subtitle</label>
-                </div>
-                @error('lesson_steps.' . $i .'.sub_title') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
-                <div class="mt-6 relative z-0 w-full mb-3 group">
-                    <input wire:model="lesson_steps.{{$i}}.duration" id="step{{$i}}_duration" type="number" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                    <label for="step{{$i}}_duration" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Estimated time (min.)</label>
-                    @error('lesson_steps.' . $i . '.duration') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
-                </div>
-                <div class="mt-6 relative z-0 w-full mb-3 group">
-                    <label for="step{{$i}}_description" class="block mb-2 text-sm text-gray-900 dark:text-white">Your description</label>
-                    <textarea wire:model="lesson_steps.{{$i}}.description" id="step{{$i}}_description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write the description of your lesson..."></textarea>
-                    @error('lesson_steps.' . $i . '.description') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
-                </div>
-                <div class="mt-6 relative z-0 w-full mb-3 group">
-                    <label class="block mb-2 text-sm text-gray-900 dark:text-white">Choose Video (10MB max)</label>
-                    <input wire:model="lesson_steps.{{$i}}.video" type="file" name="video">
-                    @error('lesson_steps.'. $i .'.video') <span class="error">{{ $message }}</span> @enderror
-                </div>
+                <label for="class_lessons_{{$i}}_id" class="sr-only">Underline select</label>
+                <select wire:model="class_lessons.{{$i}}.id" id="class_lessons_{{$i}}_id" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                    <option selected value="0">Please select a lesson</option>
+                    @foreach($available_lessons as $element)
+                        <option value="{{$element->id}}">{{$element->title}}</option>
+                    @endforeach
+                </select>
             </div>
         @endfor
-
-        <button wire:click="addStep" type="button" class="mt-3 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-400 rounded">
-            Add step
+        @for($i = 0; $i < $number_examiners; $i++)
+            <div class="relative z-0 w-full mb-3 group">
+                <div class="inline-flex items-center justify-center w-full">
+                    <hr class="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+                    <span class="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">Examiner n°{{$i + 1}}</span>
+                </div>
+                <label for="class_examiners_{{$i}}_id" class="sr-only">Underline select</label>
+                <select wire:model="class_examiners.{{$i}}.id" id="class_examiners_{{$i}}_id" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                    <option selected value="0">Please select an examiner</option>
+                    @foreach($available_examiners as $element)
+                        <option value="{{$element->id}}">{{$element->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endfor
+        <button wire:click="addLesson" type="button" class="mt-3 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-400 rounded">
+            Add lesson
         </button>
-        @if(!empty($lesson_steps))
-            <button wire:click="createLesson" type="button" class="mt-3 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-400 rounded">
-                Create lesson
+        <button wire:click="addExaminer" type="button" class="mt-3 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-400 rounded">
+            Add examiner
+        </button>
+        @if(!empty($class_lessons))
+            <button wire:click="createClass" type="button" class="mt-3 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-400 rounded">
+                Create course
             </button>
         @endif
     </form>

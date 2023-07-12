@@ -58,6 +58,7 @@ class SubscriptionController extends Controller
         $user->update(['coupon_recipes' => $subscription->nb_recipes_month]);
         $user->update(['coupon_lessons' => $subscription->nb_lessons_month]);
         $user->update(['coupon_classess' => $subscription->nb_classes_month]);
+        $user->update(['updated_date_subscription' => now()]);
         return view('subscription.checkout.success', ['subscription' => $subscription]);
     }
     public function cancel(){

@@ -109,5 +109,70 @@ class AdminSeeder extends Seeder
                 'personal_team' => true
             ]
         );
+
+
+        DB::table('users')->insert([
+            'name' => 'Cedric Grelet',
+            'first_name' => 'Cedric',
+            'last_name' => 'Grelet',
+            'email' => 'cgrelet@protonmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('Cedric123'),
+            'role' => 'provider',
+            'customer_id' => 'cus_OFeff5AEZbSZwB',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        Team::create(
+            [
+                'user_id' => 5,
+                'name' => 'Cedric\'s team',
+                'personal_team' => true
+            ]
+        );
+
+        DB::table('users')->insert([
+            'name' => 'Alain Ducasse',
+            'first_name' => 'Alain',
+            'last_name' => 'Ducasse',
+            'email' => 'aducasse@protonmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('Alain123'),
+            'role' => 'provider',
+            'customer_id' => 'cus_OFefOhqav63L0Z',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        Team::create(
+            [
+                'user_id' => 6,
+                'name' => 'Alain\'s team',
+                'personal_team' => true
+            ]
+        );
+
+
+        DB::table('users')->insert([
+            'name' => 'Philippe Etchebest',
+            'first_name' => 'Philippe',
+            'last_name' => 'Etchebest',
+            'email' => 'petchebest@protonmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('Philippe123'),
+            'role' => 'provider',
+            'customer_id' => 'cus_OFehLRYBtffV7O',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        Team::create(
+            [
+                'user_id' => 7,
+                'name' => 'Philippe\'s team',
+                'personal_team' => true
+            ]
+        );
     }
 }

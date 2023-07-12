@@ -8,6 +8,8 @@ use App\Http\Livewire\Cart\Cart;
 use App\Http\Livewire\Lessons\LessonPage;
 use App\Http\Livewire\Lessons\LessonPreview;
 use App\Http\Livewire\Lessons\LessonsShop;
+use App\Http\Livewire\Provider\Classes\CreateClass;
+use App\Http\Livewire\Provider\Classes\ShowClasses;
 use App\Http\Livewire\Provider\Lessons\CreateLesson;
 use App\Http\Livewire\Provider\Lessons\ShowLessons;
 use App\Http\Livewire\Users\BillingDashboard;
@@ -106,9 +108,8 @@ Route::middleware(['auth', 'provider'])->prefix('provider')->group(function () {
         return view('provider.index');
     })->name('provider');
 
-    Route::get('/classes', function(){
-        return view('provider.classes.index');
-    })->name('provider.classes');
+    Route::get('/classes', ShowClasses::class)->name('provider.classes');
+    Route::get('/classes/create', CreateClass::class)->name('provider.classes.create');
 
     Route::get('/lessons', ShowLessons::class)->name('provider.lessons');
     Route::get('/lessons/create', CreateLesson::class)->name('provider.lessons.create');

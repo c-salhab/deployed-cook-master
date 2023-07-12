@@ -34,6 +34,7 @@ class BillingDashboard extends Component
                     $user->update(['coupon_recipes' => $subscription->nb_recipes_month]);
                     $user->update(['coupon_lessons' => $subscription->nb_lessons_month]);
                     $user->update(['coupon_classes' => $subscription->nb_classes_month]);
+                    $user->update(['updated_date_subscription' => now()]);
                     break;
                 };
             };

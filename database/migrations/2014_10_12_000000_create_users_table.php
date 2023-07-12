@@ -32,6 +32,7 @@ return new class extends Migration
             $table->integer('coupon_recipes')->default(0);
             $table->integer('coupon_lessons')->default(0);
             $table->integer('coupon_classes')->default(0);
+            $table->timestamp('updated_date_subscription')->nullable();
             $table->timestamps();
         });
     }

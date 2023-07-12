@@ -61,6 +61,10 @@
             <h1 class="font-semibold text-2xl pb-8">Order Summary</h1>
             <span class="mt-10 font-extrabold text-sm uppercase text-green-400">Subscription coupons</span>
             <div class="flex justify-between mt-6 mb-5">
+                <span class="font-semibold text-sm uppercase">Recipes : </span>
+                <span class="font-semibold text-sm">{{auth()->user()->coupon_recipes}}</span>
+            </div>
+            <div class="flex justify-between mt-3 mb-5">
                 <span class="font-semibold text-sm uppercase">Lessons : </span>
                 <span class="font-semibold text-sm">{{auth()->user()->coupon_lessons}}</span>
             </div>

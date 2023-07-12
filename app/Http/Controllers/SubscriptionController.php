@@ -54,6 +54,11 @@ class SubscriptionController extends Controller
         $user = User::find(auth()->user()->id);
         $subscription = DB::table('subscriptions')->where('price_id', '=', $user->last_sub_id)->get();
         $user->update(['subscription_id' => $subscription[0]->id]);
+
+        $subscription = Subscription::find($user->subscription_id);
+        $user->update(['coupon_recipes' => $subscription->nb_recipes_month]);
+        $user->update(['coupon_lessons' => $subscription->nb_lessons_month]);
+        $user->update(['coupon_classess' => $subscription->nb_classes_month]);
         return view('subscription.checkout.success', ['subscription' => $subscription]);
     }
     public function cancel(){

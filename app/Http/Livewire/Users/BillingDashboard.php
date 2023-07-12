@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Users;
 
+use App\Models\Subscription;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class BillingDashboard extends Component
@@ -28,6 +30,10 @@ class BillingDashboard extends Component
                     break;
                 }else{
                     $updatedUser->update(['subscription_id' => $product->metadata->subscription_id]);
+                    $subscription = Subscription::find($product->metadata->subscription_id);
+                    $user->update(['coupon_recipes' => $subscription->nb_recipes_month]);
+                    $user->update(['coupon_lessons' => $subscription->nb_lessons_month]);
+                    $user->update(['coupon_classes' => $subscription->nb_classes_month]);
                     break;
                 };
             };

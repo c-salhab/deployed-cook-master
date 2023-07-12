@@ -1,14 +1,10 @@
 <?php
 
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Lessons;
 
-use App\Models\Cart;
 use App\Models\Lessons;
-use App\Models\LessonStep;
-use \App\Models\Subscription;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Livewire\Component;
 

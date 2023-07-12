@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -14,7 +13,6 @@ class CancelMail extends Mailable
     public $event;
 
     /**
-     * Crée une nouvelle instance du message.
      *
      * @param  \App\Models\Events  $event
      * @return void

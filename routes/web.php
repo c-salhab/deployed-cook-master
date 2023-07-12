@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Provider\PDFController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Livewire\Administration\Coupons\Coupon;
 use App\Http\Livewire\Administration\Coupons\CreateCoupon;
@@ -103,7 +104,11 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/search-rentals', '\App\Http\Controllers\Management\RentalsController@search')->name('rentals.search');
 });
 
+
+
+
 Route::middleware(['auth', 'provider'])->prefix('provider')->group(function () {
+
     Route::get('/', function(){
         return view('provider.index');
     })->name('provider');
@@ -113,6 +118,12 @@ Route::middleware(['auth', 'provider'])->prefix('provider')->group(function () {
 
     Route::get('/lessons', ShowLessons::class)->name('provider.lessons');
     Route::get('/lessons/create', CreateLesson::class)->name('provider.lessons.create');
+});
+
+Route::middleware(['auth', 'provider'])->name('provider.')->prefix('provider')->group(function () {
+    Route::resource('/certifications', \App\Http\Controllers\Provider\CertificationController::class);
+    Route::post('/search-certifications', '\App\Http\Controllers\Provider\CertificationController@search')->name('certifications.search');
+    Route::post('/generate-pdf/{certificationId}', [PDFController::class, 'generatePDF'])->name('certifications.generate-pdf');
 });
 
 Route::middleware([

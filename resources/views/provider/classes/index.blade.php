@@ -77,7 +77,7 @@
             Create course
         </button>
     </a>
-    <a href="#">
+    <a href="{{ route('provider.certifications.create') }}">
         <button class="mt-3 col-span-1 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-400 rounded">
             Create certificate
         </button>

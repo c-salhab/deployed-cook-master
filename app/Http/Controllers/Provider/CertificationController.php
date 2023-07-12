@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Provider;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certification;
-use App\Models\Formation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
-class CertificationsController extends Controller
+class CertificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,8 +24,7 @@ class CertificationsController extends Controller
      */
     public function create()
     {
-        $formations = Formation::whereNull('certification_id')->orWhere('certification_id', '')->get();
-        return view('provider.certifications.create',compact('formations'));
+        return view('provider.certifications.create');
     }
 
     /**
@@ -35,29 +32,12 @@ class CertificationsController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'formation' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors())->withInput();
-        }
-
-        $formationName = $request->formation;
-
-        $certification = Certification::create([
+        Certification::create([
             'name' => $request->name,
             'description' => $request->description,
             'creator' => Auth::id(),
         ]);
-
-        $formation = Formation::where('name', $formationName)->first();
-        if ($formation) {
-            $formation->certification_id = $certification->id;
-            $formation->save();
-        }
-
-        return redirect()->route('provider.certifications.index')->with('success', 'Certification created successfully');
+        return redirect()->route('provider.certifications.index')->with('success', 'Certification created successfully.');
     }
 
     /**
@@ -79,48 +59,21 @@ class CertificationsController extends Controller
             abort(403);
         }
 
-        $formations = Formation::whereNull('certification_id')->orWhere('certification_id', '')->get();
-
-        return view('provider.certifications.edit', compact('certification', 'formations'));
+        return view('provider.certifications.edit', compact('certification'));
     }
-
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Certification $certification)
     {
-
-        $validator = Validator::make($request->all(), [
-            'formation' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors())->withInput();
-        }
-
         $certification->name = $request->input('name');
         $certification->description = $request->input('description');
+
         $certification->save();
-
-        $formationName = $request->formation;
-        $formation = Formation::where('name', $formationName)->first();
-
-        // Reset the previous formation's certification ID
-        if ($formation) {
-            $previousFormation = Formation::where('certification_id', $certification->id)->first();
-            if ($previousFormation) {
-                $previousFormation->certification_id = null;
-                $previousFormation->save();
-            }
-
-            $formation->certification_id = $certification->id;
-            $formation->save();
-        }
 
         return redirect()->route('provider.certifications.index')->with('warning', 'Certification updated successfully.');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -139,5 +92,4 @@ class CertificationsController extends Controller
 
         return view('provider.certifications.index', compact('certifications'));
     }
-
 }

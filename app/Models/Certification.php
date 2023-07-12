@@ -18,7 +18,7 @@ class Certification extends Model
 
     public function formation()
     {
-        return $this->hasOne(Formation::class, 'certification_id');
+        return $this->hasOne(Classes::class, 'certificate_id');
     }
 
 }

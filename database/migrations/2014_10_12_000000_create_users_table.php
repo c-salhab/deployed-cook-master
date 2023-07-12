@@ -28,6 +28,7 @@ return new class extends Migration
             $table->foreignId('creator')->nullable()->constrained('users');
             $table->string('customer_id');
             $table->foreignId('subscription_id')->default(1)->constrained('subscriptions');
+            $table->string('last_sub_id')->default('null');
             $table->timestamps();
         });
     }

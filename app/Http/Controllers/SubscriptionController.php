@@ -6,6 +6,7 @@ use App\Models\Events;
 use App\Models\Materials;
 use App\Models\Rentals;
 use App\Models\RentalProduct;
+use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,10 @@ class SubscriptionController extends Controller
 
         $stripeSecretKey = config('stripe.sk');
         $price_id = $request->input('price_id');
+
+        //Sub temporary saved in a cart column in user
+        $user = User::find(auth()->user()->id);
+        $user->update(['last_sub_id' => $price_id]);
 
         /* --------------------- TEST MODE ---------------------- */
         //$stripeSecretKey = config('stripe.sk_test');
@@ -42,14 +47,17 @@ class SubscriptionController extends Controller
             'success_url' => route('subscription.checkout.success'),
             'cancel_url' => route('subscription.checkout.cancel'),
         ]);
-
         return redirect()->away($checkout_session->url);
     }
 
     public function success(){
-        return view('subscription.checkout.success');
+        $user = User::find(auth()->user()->id);
+        $subscription = DB::table('subscriptions')->where('price_id', '=', $user->last_sub_id)->get();
+        $user->update(['subscription_id' => $subscription[0]->id]);
+        return view('subscription.checkout.success', ['subscription' => $subscription]);
     }
     public function cancel(){
+        $user = User::find(auth()->user()->id);
         return view('subscription.checkout.cancel');
     }
 }

@@ -42,9 +42,7 @@
                                 </button>
                             </a>
                             @if($lesson['possessed'])
-                                <button wire:click="addCart({{$lesson->id}})" class="grid-span-1 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded text-sm">
-                                    Learn
-                                </button>
+                                <a href="page/{{$lesson->id}}" class="text-center grid-span-1 bg-green-500 hover:bg-green-400 text-white font-extrabold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded text-sm">Learn</a>
                             @else
                                 @if($lesson['active'])
                                     <button wire:click="removeCart({{$lesson->id}})" class="grid-span-1 bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded text-sm">

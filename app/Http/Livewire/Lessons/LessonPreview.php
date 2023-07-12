@@ -31,8 +31,16 @@ class LessonPreview extends Component
     }
     public function render()
     {
-        $this->duration = 0;
         $lesson = Lessons::where('id', $this->lesson_id)->first();
+        $this->duration = 0;
+        if(DB::table('possess_lessons')
+            ->where('user_id', auth()->user()->id)
+            ->where('lesson_id', $this->lesson_id)
+            ->first()) {
+            $lesson['possessed'] = true;
+        }else{
+            $lesson['possessed'] = false;
+        }
         if(DB::table('carts')->where('lesson_id', $this->lesson_id)->first()){
             $lesson['active'] = true;
         }else{

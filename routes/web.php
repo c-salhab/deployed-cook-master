@@ -5,6 +5,7 @@ use App\Http\Livewire\Administration\Coupons\Coupon;
 use App\Http\Livewire\Administration\Coupons\CreateCoupon;
 use App\Http\Livewire\Administration\Coupons\ShowCodes;
 use App\Http\Livewire\Cart\Cart;
+use App\Http\Livewire\Lessons\LessonPage;
 use App\Http\Livewire\Lessons\LessonPreview;
 use App\Http\Livewire\Lessons\LessonsShop;
 use App\Http\Livewire\Provider\Lessons\CreateLesson;
@@ -50,6 +51,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
     Route::prefix('lessons')->group(function () {
         Route::get('/shop', LessonsShop::class)->name('lessons.shop');
+        Route::get('/page/{lesson_id}', LessonPage::class)->name('lessons.page');
         Route::get('/preview/{lesson_id}', LessonPreview::class)->name('lessons.preview');
     });
 

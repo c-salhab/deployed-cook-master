@@ -58,7 +58,7 @@ class CreateLesson extends Component
                     ]);
                     try{
                         foreach ($this->lesson_steps as $step){
-                            $path = $step['video']->store('lessons');
+                            $path = $step['video']->store('lessons', 'images');
                             LessonStep::create([
                                 'sub_title' => $step['sub_title'],
                                 'description' => $step['description'],

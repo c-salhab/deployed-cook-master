@@ -1,7 +1,7 @@
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         @if($classes->isEmpty())
-            <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">We currently don't have any lesson available yet.</h1>
+            <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">We currently don't have any certified courses available yet.</h1>
         @else
             <div class="sm:p-6 lg:p-8 bg-white overflow-hidden shadow-xl sm:rounded-lg grid grid-cols-4 gap-8 h-full">
                 @foreach($classes as $class)

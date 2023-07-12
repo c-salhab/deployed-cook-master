@@ -62,10 +62,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
     Route::prefix('cart')->group(function () {
         Route::get('/', Cart::class)->name('cart');
-    });
-
-    Route::prefix('calendar')->group(function () {
-        Route::get('/', function () { return view('calendar.index'); })->name('calendar');
+        Route::get('/success', [Cart::class, 'success'])->name('cart.checkout.success');
+        Route::get('/cancel', function(){return view('cart.checkout.cancel');})->name('cart.checkout.cancel');
     });
 });
 

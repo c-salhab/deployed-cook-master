@@ -41,16 +41,21 @@
                                     Preview
                                 </button>
                             </a>
-                            @if($lesson['active'])
-                                <button wire:click="removeCart({{$lesson->id}})" class="grid-span-1 bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded text-sm">
-                                    Remove
+                            @if($lesson['possessed'])
+                                <button wire:click="addCart({{$lesson->id}})" class="grid-span-1 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded text-sm">
+                                    Learn
                                 </button>
                             @else
-                                <button wire:click="addCart({{$lesson->id}})" class="grid-span-1 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded text-sm">
-                                    Add to cart
-                                </button>
+                                @if($lesson['active'])
+                                    <button wire:click="removeCart({{$lesson->id}})" class="grid-span-1 bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded text-sm">
+                                        Remove
+                                    </button>
+                                @else
+                                    <button wire:click="addCart({{$lesson->id}})" class="grid-span-1 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded text-sm">
+                                        Add to cart
+                                    </button>
+                                @endif
                             @endif
-
                         </div>
                     </div>
                 @endforeach

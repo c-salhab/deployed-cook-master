@@ -26,6 +26,7 @@
                             </div>
                             <div class="flex flex-col justify-between ml-4 flex-grow">
                                 <span class="font-bold text-2xl">{{$lesson[0]->title}}</span>
+                                <a href="#" class="font-semibold hover:text-green-500 text-gray-500 text-xs">Use coupon</a>
                                 <a href="#" class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
                             </div>
                         </div>
@@ -44,6 +45,7 @@
                             </div>
                             <div class="flex flex-col justify-between ml-4 flex-grow">
                                 <span class="font-bold text-2xl">{{$class[0]->title}}</span>
+                                <a href="#" class="font-semibold hover:text-green-500 text-gray-500 text-xs">Use coupon</a>
                                 <a href="#" class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
                             </div>
                         </div>
@@ -78,7 +80,7 @@
                     <span>Total cost</span>
                     <span>{{$total_price}} €</span>
                 </div>
-                <button class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
+                <button wire:click="checkout" class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
             </div>
         </div>
     </div>

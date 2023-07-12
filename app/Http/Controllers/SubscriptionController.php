@@ -15,7 +15,6 @@ use Stripe\Stripe;
 
 class SubscriptionController extends Controller
 {
-
     public function checkout(Request $request){
 
         $stripeSecretKey = config('stripe.sk');

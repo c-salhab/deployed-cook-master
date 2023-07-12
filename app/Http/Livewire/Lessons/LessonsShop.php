@@ -31,6 +31,15 @@ class LessonsShop extends Component
         $lessons = Lessons::all();
         foreach ($lessons as $lesson){
             $lesson->description = Str::limit($lesson->description, 25);
+
+            if(DB::table('possess_lessons')
+                ->where('user_id', auth()->user()->id)
+                ->where('lesson_id', $lesson->id)
+                ->first()) {
+                $lesson['possessed'] = true;
+            }else{
+                $lesson['possessed'] = false;
+            }
             if(DB::table('carts')->where('lesson_id', $lesson->id)->first()){
                 $lesson['active'] = true;
             }else{

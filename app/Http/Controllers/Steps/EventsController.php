@@ -56,7 +56,6 @@ class EventsController extends Controller
     {
         $validated = $request->validate([
             'room_name' => ['nullable', 'exists:rooms,name'],
-            'price' => ['required', 'numeric'],
             'difficulty' => ['required'],
             'start_time' => ['required'],
             'end_time' => ['required'],

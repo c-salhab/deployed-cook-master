@@ -25,9 +25,8 @@
                         </div>
                         <div class="flex items-center justify-between p-4">
                             <button class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">
-                                <a href="{{ route('add_event_to_cart', $event->name) }}" class="btn btn-primary btn-block text-center" role="button">Join the event !</a>
+                                <a href="#" class="btn btn-primary btn-block text-center" role="button">Join the event !</a>
                             </button>
-                            <span class="text-xl text-indigo-500">€ {{ number_format($event->price, 2, ',', '.') }}</span>
                         </div>
                     </div>
                 @endif

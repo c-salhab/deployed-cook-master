@@ -54,14 +54,6 @@
                     {{ __('Used Materials') }}
                 </x-admin-nav-link>
 
-                <x-admin-nav-link :href="route('management.formations.index')" :active="request()->routeIs('management.formations.index')">
-                    {{ __('Formations') }}
-                </x-admin-nav-link>
-
-                <x-admin-nav-link :href="route('management.lessons.index')" :active="request()->routeIs('management.lessons.index')">
-                    {{ __('Lessons') }}
-                </x-admin-nav-link>
-
                 <x-admin-nav-link :href="route('management.products.index')" :active="request()->routeIs('management.products.index')">
                     {{ __('Products') }}
                 </x-admin-nav-link>

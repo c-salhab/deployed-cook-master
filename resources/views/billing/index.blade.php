@@ -5,6 +5,5 @@
         <br><i>Welcome to the billing panel. Here you can manage your billing information from your payment option to shipping address.</i>
         <br><div class="text-indigo-600">You can also check your invoices and download them.</div>
         </p>
-
     </div>
 </div>

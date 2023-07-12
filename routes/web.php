@@ -4,6 +4,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Livewire\Administration\Coupons\Coupon;
 use App\Http\Livewire\Administration\Coupons\CreateCoupon;
 use App\Http\Livewire\Administration\Coupons\ShowCodes;
+use App\Http\Livewire\LessonsShop;
 use App\Http\Livewire\Provider\Lessons\CreateLesson;
 use App\Http\Livewire\Provider\Lessons\ShowLessons;
 use App\Http\Livewire\Users\BillingDashboard;
@@ -43,11 +44,13 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::get('/subscription/checkout/success', [SubscriptionController::class, 'success'])->name('subscription.checkout.success');
     Route::get('/subscription/checkout/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.checkout.cancel');
 
-    Route::get('/message', function () { return view('message'); })->name('message');
+    Route::prefix('lessons')->group(function () {
+        Route::get('/shop', LessonsShop::class)->name('lessons.shop');
+    });
 
+    Route::get('/message', function () { return view('message'); })->name('message');
     Route::get('/interventions', function () { return view('interventions'); })->name('interventions');
     Route::get('/events', [\App\Http\Controllers\Frontend\EventsController::class, 'index'])->name('events.index');
-    Route::get('/lessons', [\App\Http\Controllers\Frontend\LessonsController::class, 'index'])->name('lessons.index');
     Route::get('/shop', [\App\Http\Controllers\Frontend\ProductsController::class, 'index'])->name('shop.index');
     Route::get('/recipes', [\App\Http\Controllers\Frontend\RecipesController::class, 'index'])->name('recipes.index');
     Route::get('/rentals', [\App\Http\Controllers\Frontend\RentalsController::class, 'index'])->name('rentals.index');

@@ -13,6 +13,9 @@ class Subscription extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name','price', 'currency', 'product_id', 'price_id', 'nb_recipes_month', 'nb_lessons_month', 'nb_classes_month'
+    ];
     public static function create(array $validatedData)
     {
         //Create the product
@@ -48,6 +51,9 @@ class Subscription extends Model
                         'currency' => $validatedData['currency'],
                         'product_id' => $response->product,
                         'price_id' => $response->id,
+                        'nb_recipes_month' => $validatedData['nb_recipes'],
+                        'nb_lessons_month' => $validatedData['nb_lessons'],
+                        'nb_classes_month' => $validatedData['nb_classes'],
                         'created_at' => now(),
                         'updated_at' => now()
                     ]
@@ -64,7 +70,7 @@ class Subscription extends Model
 
                 try{
                     $stripe->products->update(
-                        'prod_OECdFUXibD48XK',
+                        $product->id,
                         ['metadata' => ['subscription_id' => $subscription_id]]
                     );
                 }catch (Exception $e){

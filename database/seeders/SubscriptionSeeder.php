@@ -20,6 +20,9 @@ class SubscriptionSeeder extends Seeder
             'currency' => 'eur',
             'product_id' => 'prod_OEClb3g0uWmiJN',
             'price_id' => 'price_1NRkLwFJvMbSMVjzo4YdaAlG',
+            'nb_recipes_month' => 3,
+            'nb_lessons_month' => 1,
+            'nb_classes_month' => 0,
             'created_at' => now(),
             'updated_at' => now()
 
@@ -32,6 +35,9 @@ class SubscriptionSeeder extends Seeder
             'currency' => 'eur',
             'product_id' => 'prod_OECjr42INYh31o',
             'price_id' => 'price_1NRkKTFJvMbSMVjzPruZ4ODw',
+            'nb_recipes_month' => 8,
+            'nb_lessons_month' => 3,
+            'nb_classes_month' => 1,
             'created_at' => now(),
             'updated_at' => now()
        ]);

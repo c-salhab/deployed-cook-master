@@ -67,8 +67,8 @@
                     </button>
                 </div>
                 <div class="col-span-1 px-3 content-center">
-                    <button type="button" wire:click="resetAdvantages" class="mt-6 bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-400 rounded">
-                        Reset all
+                    <button type="button" wire:click="resetAdvantages" class="mt-6 bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-8 border-b-4 border-red-700 hover:border-red-400 rounded">
+                        Reset
                     </button>
                 </div>
                 <button wire:click="modifySubscription" type="button" class="col-span-4 mt-3 mx-3 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-16 border-b-4 border-blue-700 hover:border-blue-400 rounded">

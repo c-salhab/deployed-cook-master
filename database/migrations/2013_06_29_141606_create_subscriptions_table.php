@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('currency');
             $table->string('product_id')->nullable();
             $table->string('price_id')->nullable();
+            $table->integer('nb_recipes_month')->default(0);
+            $table->integer('nb_lessons_month')->default(0);
+            $table->integer('nb_classes_month')->default(0);
             $table->timestamps();
         });
     }

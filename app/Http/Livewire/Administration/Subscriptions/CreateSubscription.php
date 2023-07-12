@@ -11,6 +11,11 @@ class CreateSubscription extends Component
     public $name;
     public $price;
     public $currency ='eur';
+
+    public $nb_recipes = 0;
+    public $nb_lessons = 0;
+    public $nb_classes = 0;
+
     public $advantages = [];
     public $advantage;
 
@@ -21,6 +26,9 @@ class CreateSubscription extends Component
         'name' => ['required', 'string'],
         'price' => ['required', 'integer'],
         'currency' => ['required', 'string'],
+        'nb_recipes' => ['required', 'integer'],
+        'nb_lessons' => ['required', 'integer'],
+        'nb_classes' => ['required', 'integer'],
         'advantages' => ['required'],
     ];
 

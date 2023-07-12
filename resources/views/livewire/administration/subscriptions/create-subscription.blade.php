@@ -28,31 +28,59 @@
     <form wire:submit.prevent="createSubscription" class="col-span-1 w-full max-w-lg">
         <div class="grid grid-cols-4 gap-x-1 gap-y-6">
             <div class="col-span-4 px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
                     Name
                 </label>
-                <input wire:model="name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Chief">
+                <input wire:model="name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="name" type="text" placeholder="Chief">
                 @error('name') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
             <div class="col-span-2 px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="price">
                     Price
                 </label>
-                <input wire:model="price" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="10">
+                <input wire:model="price" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="price" type="text" placeholder="10">
                 @error('price') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
             <div class="col-span-2 px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="currency">
                     Currency
                 </label>
                 <div class="relative">
-                    <select wire:model="currency" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                    <select wire:model="currency" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="currency">
                         <option>eur</option>
                         <option>usd</option>
                     </select>
                 </div>
                 @error('currency') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
+
+            <div class="col-span-4 px-3 grid grid-cols-3 grid-flow-row">
+                <label class="pb-2 col-span-3 block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2" for="nb_recipes">
+                    Number of * offered / month
+                </label>
+                <div class="col-span-1 pr-6">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nb_recipes">
+                        Recipes
+                    </label>
+                    <input wire:model="nb_recipes" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nb_recipes" type="number" min="0" placeholder="10">
+                    @error('nb_recipes') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
+                </div>
+                <div class="col-span-1 px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nb_lessons">
+                        Lessons
+                    </label>
+                    <input wire:model="nb_lessons" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nb_lessons" type="number" min="0" placeholder="10">
+                    @error('nb_lessons') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
+                </div>
+                <div class="col-span-1 pl-6">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nb_classes">
+                        Classes
+                    </label>
+                    <input wire:model="nb_classes" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nb_classes" type="number" min="0" placeholder="10">
+                    @error('nb_classes') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
+                </div>
+            </div>
+
             <div class="col-span-2 px-3">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                     Advantages

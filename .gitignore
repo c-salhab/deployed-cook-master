@@ -1,19 +1,30 @@
-/.phpunit.cache
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
+# Laravel specific
 .env
-.env.backup
-.env.production
-.phpunit.result.cache
+storage/*.key
+vendor
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 Homestead.json
 Homestead.yaml
-auth.json
-npm-debug.log
-yarn-error.log
-/.fleet
 /.idea
 /.vscode
+.phpunit.result.cache
+
+# Composer specific
+composer.lock
+
+# Build tools
+.DS_Store
+Thumbs.db
+
+# Application specific
+public/uploads
+
+# Log files
+/storage/*.log
+
+# Testing databases
+sqlite/*.sqlite
+

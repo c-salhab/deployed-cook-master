@@ -39,6 +39,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
         Route::get('/portal', [\App\Http\Controllers\BillingController::class, 'createPortalSession'])->name('billing.portal');
         Route::get('/events', [\App\Http\Controllers\JoinedEventsController::class, 'index'])->name('joined.events');
         Route::post('/events/{event}/cancel', '\App\Http\Controllers\Frontend\EventsController@cancel')->name('events.cancel');
+        Route::post('/search-events', '\App\Http\Controllers\JoinedEventsController@search')->name('event.search');
     });
 
     Route::get('/subscription', \App\Http\Livewire\Administration\Subscriptions\Subscription::class)->name('subscription');

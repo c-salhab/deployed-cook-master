@@ -7,6 +7,9 @@ use App\Models\Events;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Mail\EventMail;
+use App\Mail\CancelMail;
+use Illuminate\Support\Facades\Mail;
 
 class EventsController extends Controller
 {
@@ -63,9 +66,11 @@ class EventsController extends Controller
             return redirect()->back()->with('error', 'Already registered to event');
         }
 
-        $user->event()->attach($event);
+        $user->event()->attach($eventId);
 
         $event->decrement('places_left');
+
+        Mail::to($user->email)->send(new EventMail($event));
 
         return redirect()->back()->with('success', 'Registered to the event successfully');
     }
@@ -81,11 +86,14 @@ class EventsController extends Controller
             return redirect()->back()->with('error', 'Cancellation not allowed');
         }
 
-        DB::table('events')->where('id', $eventId)->increment('places_left');
+        if($event->places_left < $event->max_capacity){
+            DB::table('events')->where('id', $eventId)->increment('places_left');
+        }
 
         $user = auth()->user();
-        $user->events()->detach($eventId);
+        $user->event()->detach($eventId);
 
+        Mail::to($user->email)->send(new CancelMail($event));
         return redirect()->back()->with('success', 'Reservation canceled successfully');
     }
 

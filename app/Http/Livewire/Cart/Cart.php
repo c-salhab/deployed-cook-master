@@ -21,7 +21,7 @@ class Cart extends Component
     public $recipes = [];
     public $lessons = [];
     public $classes = [];
-
+    public $successMessage;
     public $total_price = 0;
     public function checkout(){
 
@@ -53,7 +53,6 @@ class Cart extends Component
 
             return redirect()->away($checkout_session->url);
         }
-
     }
     public function render()
     {
@@ -136,6 +135,8 @@ class Cart extends Component
         $this->lessons_id = [];
         $this->classes_id = [];
 
+        \App\Models\Cart::where('user_id', auth()->user()->id)->delete();
+        $this->successMessage = 'Payment successful ! Go check your product :D';
         return view('cart.checkout.success');
     }
 }

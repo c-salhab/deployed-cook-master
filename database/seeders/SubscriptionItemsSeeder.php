@@ -21,7 +21,7 @@ class SubscriptionItemsSeeder extends Seeder
 
         DB::table('subscription_items')->insert([
             'id' => '2',
-            'description' => '3 free recipes / day',
+            'description' => '3 free recipes / month',
             'subscription_id' => '2',
         ]);
         DB::table('subscription_items')->insert([

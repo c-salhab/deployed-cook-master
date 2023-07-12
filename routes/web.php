@@ -86,6 +86,10 @@ Route::middleware(['auth', 'management'])->name('management.')->prefix('manageme
     Route::post('/events/step-three', [\App\Http\Controllers\Steps\EventsController::class, 'storeStepThree'])->name('events.store.step-three');
     Route::get('/', [\App\Http\Controllers\Management\ManagementController::class, 'index'])->name('index');
 
+    Route::prefix('classes')->group(function () {
+        Route::get('/classes', \App\Http\Livewire\Manager\ShowClasses::class)->name('classes');
+    });
+
     Route::resource('/rentals', \App\Http\Controllers\Management\RentalsController::class);
     Route::resource('/materials', \App\Http\Controllers\Management\MaterialsController::class);
     Route::resource('/rooms', \App\Http\Controllers\Management\RoomsController::class);

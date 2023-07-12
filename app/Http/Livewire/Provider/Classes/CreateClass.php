@@ -10,6 +10,7 @@ use App\Models\Lessons;
 use App\Models\LessonStep;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -31,7 +32,6 @@ class CreateClass extends Component
     public $errorMessage;
 
     public function createClass(){
-
         try{
             $path = $this->class['image']->store('classes', 'images');
 
@@ -66,7 +66,7 @@ class CreateClass extends Component
                     ]);
                     try{
                         foreach ($this->class_lessons as $lesson){
-                            ClassLessons::create([
+                            DB::table('class_lessons')->insert([
                                 'class_id' => $class->id,
                                 'lesson_id' => $lesson['id'],
                                 'order' => $lesson['order']
@@ -78,7 +78,7 @@ class CreateClass extends Component
                     }
                     try{
                         foreach ($this->class_examiners as $examiner){
-                            Examiner::create([
+                            DB::table('examiners')->insert([
                                 'user_id' => $examiner['id'],
                                 'class_id' => $class->id,
                             ]);

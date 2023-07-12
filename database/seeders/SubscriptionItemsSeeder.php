@@ -21,12 +21,12 @@ class SubscriptionItemsSeeder extends Seeder
 
         DB::table('subscription_items')->insert([
             'id' => '2',
-            'description' => '3 free recipes per day',
+            'description' => '3 free recipes / day',
             'subscription_id' => '2',
         ]);
         DB::table('subscription_items')->insert([
             'id' => '3',
-            'description' => '1 free formation per month',
+            'description' => '1 offered lesson / month',
             'subscription_id' => '2',
         ]);
         DB::table('subscription_items')->insert([
@@ -40,20 +40,21 @@ class SubscriptionItemsSeeder extends Seeder
             'description' => 'unlimited recipes',
             'subscription_id' => '3',
         ]);
+
         DB::table('subscription_items')->insert([
-            'id' => '6',
-            'description' => '3 free formations per month',
-            'subscription_id' => '3',
-        ]);
-        DB::table('subscription_items')->insert([
-            'id' => '7',
-            'description' => 'access to private messages',
-            'subscription_id' => '3',
+        'id' => '6',
+        'description' => '3 offered lessons / month',
+        'subscription_id' => '3',
         ]);
 
         DB::table('subscription_items')->insert([
+            'id' => '7',
+            'description' => '1 free formation / month',
+            'subscription_id' => '3',
+        ]);
+        DB::table('subscription_items')->insert([
             'id' => '8',
-            'description' => '20% reduction on extra recipes',
+            'description' => 'access to private messages',
             'subscription_id' => '3',
         ]);
 
@@ -61,6 +62,18 @@ class SubscriptionItemsSeeder extends Seeder
             'id' => '9',
             'description' => 'no ads',
             'subscription_id' => '3',
+        ]);
+
+        DB::table('subscription_items')->insert([
+            'id' => '10',
+            'description' => 'ads',
+            'subscription_id' => '1',
+        ]);
+
+        DB::table('subscription_items')->insert([
+            'id' => '11',
+            'description' => 'ads only on videos',
+            'subscription_id' => '2',
         ]);
     }
 }

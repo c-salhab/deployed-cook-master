@@ -29,6 +29,8 @@ return new class extends Migration
             $table->string('customer_id');
             $table->foreignId('subscription_id')->default(1)->constrained('subscriptions');
             $table->string('last_sub_id')->default('null');
+            $table->integer('coupon_lessons')->default(0);
+            $table->integer('coupon_classes')->default(0);
             $table->timestamps();
         });
     }

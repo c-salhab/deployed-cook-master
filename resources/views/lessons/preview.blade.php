@@ -10,7 +10,7 @@
                 <div class="grid-span-1 grid">
                     <div class="flex flex-row mb-6">
                         <div class="grow-0 place-self-center">
-                            <p class="font-bold text-lg text-gray-700 lg:text-xl dark:text-gray-400">Duration : {{$duration}}</p>
+                            <p class="font-bold text-lg text-gray-700 lg:text-xl dark:text-gray-400">Duration : {{$duration}} min</p>
                             <p class="font-bold text-lg text-gray-700 lg:text-xl dark:text-gray-400">Difficulty : {{$lesson->difficulty}}</p>
                         </div>
                         <div class="ml-auto">

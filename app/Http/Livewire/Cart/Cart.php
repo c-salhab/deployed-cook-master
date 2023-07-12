@@ -14,16 +14,17 @@ class Cart extends Component
     public function render()
     {
         $cart = \App\Models\Cart::where('user_id', auth()->user()->id)->get();
+        $number_items = 0;
+        $total_price = 0;
+
         $recipes_id = [];
-        $events_id = [];
         $lessons_id = [];
         $classes_id = [];
 
         foreach($cart as $element){
+            $number_items += 1;
             if($element->recipe_id){
                 $recipes_id[] = $element->recipe_id;
-            }elseif ($element->event_id){
-                $events_id[] = $element->event_id;
             }elseif($element->lesson_id){
                 $lessons_id[] = $element->lesson_id;
             }else{
@@ -32,7 +33,6 @@ class Cart extends Component
         }
 
         $recipes = [];
-        $events = [];
         $lessons = [];
         $classes = [];
 
@@ -40,23 +40,26 @@ class Cart extends Component
             foreach ($recipes_id as $id){
                 $recipes[] = DB::table('recipes')->where('id', '=', $id)->get();
             }
-        }
-        if(!empty($events_id)){
-            foreach ($events_id as $id){
-                $events[] = DB::table('events')->where('id', '=', $id)->get();
+            foreach ($recipes as $recipe){
+                $total_price += $recipe[0]->price;
             }
         }
         if(!empty($lessons_id)){
             foreach ($lessons_id as $id){
                 $lessons[] = DB::table('lessons')->where('id', '=', $id)->get();
             }
+            foreach ($lessons as $lesson){
+                $total_price += $lesson[0]->price;
+            }
         }
         if(!empty($classes_id)){
             foreach ($classes_id as $id){
                 $classes[] = DB::table('classes')->where('id', '=', $id)->get();
             }
+            foreach ($classes as $class){
+                $total_price += $class[0]->price;
+            }
         }
-        dd($recipes, $events, $lessons, $classes);
-        return view('cart.index', ['recipes' => $recipes, 'events' => $events, 'lessons' => $lessons, 'classes' => $classes])->layout('layouts.app');
+        return view('cart.index', ['recipes' => $recipes, 'lessons' => $lessons, 'classes' => $classes, 'number_items' => $number_items, 'total_price' => $total_price])->layout('layouts.app');
     }
 }

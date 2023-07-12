@@ -4,6 +4,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Livewire\Administration\Coupons\Coupon;
 use App\Http\Livewire\Administration\Coupons\CreateCoupon;
 use App\Http\Livewire\Administration\Coupons\ShowCodes;
+use App\Http\Livewire\Cart\Cart;
 use App\Http\Livewire\Lessons\LessonPreview;
 use App\Http\Livewire\Lessons\LessonsShop;
 use App\Http\Livewire\Provider\Lessons\CreateLesson;
@@ -60,7 +61,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::post('/search-recipes', '\App\Http\Controllers\Frontend\RecipesController@search')->name('recipes.search');
 
     Route::prefix('cart')->group(function () {
-        Route::get('/', function () { return view('cart.index'); })->name('cart');
+        Route::get('/', Cart::class)->name('cart');
     });
 
     Route::prefix('calendar')->group(function () {

@@ -20,7 +20,7 @@
                                     <p class="ml-6 place-self-center grid-span-1 font-bold text-2xl text-gray-700 lg:text-6xl dark:text-gray-400">{{$creator->name}}</p>
                                 </div>
                             @else
-                                <p class="grid-span-2 font-bold	mb-6 text-lg text-gray-700 lg:text-xl sm:pr-8 xl:pr-16 dark:text-gray-400">{{$creator->name}}</p>
+                                <p class="grid-span-2 font-bold	mb-6 text-2xl text-gray-700 lg:text-6xl sm:pr-8 xl:pr-16 dark:text-gray-400">{{$creator->name}}</p>
                             @endif
                         </div>
                     </div>

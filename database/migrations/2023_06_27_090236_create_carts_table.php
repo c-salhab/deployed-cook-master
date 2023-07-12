@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('class_id')->nullable()->constrained('classes')->onDelete('cascade');
             $table->foreignId('lesson_id')->nullable()->constrained('lessons')->onDelete('cascade');
             $table->foreignId('event_id')->nullable()->constrained('events')->onDelete('cascade');
+            $table->foreignId('recipe_id')->nullable()->constrained('recipes')->onDelete('cascade');
         });
     }
 

@@ -1,66 +1,151 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Cook Master Project 🍽️🍗
 
-## About Laravel
+For the second year annual project in development, we had to create a website for a cooking company. This company aims to sell certified courses that are provided by external providers such as renowned chefs. The site provides a wide range of features such as the purchase of materials, lessons, certified courses or even the possibility of registering for an organized event. A shopping cart is available to sort all the desired objects.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+You have 4 types of users
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**The administrator :**
+- Creates, modifies and deletes plans
+- Manages users
+- Creates coupons and promotion codes
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**The manager :**
+- Validates the certified courses
+- Creates events
+- Creates materials and rooms
 
-## Learning Laravel
+**The provider :**
+- Creates lessons
+- Creates certified courses / classes
+- Generates diplomas in pdf
+- Creates recipes
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**The user :**
+- Manage billing
+- Check invoices
+- Subscribe and buy items
+- Watch and learn lessons 
+- Can participate to a certified course
+## Documentation 📖
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+We are using the version 10.x of Laravel for this project.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Also, Laravel offers an easy way to render your front view vith blade framework for html templates and livewire for dynamic components.
 
-## Laravel Sponsors
+**The stack :** 
+- Laravel 10.x [https://laravel.com/docs/10.x/installation]
+- Blade [https://laravel.com/docs/10.x/blade]
+- Lviewire [https://laravel-livewire.com/docs/2.x/quickstart]
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+**Api for payment :**
+- Stripe [https://stripe.com/docs/api]
 
-### Premium Partners
+## Run Locally (on Linux only :p)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Update your dependencies
+```bash
+sudo apt update
+sudo apt upgrade
+```
 
-## Contributing
+Download or update PHP dependencies 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+PHP >= 8.0
+OpenSSL PHP Extension
+PDO PHP Extension
+Mbstring PHP Extension
+Tokenizer PHP Extension
+XML PHP Extension
+Ctype PHP Extension
+JSON PHP Extension
+BCMath PHP Extension
+```
 
-## Code of Conduct
+Download Composer
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+```
 
-## Security Vulnerabilities
+Download NodeJS : 
+https://nodejs.org/fr/download
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Clone the project
 
-## License
+```bash
+  git clone https://github.com/Onsraa/deployed-cook-master.git
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Go to the project directory
+
+```bash
+  cd deployed-cook-master
+```
+
+Install npm
+```bash
+  npm install
+```
+
+Create a build directory with a production build of your app
+```bash
+  npm run build
+```
+
+Add an .env file to the root directory with the correct informations like so (File's location : /deployed-cook-master/.env) :
+
+```bash
+APP_NAME="Cook Master"
+APP_ENV=local
+APP_KEY=base64:aYSTKc6Jr/H4/lXBq4qiViUOojqeoRlsLAmMHaWdsd8=
+APP_DEBUG=true
+APP_URL=http:
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=db_example // [MODIFY]
+DB_USERNAME=root // [MODIFY]
+DB_PASSWORD=password // [MODIFY]
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MEMCACHED_HOST=127.0.0.1
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.googlemail.com
+MAIL_PORT=465
+MAIL_USERNAME=example@gmail.com
+MAIL_PASSWORD=password
+MAIL_ENCRYPTION=ssl
+
+STRIPE_KEY=pk_example
+STRIPE_SECRET=sk_example
+
+SESSION_DRIVER=database
+```
+
+Launch the server 🐋
+```bash
+php artisan migrate:fresh --seed 
+php artisan serve 
+```
+
